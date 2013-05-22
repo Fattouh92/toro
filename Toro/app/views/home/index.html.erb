@@ -1,0 +1,15 @@
+<img style="position:absolute; left:550px; top:100px;" src="assets/toro.jpg">
+<form style="position:absolute; left:450px; top:320px;" class="form-horizontal" action="<%=staff_give_permission_path%>" enctype="multipart/form-data" method="POST">
+  <input type="hidden" value="<%= form_authenticity_token %>" name="authenticity_token">
+  <div class="control-group">
+    <label class="control-label" for="inputPassword">Password:</label>
+    <div class="controls">
+      <input type="password" name="password" placeholder="Password">
+    </div>
+  </div>
+<div class="control-group">
+  <div class="controls">
+    <button type="submit" class="btn btn-primary">Continue</button>
+  </div>
+</div>
+</form>
