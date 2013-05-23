@@ -1,0 +1,10 @@
+<div class="navbar navbar-inverse">
+  <div class="navbar-inner">
+    <a class="brand" href="#">Toro</a>
+    <ul class="nav pull-right">
+      <% if current_uri != "/" %>
+        <li><a href="<%=root_path%>">log out</a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

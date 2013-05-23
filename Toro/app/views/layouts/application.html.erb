@@ -7,9 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% flash.each do |key, value| %>
-    <%= content_tag(:div, value, :class => "flash #{key}") %>
-  <% end %>
 <% current_uri = request.env['PATH_INFO'] %>
 <div class="navbar navbar-inverse">
   <div class="navbar-inner">
@@ -19,8 +16,11 @@
         <li><a href="<%=root_path%>">log out</a></li>
       <% end %>
     </ul>
-  </div>
+  </div>  
 </div>
+
+
+<%= render "layouts/messages" %>
 
 <%= yield %>
 
