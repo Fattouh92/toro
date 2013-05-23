@@ -1,4 +1,8 @@
 Toro::Application.routes.draw do
+  devise_for :users do 
+    get '/users/sign_out' => 'devise/sessions#destroy' 
+  end
+
   root :to => "home#index"
   get "home/index"
   post "staff/give_permission" => "staff#give_permission", :as => "staff_give_permission"
