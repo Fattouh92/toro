@@ -5,7 +5,6 @@ Toro::Application.routes.draw do
 
   root :to => "home#index"
   get "home/index"
-  post "staff/give_permission" => "staff#give_permission", :as => "staff_give_permission"
   match 'staff/choose_mode' => 'staff#choose_mode', :as => "staff_choose_mode"
 
 
