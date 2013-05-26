@@ -7,8 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% current_uri = request.env['PATH_INFO'] %>
-<div class="navbar navbar-inverse">
+  <div class="navbar navbar-inverse">
   <div class="navbar-inner">
     <a class="brand" href="<%=root_path%>">Toro</a>
     <ul class="nav pull-right">
@@ -21,11 +20,13 @@
       <% end %>
     </ul>
   </div>  
-</div>
-
-<%= render "layouts/messages" %>
-
-<%= yield %>
+  </div>
+  <div class="bod">
+    <% current_uri = request.env['PATH_INFO'] %>
+  <%= render "layouts/messages" %>
+  <%= yield %>
+   </div>
+  
 
 </body>
 </html>

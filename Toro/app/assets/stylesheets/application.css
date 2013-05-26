@@ -104,6 +104,11 @@ audio:not([controls]) {
 }
 
 html {
+  background:url('../assets/back.png') center center no-repeat;
+  background-attachment:fixed;
+  height:100%;
+  margn:0;
+  padding:0;
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
@@ -265,9 +270,14 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #333333;
-  background-color: #ffffff;
+  background-color: transparent; 
 }
 
+.bod{
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 10px;
+}
 a {
   color: #0088cc;
   text-decoration: none;
