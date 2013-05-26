@@ -11,7 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130526124347) do
+ActiveRecord::Schema.define(:version => 20130526145912) do
+
+  create_table "checks", :force => true do |t|
+    t.datetime "datetime"
+    t.float    "pretax"
+    t.float    "taxrate"
+    t.float    "posttax"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "items", :force => true do |t|
+    t.string   "type"
+    t.string   "name"
+    t.float    "price"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tables", :force => true do |t|
+    t.integer  "number"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

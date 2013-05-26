@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  datetime: 2013-05-26 16:57:51
+  pretax: 1.5
+  taxrate: 1.5
+  posttax: 1.5
+
+two:
+  datetime: 2013-05-26 16:57:51
+  pretax: 1.5
+  taxrate: 1.5
+  posttax: 1.5
