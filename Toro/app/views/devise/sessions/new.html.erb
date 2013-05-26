@@ -1,9 +1,16 @@
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-signin"}) do |f| %>
-  <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
+<div class="auth-form">
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:style => "margin:0;padding:0;display:inline"}) do |f| %>
+    <div class="auth-form-header"><h1>Sign In</h1></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+    <div class="auth-form-body">
+      <div><%= f.label :username %><br />
+      <%= f.text_field :username %></div>
 
-  <div><%= f.submit "Sign in", class: "btn btn-success" %></div>
-<% end %>
+      <div><%= f.label :password %><br />
+      <%= f.password_field :password %></div>
+      <br>
+
+      <div><%= f.submit "Sign in", class: "btn btn-success" %></div>
+    </div>
+  <% end %>
+</div>
