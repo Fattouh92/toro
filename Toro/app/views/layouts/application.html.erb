@@ -13,8 +13,10 @@
     <ul class="nav pull-right">
       <% if !user_signed_in? %>
         <li><a href="<%=new_user_session_path%>">Sign in</a></li>
-        <li><a href="<%=new_user_registration_path%>">Sign up</a></li>
       <% else %>
+        <% if current_user.admin?%>
+          <li><a href="<%=new_captain_path%>">Add a new Captain</a></li>
+        <% end %>
         <li><a href="<%=edit_user_registration_path%>">Edit Account</a></li>
         <li><a href="<%=destroy_user_session_path%>">Log out</a></li>
       <% end %>
