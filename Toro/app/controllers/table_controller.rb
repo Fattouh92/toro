@@ -1,4 +1,5 @@
 class TableController < ApplicationController
+  before_filter :authenticate_user!
 
   def index
     @tables = Table.all

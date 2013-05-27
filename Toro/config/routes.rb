@@ -19,7 +19,7 @@ Toro::Application.routes.draw do
   get "home/index"
   match 'staff/choose_mode' => 'staff#choose_mode', :as => "staff_choose_mode"
 
-
+  match 'tables' => 'table#index', :as => "tables"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
