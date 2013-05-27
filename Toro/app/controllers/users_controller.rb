@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :authenticate_manager!
 
   def new
     @errors = params[:errors]
@@ -16,6 +18,14 @@ class UsersController < ApplicationController
   end
 
   def index
+    @captains = User.all
+  end
+
+  def destroy
+    @captain = User.find(params[:id])
+    @captain.destroy
+    flash[:success] = "Captain deleted successfully!"
+    redirect_to users_path
   end
 
 end
