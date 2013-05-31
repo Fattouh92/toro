@@ -1,3 +1,38 @@
 // Place all the styles related to the Table controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.redCircle {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    
+    background: red;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    
+    font: 50px Arial, sans-serif
+}
+.greenCircle {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    
+    background: green;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    
+    font: 50px Arial, sans-serif
+}
