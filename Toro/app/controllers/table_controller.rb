@@ -12,4 +12,8 @@ class TableController < ApplicationController
   def remove_table(table_id)
     Table.delete_table(table_id)
   end
+
+  def order
+    @tid = params[:table_id]
+  end
 end

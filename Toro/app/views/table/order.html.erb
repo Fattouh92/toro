@@ -1,5 +1,5 @@
-<% if Check.find_by_table_number(@tn).current %>
+<% if Check.where(table_id: @tid).last.current %>
 
 <% else %>
-
+	<a class="btn btn-large" href="#">#</a>
 <% end %>

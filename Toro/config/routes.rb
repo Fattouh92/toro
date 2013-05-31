@@ -20,6 +20,7 @@ Toro::Application.routes.draw do
   match 'staff/choose_mode' => 'staff#choose_mode', :as => "staff_choose_mode"
 
   match 'tables' => 'table#index', :as => "tables"
+  match "/:table_id/order"=>"table#order", :as => "order"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
