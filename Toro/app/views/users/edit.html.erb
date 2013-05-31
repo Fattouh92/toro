@@ -1,3 +1,5 @@
+<%= link_to "<<Back", users_path%>
+<br>
 <h2>Edit user</h2>
 <%= form_tag("/users/#{@user.id}/update", :method => "post") do %>
   <%= label_tag(:q, "New password:") %>
