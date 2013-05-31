@@ -8,6 +8,13 @@ Toro::Application.routes.draw do
   get "/users/:id/edit" => "users#edit", :as => :edit_user
   post "users/:id/update" => "users#update", :as => "update_user"
 
+  match 'items' => 'items#index', :as => "items"
+  match 'items/new' => 'items#new', :as => "new_item"
+  post "items/create" => "items#create", :as => "create_item"
+  get "/items/:id/destroy" => "item#destroy", :as => :delete_item
+  get "/items/:id/edit" => "items#edit", :as => :edit_item
+  post "items/:id/update" => "items#update", :as => "update_item"
+
 
   # prevent access to the pages we are not using from devise
   match 'users/sign_up' => redirect('/404.html')
