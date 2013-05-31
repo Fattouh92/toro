@@ -10,6 +10,7 @@ Toro::Application.routes.draw do
   match 'users/sign_up' => redirect('/404.html')
   match 'users/password/new' => redirect('/404.html')
   match 'users/password/edit' => redirect('/404.html')
+  match 'users/edit' => redirect('/404.html')
 
   devise_for :users do 
     get '/users/sign_out' => 'devise/sessions#destroy' 

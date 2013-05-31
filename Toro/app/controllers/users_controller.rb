@@ -8,11 +8,18 @@ class UsersController < ApplicationController
   end
 
   def create
+    if params[:type] == nil
+      flash[:success] = "Please select type!"
+      redirect_to new_captain_path
+      return
+    end
     @user = User.create(params[:user])
     if @user.errors.size != 0
       redirect_to action: "new", errors: @user.errors.messages  
     else
-      flash[:success] = "Captain added successfully!"
+      @user.admin = params[:type]
+      @user.save
+      flash[:success] = "User added successfully!"
       redirect_to root_path
     end
   end
@@ -24,7 +31,7 @@ class UsersController < ApplicationController
   def destroy
     @captain = User.find(params[:id])
     @captain.destroy
-    flash[:success] = "Captain deleted successfully!"
+    flash[:success] = "User deleted successfully!"
     redirect_to users_path
   end
 

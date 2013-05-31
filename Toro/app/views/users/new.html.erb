@@ -38,5 +38,11 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.submit "Add captain", class: "btn btn-success btn-large" %></div>
+  <p>Select type of user:</p>
+  <%= radio_button_tag(:type, "true") %>
+  <%= label_tag(:manager, "Manager") %>
+  <%= radio_button_tag(:type, "false") %>
+  <%= label_tag(:cashier, "Cashier") %>
+
+  <div><%= f.submit "Add user", class: "btn btn-success btn-large" %></div>
 <% end %>

@@ -15,10 +15,8 @@
         <li><a href="<%=new_user_session_path%>">Sign in</a></li>
       <% else %>
         <% if current_user.admin?%>
-        <li><a href="<%=users_path%>">Browse/Delete Users</a></li>
-          <li><a href="<%=new_captain_path%>">Add a new Captain</a></li>
+        <li><a href="<%=users_path%>">CRUD Users</a></li>
         <% end %>
-        <li><a href="<%=edit_user_registration_path%>">Edit Account</a></li>
         <li><a href="<%=destroy_user_session_path%>">Log out</a></li>
       <% end %>
     </ul>
