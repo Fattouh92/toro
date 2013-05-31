@@ -10,11 +10,13 @@ class TableController < ApplicationController
     @tablesE = Table.where(placement: "E").all
   end
 
-  def add_table(table_number, placement)
-    @table = Table.new(number: params[:number], placement: params[:placement])
+  def add_table
+    Table.create_table(params[:number], params[:placement])
+    redirect_to tables_path
   end
 
-  def remove_table(table_id)
-    Table.delete_table(table_id)
+  def remove_table
+    Table.delete_table(params[:number], params[:placement])
+    redirect_to tables_path
   end
 end

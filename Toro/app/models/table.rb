@@ -3,8 +3,8 @@ class Table < ActiveRecord::Base
   validates_presence_of :number
   has_many :checks
 
-  def self.create_table(number, placment)
-    table = where(number: number, placment: placment).first_or_create
+  def self.create_table(number, placement)
+    table = where(number: number, placement: placement).first_or_create
     if table.save 
       [true, table]
     else
@@ -12,8 +12,8 @@ class Table < ActiveRecord::Base
     end
   end
 
-  def self.delete_table(table_id)
-    table = Table.where(id: table_id).first
+  def self.delete_table(number, placement)
+    table = Table.where(number: number, placement: placement).first
     table.delete
   end
   

@@ -14,6 +14,14 @@
               <br>
             </div>
           <% end %>
+          <% if @tablesA.blank?%>
+            <% newTable = 1 %>
+            <% deleteTable = 0 %>
+          <% else %>
+            <% newTable = @tablesA.last.number + 1 %>
+            <% deleteTable = @tablesA.last.number %>
+          <% end %>
+          <div class="span5"><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "A") ,class:"btn btn-primary" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "A") ,class:"btn btn-danger" %></div></div>  
       </div>
     </end>
   </div>
