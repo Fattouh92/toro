@@ -5,8 +5,8 @@ class TableController < ApplicationController
     @tables = Table.all
   end
 
-  def add_table(table_number)
-    @table = Table.new(number: params[:number])
+  def add_table(table_number, placement)
+    @table = Table.new(number: params[:number], placement: params[:placement])
   end
 
   def remove_table(table_id)
