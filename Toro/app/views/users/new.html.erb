@@ -19,7 +19,7 @@
   </ul>
 </div>
 <% end %>
-<%= form_for(@user, :url => create_captain_path, :html => {:class => "form-signin"}) do |f| %>
+<%= form_for(@user, :url => create_user_path, :html => {:class => "form-signin"}) do |f| %>
 
   <%= f.hidden_field :email, :value => "{Time.now.to_i}#{rand(99)}@example.com" %>  
 

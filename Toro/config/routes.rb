@@ -2,9 +2,12 @@ Toro::Application.routes.draw do
 
   # routes to crud users, must be before devise routes
   match 'users/index' => 'users#index', :as => "users"
-  match 'users/new' => 'users#new', :as => "new_captain"
-  post "users/create_captain" => "users#create", :as => "create_captain"
-  get "/users/:id/destroy" => "users#destroy", :as => :delete_captain
+  match 'users/new' => 'users#new', :as => "new_user"
+  post "users/create" => "users#create", :as => "create_user"
+  get "/users/:id/destroy" => "users#destroy", :as => :delete_user
+  get "/users/:id/edit" => "users#edit", :as => :edit_user
+  post "users/:id/update" => "users#update", :as => "update_user"
+
 
   # prevent access to the pages we are not using from devise
   match 'users/sign_up' => redirect('/404.html')
