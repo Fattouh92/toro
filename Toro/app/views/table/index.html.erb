@@ -1,0 +1,100 @@
+<div style="padding: 15px;">  
+  <div style="padding-left:65%;">
+    <div class="well" style="font-weight: bold; text-align:center;">
+      <div class="row" style="width:600px; margin:0 auto;">
+          <div class="span5"><h1 style="font-size:50px; padding-bottom:30px;">Sala da5ely </h1></div>
+          <% @tablesA.each do |table| %>
+            <div class="span3">
+              <% if table.isEmpty == true %>
+                <div class="greenCircle"> <%= table.number %></div>
+              <% else %>
+                <div class="redCircle"> <%= table.number %></div>
+              <% end %>
+              <br>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </end>
+  </div>
+  </div>
+
+
+    <div class="well" style="font-weight: bold; text-align:center;">
+      <div class="row" style="width:1200px; margin:0 auto;">
+          <div class="span12" style="width:1200px;"><h1 style="font-size:50px;">Sala</h1></div>
+          <br>
+          <% @tablesB.each do |table| %>
+            <div class="span2">
+              <% if table.isEmpty == true %>
+                <div class="greenCircle"> <%= table.number %></div>
+              <% else %>
+                <div class="redCircle"> <%= table.number %></div>
+              <% end %>
+              <br>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </end>
+  </div>
+
+    <div class="well" style="font-weight: bold; text-align:center;">
+      <div class="row" style="width:1200px; margin:0 auto;">
+          <div class="span12" style="width:1200px;"><h1 style="font-size:50px;">Terrace</h1></div>
+          <br>
+          <% @tablesC.each do |table| %>
+            <div class="span2">
+              <% if table.isEmpty == true %>
+                <div class="greenCircle"> <%= table.number %></div>
+              <% else %>
+                <div class="redCircle"> <%= table.number %></div>
+              <% end %>
+              <br>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </end>
+  </div>
+
+    <div class="well" style="font-weight: bold; text-align:center;">
+      <div class="row" style="width:1200px; margin:0 auto;">
+          <div class="span12" style="width:1200px;"><h1 style="font-size:50px;">Garden</h1></div>
+          <br>
+          <% @tablesD.each do |table| %>
+            <div class="span2">
+              <% if table.isEmpty == true %>
+                <div class="greenCircle"> <%= table.number %></div>
+              <% else %>
+                <div class="redCircle"> <%= table.number %></div>
+              <% end %>
+              <br>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </end>
+  </div>
+
+    <div class="well" style="font-weight: bold; text-align:center;">
+      <div class="row" style="width:1200px; margin:0 auto;">
+          <div class="span12" style="width:1200px;"><h1 style="font-size:50px;">Special</h1></div>
+          <br>
+          <% @tablesE.each do |table| %>
+            <div class="span2">
+              <% if table.isEmpty == true %>
+                <div class="greenCircle"> <%= table.number %></div>
+              <% else %>
+                <div class="redCircle"> <%= table.number %></div>
+              <% end %>
+              <br>
+              <br>
+            </div>
+          <% end %>
+      </div>
+    </end>
+  </div>
+</div>
+
+
