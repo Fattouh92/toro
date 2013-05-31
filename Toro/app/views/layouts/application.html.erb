@@ -7,11 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <span style="font-size:18px" class="pull-right"><strong>Welcome, <%=current_user.username%></strong></span>
+  <br>
   <div class="navbar navbar-inverse">
   <div class="navbar-inner">
     <a class="brand" href="<%=root_path%>">Toro</a>
     <ul class="nav pull-right">
-      <li><a href=""><%=current_user.username%></a></li>
       <% if !user_signed_in? %>
         <li><a href="<%=new_user_session_path%>">Sign in</a></li>
       <% else %>
