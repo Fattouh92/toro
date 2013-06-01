@@ -15,20 +15,7 @@
     <td><strong><%= captain.firstname%>&nbsp;<%= captain.lastname%></strong></td>
     <td><strong><%= captain.username%></strong></td>
     <td><a href="<%=edit_user_path(captain.id)%>" class="btn btn-primary">Edit</a></td>
-    <td><a href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo">Delete user</a></td>
-    <div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 id="modal_label">Delete user</h3>
-      </div>
-      <div class="modal-body">
-        <h4>Are you sure you want to delete that user from the database?</h4>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal">Cancel</button>
-        <%= link_to "Delete", delete_user_path(captain.id), :class => "btn btn-danger"%>
-      </div>
-    </div>
+    <td><a href="<%=delete_user_path(captain.id)%>" class="btn btn-danger">Delete</a></td>
   </tr>
   <%end%>
 <% end %>
@@ -46,20 +33,7 @@
     <td><strong><%= captain.firstname%>&nbsp;<%= captain.lastname%></strong></td>
     <td><strong><%= captain.username%></strong></td>
     <td><a href="<%=edit_user_path(captain.id)%>" class="btn btn-primary">Edit</a></td>
-    <td><a href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo">Delete manager</a></td>
-    <div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 id="modal_label">Delete manager</h3>
-      </div>
-      <div class="modal-body">
-        <h4>Are you sure you want to delete that manager from the database?</h4>
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal">Cancel</button>
-        <%= link_to "Delete", delete_user_path(captain.id), :class => "btn btn-danger"%>
-      </div>
-    </div>
+    <td><a href="<%=delete_user_path(captain.id)%>" class="btn btn-danger">Delete</a></td>
   </tr>
   <%end%>
 <% end %>

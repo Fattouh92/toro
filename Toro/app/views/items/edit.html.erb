@@ -9,7 +9,7 @@
   <%= label_tag(:q, "New price:") %>
   <%= text_field_tag(:p, @item.price) %>
   <p>Select type of item:</p>
-  <%= collection_select(:item, :category, Category.all, :id,:name, { prompt: true }) %>
+  <%= collection_select(:item, :category, Category.all, :id,:name, { prompt: true, :selected => "#{@item.category.id}"}) %>
   <br>
   <%= submit_tag "Update", class: "btn btn-success btn-large"%>
 <% end %>

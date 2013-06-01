@@ -1,0 +1,19 @@
+<a href="<%=new_category_path%>" class="btn btn-primary">Add a new category</a>
+<br>
+<br>
+<legend>Items</legend>
+<table style="width:1200px;"class="table table-bordered">
+  <tr>
+    <td style="width:350px;"><h3>Name</h3></td>
+    <td style="width:120px;"><h3>Delete</h3></td>
+  </tr>
+<%@cats.each do |cat|%>
+  <tr>
+    <td><strong><%= cat.name%></strong></td>
+    <td><a href="<%=delete_category_path(cat.id)%>" class="btn btn-danger">Delete</a></td>
+  </tr>
+<% end %>
+</table>
+<script type="text/javascript">
+ <%= render "delete.js" %>
+</script>

@@ -1,0 +1,30 @@
+<%= link_to "<<Back", categories_path%>
+<br>
+<% if @errors != nil %>
+<div class="validation">
+  <ul>
+  <% @errors.each do |error|%>
+    <li><%= error[0] %>
+    <% error.delete_at(0) %>
+    <% error.each do |e|%>
+      <%e.each do |printable|%>
+        <%if printable == e.last%>
+          <%=printable%>
+        <%else%>
+          <%=printable%>,
+        <%end%>
+      <% end %>
+    <%end%>
+    <br>
+    </li>
+  <%end%>
+  </ul>
+</div>
+<% end %>
+<%= form_for(@cat, :url => create_category_path, :html => {:class => "form-signin"}) do |f| %>
+
+  <div><%= f.label :name %><br />
+  <%= f.text_field :name %></div>
+
+  <div><%= f.submit "Add category", class: "btn btn-success btn-large" %></div>
+<% end %>
