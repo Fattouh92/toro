@@ -24,5 +24,6 @@ class TableController < ApplicationController
     @tid = params[:table_id]
     @cheque = Check.where(table_id: @tid).last
     @orders = Order.where(check_id: @cheque.id).all
+    @counter = 0
   end
 end

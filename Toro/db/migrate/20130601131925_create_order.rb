@@ -2,10 +2,8 @@ class CreateOrder < ActiveRecord::Migration
   def change
     create_table :orders do |t|
       t.string :cashier_name
-      t.integer :table_number
       t.string :captain_name
-      t.integer :number_of_customers
-      t.float :min_charge
+      t.decimal :total, :precision => 5, :scale => 2
 
       t.references :check
 
