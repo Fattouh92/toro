@@ -14,6 +14,9 @@ Toro::Application.routes.draw do
   get "/items/:id/destroy" => "items#destroy", :as => :delete_item
   get "/items/:id/edit" => "items#edit", :as => :edit_item
   post "items/:id/update" => "items#update", :as => "update_item"
+  match 'items/:id/newOffer' => 'items#newOffer', :as => "newOffer_item"
+  post "items/:id/createOffer" => "items#createOffer", :as => "createOffer_item"
+  match 'items/:id/deleteOffer' => 'items#deleteOffer', :as => "deleteOffer_item"
 
   match 'categories' => 'categories#index', :as => "categories"
   match 'categories/new' => 'categories#new', :as => "new_category"

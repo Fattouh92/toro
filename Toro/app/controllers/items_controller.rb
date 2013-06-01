@@ -53,4 +53,23 @@ class ItemsController < ApplicationController
       redirect_to edit_item_path
     end    
   end
+
+  def newOffer
+    @item = Item.find(params[:id])
+  end
+
+  def createOffer
+    @item = Item.find(params[:id])
+    @item.offer = params[:o]
+    @item.save
+    redirect_to items_path
+  end
+
+  def deleteOffer
+    @item = Item.find(params[:id])
+    @item.offer = nil
+    @item.save
+    redirect_to items_path
+  end
+
 end

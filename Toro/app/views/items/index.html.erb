@@ -4,10 +4,11 @@
 <legend>Items</legend>
 <table style="width:1200px;"class="table table-bordered">
   <tr>
-    <td style="width:350px;"><h3>English name</h3></td>
-    <td style="width:300px;"><h3>Arabic name</h3></td>
-    <td style="width:300px;"><h3>Category</h3></td>
-    <td style="width:150px;"><h3>Price</h3></td>
+    <td style="width:300px;"><h3>English name</h3></td>
+    <td style="width:250px;"><h3>Arabic name</h3></td>
+    <td style="width:200px;"><h3>Category</h3></td>
+    <td style="width:125px;"><h3>Price</h3></td>
+    <td style="width:225px;"><h3>Special offer</h3></td>
     <td style="width:120px;"><h3>Edit</h3></td>
     <td style="width:120px;"><h3>Delete</h3></td>
   </tr>
@@ -17,6 +18,15 @@
     <td><strong><%= item.arabicname%></strong></td>
     <td><%= item.category.name%></td>
     <td><%= item.price %></td>
+    <td>
+      <%if item.offer == nil %>
+        -
+      <%else%>
+        <%=item.offer%>
+      <%end%>
+      <a href="<%=deleteOffer_item_path(item.id)%>" class="btn btn-danger pull-right">Remove</a>
+      <a href="<%=newOffer_item_path(item.id)%>" class="btn btn-primary pull-right">New</a>
+    </td>
     <td><a href="<%=edit_item_path(item.id)%>" class="btn btn-primary">Edit</a></td>
     <td><a href="<%=delete_item_path(item.id)%>" class="btn btn-danger">Delete</a></td>
   </tr>

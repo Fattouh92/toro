@@ -1,0 +1,9 @@
+<%= link_to "<<Back", items_path%>
+<br>
+<h2>Edit item</h2>
+<%= form_tag("/items/#{@item.id}/createOffer", :method => "post") do %>
+  <%= label_tag(:q, "New special offer:") %>
+  <%= text_field_tag(:o) %>
+  <br>
+  <%= submit_tag "Submit", class: "btn btn-success btn-large"%>
+<% end %>

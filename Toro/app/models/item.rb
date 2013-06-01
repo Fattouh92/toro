@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :name, :price, :arabicname, :category
+  attr_accessible :name, :price, :arabicname, :category, :offer
   belongs_to :check
   belongs_to :category
   validates_uniqueness_of :name

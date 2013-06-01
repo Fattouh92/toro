@@ -1,5 +1,6 @@
 class RecreateItems < ActiveRecord::Migration
   def change
+    drop_table :items
     create_table :items do |t|
       t.string :name
       t.decimal :price, :precision => 5, :scale => 2
