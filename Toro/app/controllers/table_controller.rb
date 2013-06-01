@@ -19,4 +19,10 @@ class TableController < ApplicationController
     Table.delete_table(params[:number], params[:placement])
     redirect_to tables_path
   end
+
+  def order
+    @tid = params[:table_id]
+    @cheque = Check.where(table_id: @tid).last
+    @receipt = Item.where(check_id: @cheque.id).all
+  end
 end
