@@ -1,5 +1,22 @@
-<% if Check.where(table_id: @tid).last.current %>
-
+<% if @cheque.current %>
+	<table>
+    <thead>
+      <tr>
+        <th>Item name</th>
+        <th>إItem price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @receipt.each do |r| %>
+        <tr>
+          <th><%= r.name %></th>
+          <th><%= r.price %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
-	<a class="btn btn-large" href="#">#</a>
+	<div style="text-align:center;">
+		<a class="btn btn-large btn-primary" href="#">New Order</a>
+	</div>
 <% end %>
