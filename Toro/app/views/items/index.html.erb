@@ -5,18 +5,20 @@
 <table style="width:1200px;"class="table table-bordered">
   <tr>
     <td style="width:350px;"><h3>English name</h3></td>
-    <td style="width:350px;"><h3>Arabic name</h3></td>
-    <td style="width:350px;"><h3>Category</h3></td>
-    <td style="width:160px;"><h3>Edit</h3></td>
-    <td style="width:160px;"><h3>Delete</h3></td>
+    <td style="width:300px;"><h3>Arabic name</h3></td>
+    <td style="width:300px;"><h3>Category</h3></td>
+    <td style="width:150px;"><h3>Price</h3></td>
+    <td style="width:120px;"><h3>Edit</h3></td>
+    <td style="width:120px;"><h3>Delete</h3></td>
   </tr>
 <%@items.each do |item|%>
   <tr>
     <td><strong><%= item.name%></strong></td>
     <td><strong><%= item.arabicname%></strong></td>
-    <td><%= item.category.id%></td>
+    <td><%= item.category.name%></td>
+    <td><%= item.price %></td>
     <td><a href="<%=edit_item_path(item.id)%>" class="btn btn-primary">Edit</a></td>
-    <td><a style="font-size : 18px;" href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo"><i class="icon-trash"></i>Delete item</a></td>
+    <td><a href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo">Delete item</a></td>
     <div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -33,3 +35,6 @@
   </tr>
 <% end %>
 </table>
+<script type="text/javascript">
+ <%= render "delete.js" %>
+</script>

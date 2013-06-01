@@ -11,7 +11,7 @@ Toro::Application.routes.draw do
   match 'items' => 'items#index', :as => "items"
   match 'items/new' => 'items#new', :as => "new_item"
   post "items/create" => "items#create", :as => "create_item"
-  get "/items/:id/destroy" => "item#destroy", :as => :delete_item
+  get "/items/:id/destroy" => "items#destroy", :as => :delete_item
   get "/items/:id/edit" => "items#edit", :as => :edit_item
   post "items/:id/update" => "items#update", :as => "update_item"
 

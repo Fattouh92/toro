@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user.admin = params[:type]
       @user.save
       flash[:success] = "User added successfully!"
-      redirect_to root_path
+      redirect_to users_path
     end
   end
 

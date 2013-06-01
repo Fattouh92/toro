@@ -8,17 +8,19 @@ class ItemsController < ApplicationController
   end
 
   def create
-    if params[:type] == nil
-      flash[:success] = "Please select type!"
-      redirect_to new_item_path
-      return
+    @item = Item.new
+    @item.name = params[:item][:name]
+    @item.arabicname = params[:item][:arabicname]
+    @item.price = params[:item][:price]
+    if !(params[:item][:category].blank?)
+      @item.category = Category.find(params[:item][:category])
     end
-    @item = Item.create(params[:item])
+    @item.save
     if @item.errors.size != 0
       redirect_to action: "new", errors: @item.errors.messages  
     else
       flash[:success] = "Item added successfully!"
-      redirect_to root_path
+      redirect_to items_path
     end
   end
 
@@ -27,7 +29,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item = item.find(params[:id])
+    @item = Item.find(params[:id])
     @item.destroy
     flash[:success] = "Item deleted successfully!"
     redirect_to items_path
@@ -40,10 +42,15 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item.name = params[:n]
-    @item.arabicname = params[:a]
+    @item.arabicname = params[:an]
     @item.price = params[:p]
-    @user.save
+    @item.category = Category.find(params[:item][:category])
+    if @item.save
     flash[:success] = "Item modified successfully!"
-    redirect_to items_path    
+    redirect_to items_path
+    else
+      flash[:error] = "Something is Wrong!"
+      redirect_to edit_item_path
+    end    
   end
 end

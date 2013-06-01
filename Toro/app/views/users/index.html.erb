@@ -15,7 +15,7 @@
     <td><strong><%= captain.firstname%>&nbsp;<%= captain.lastname%></strong></td>
     <td><strong><%= captain.username%></strong></td>
     <td><a href="<%=edit_user_path(captain.id)%>" class="btn btn-primary">Edit</a></td>
-    <td><a style="font-size : 18px;" href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo"><i class="icon-trash"></i>Delete user</a></td>
+    <td><a href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo">Delete user</a></td>
     <div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -46,7 +46,7 @@
     <td><strong><%= captain.firstname%>&nbsp;<%= captain.lastname%></strong></td>
     <td><strong><%= captain.username%></strong></td>
     <td><a href="<%=edit_user_path(captain.id)%>" class="btn btn-primary">Edit</a></td>
-    <td><a style="font-size : 18px;" href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo"><i class="icon-trash"></i>Delete manager</a></td>
+    <td><a href="#delete_modal" role="button" class="btn btn-danger" onClick="modalToggle()" id="LaunchDemo">Delete manager</a></td>
     <div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
