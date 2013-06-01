@@ -31,6 +31,7 @@ Toro::Application.routes.draw do
   match 'staff/choose_mode' => 'staff#choose_mode', :as => "staff_choose_mode"
 
   match 'tables' => 'table#index', :as => "tables"
+  match "/:table_id/order"=>"table#order", :as => "order"
   match "add_table/:number/:placement" => "table#add_table", :as => :add_table
   match "remove_table/:number/:placement" => "table#remove_table", :as => :remove_table
 
