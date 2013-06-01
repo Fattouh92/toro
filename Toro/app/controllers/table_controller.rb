@@ -23,6 +23,6 @@ class TableController < ApplicationController
   def order
     @tid = params[:table_id]
     @cheque = Check.where(table_id: @tid).last
-    @receipt = Item.where(check_id: @cheque.id).all
+    @orders = Order.where(check_id: @cheque.id).all
   end
 end

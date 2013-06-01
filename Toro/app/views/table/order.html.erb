@@ -1,5 +1,8 @@
 <% if @cheque.current %>
-	<table>
+	<% @orders.each do |order| %>
+  <% @items = order.items %>
+  <% @items.each do |item| %>
+  <table>
     <thead>
       <tr>
         <th>Item name</th>
@@ -7,16 +10,16 @@
       </tr>
     </thead>
     <tbody>
-      <% @receipt.each do |r| %>
+      <% @items.each do |item| %>
         <tr>
-          <th><%= r.name %></th>
-          <th><%= r.price %></th>
+          <th><%= item.name %></th>
+          <th><%= item.price %></th>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
 	<div style="text-align:center;">
-		<a class="btn btn-large btn-primary" href="#">New Order</a>
+		<a class="btn btn-large btn-primary" href="#">New Cheque</a>
 	</div>
 <% end %>
