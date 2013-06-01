@@ -21,11 +21,11 @@
     <td>
       <%if item.offer == nil %>
         -
+        <a href="<%=newOffer_item_path(item.id)%>" class="btn btn-primary pull-right">New</a>
       <%else%>
         <%=item.offer%>
+        <a href="<%=deleteOffer_item_path(item.id)%>" class="btn btn-danger pull-right">Remove</a>
       <%end%>
-      <a href="<%=deleteOffer_item_path(item.id)%>" class="btn btn-danger pull-right">Remove</a>
-      <a href="<%=newOffer_item_path(item.id)%>" class="btn btn-primary pull-right">New</a>
     </td>
     <td><a href="<%=edit_item_path(item.id)%>" class="btn btn-primary">Edit</a></td>
     <td><a href="<%=delete_item_path(item.id)%>" class="btn btn-danger">Delete</a></td>

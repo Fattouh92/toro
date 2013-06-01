@@ -22,6 +22,8 @@ Toro::Application.routes.draw do
   match 'categories/new' => 'categories#new', :as => "new_category"
   post "categories/create" => "categories#create", :as => "create_category"
   get "/categories/:id/destroy" => "categories#destroy", :as => :delete_category
+  get "/categories/:id/edit" => "categories#edit", :as => :edit_category
+  post "categories/:id/update" => "categories#update", :as => "update_category"
 
   # prevent access to the pages we are not using from devise
   match 'users/sign_up' => redirect('/404.html')

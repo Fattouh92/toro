@@ -63,6 +63,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     @item.offer = params[:o]
     if @item.save
+      flash[:success] = "Offer added successfully!"
       redirect_to items_path
     else
       redirect_to action: "newOffer", errors: @item.errors.messages
@@ -72,8 +73,13 @@ class ItemsController < ApplicationController
   def deleteOffer
     @item = Item.find(params[:id])
     @item.offer = nil
-    @item.save
-    redirect_to items_path
+    if @item.save
+      flash[:success] = "Offer removed successfully!"
+      redirect_to items_path
+    else
+      flash[:error] = "Something is wrong!!"
+      redirect_to items_path
+    end
   end
 
 end

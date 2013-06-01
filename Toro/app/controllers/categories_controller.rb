@@ -29,4 +29,21 @@ class CategoriesController < ApplicationController
     flash[:success] = "Category deleted successfully!"
     redirect_to categories_path
   end
+
+  def edit
+    @errors = params[:errors]
+    @cat = Category.find(params[:id])
+  end
+
+  def update
+    @cat = Category.find(params[:id])
+    @cat.name = params[:n]
+    if @cat.save
+      flash[:success] = "Category updated successfully!"
+      redirect_to categories_path
+    else
+      redirect_to action: "edit", errors: @cat.errors.messages
+    end
+  end
+
 end
