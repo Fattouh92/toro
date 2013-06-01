@@ -55,14 +55,18 @@ class ItemsController < ApplicationController
   end
 
   def newOffer
+    @errors = params[:errors]
     @item = Item.find(params[:id])
   end
 
   def createOffer
     @item = Item.find(params[:id])
     @item.offer = params[:o]
-    @item.save
-    redirect_to items_path
+    if @item.save
+      redirect_to items_path
+    else
+      redirect_to action: "newOffer", errors: @item.errors.messages
+    end
   end
 
   def deleteOffer

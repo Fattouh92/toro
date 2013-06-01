@@ -1,5 +1,26 @@
 <%= link_to "<<Back", items_path%>
 <br>
+<% if @errors != nil %>
+<div class="validation">
+  <ul>
+  <% @errors.each do |error|%>
+    <li><%= error[0] %>
+    <% error.delete_at(0) %>
+    <% error.each do |e|%>
+      <%e.each do |printable|%>
+        <%if printable == e.last%>
+          <%=printable%>
+        <%else%>
+          <%=printable%>,
+        <%end%>
+      <% end %>
+    <%end%>
+    <br>
+    </li>
+  <%end%>
+  </ul>
+</div>
+<% end %>
 <h2>Edit item</h2>
 <%= form_tag("/items/#{@item.id}/createOffer", :method => "post") do %>
   <%= label_tag(:q, "New special offer:") %>
