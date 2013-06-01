@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   attr_accessible :name, :price, :arabicname, :category, :offer
-  belongs_to :check
+  has_and_belongs_to_many :orders
   belongs_to :category
   validates_uniqueness_of :name
   validates_presence_of :name, :price, :arabicname, :category
