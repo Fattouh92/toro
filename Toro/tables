@@ -1,0 +1,209 @@
+t = Table.new
+t.number = 1
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 2
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 3
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 4
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 5
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 6
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 7
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 8
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 9
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 10
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 11
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 12
+t.placement = "A"
+t.save
+t = Table.new
+t.number = 1
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 2
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 3
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 4
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 5
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 6
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 7
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 8
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 9
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 10
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 11
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 12
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 13
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 14
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 15
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 16
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 17
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 18
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 19
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 20
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 21
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 22
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 23
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 24
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 25
+t.placement = "B"
+t.save
+t = Table.new
+t.number = 1
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 2
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 3
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 4
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 5
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 6
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 7
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 8
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 9
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 10
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 11
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 12
+t.placement = "C"
+t.save
+t = Table.new
+t.number = 1
+t.placement = "D"
+t.save
+t = Table.new
+t.number = 2
+t.placement = "D"
+t.save
+t = Table.new
+t.number = 3
+t.placement = "D"
+t.save
+

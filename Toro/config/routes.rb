@@ -2,14 +2,18 @@ Toro::Application.routes.draw do
 
   # routes to crud users, must be before devise routes
   match 'users/index' => 'users#index', :as => "users"
-  match 'users/new' => 'users#new', :as => "new_captain"
-  post "users/create_captain" => "users#create", :as => "create_captain"
-  get "/users/:id/destroy" => "users#destroy", :as => :delete_captain
+  match 'users/new' => 'users#new', :as => "new_user"
+  post "users/create" => "users#create", :as => "create_user"
+  get "/users/:id/destroy" => "users#destroy", :as => :delete_user
+  get "/users/:id/edit" => "users#edit", :as => :edit_user
+  post "users/:id/update" => "users#update", :as => "update_user"
+
 
   # prevent access to the pages we are not using from devise
   match 'users/sign_up' => redirect('/404.html')
   match 'users/password/new' => redirect('/404.html')
   match 'users/password/edit' => redirect('/404.html')
+  match 'users/edit' => redirect('/404.html')
 
   devise_for :users do 
     get '/users/sign_out' => 'devise/sessions#destroy' 
@@ -21,6 +25,8 @@ Toro::Application.routes.draw do
 
   match 'tables' => 'table#index', :as => "tables"
   match "/:table_id/order"=>"table#order", :as => "order"
+  match "add_table/:number/:placement" => "table#add_table", :as => :add_table
+  match "remove_table/:number/:placement" => "table#remove_table", :as => :remove_table
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

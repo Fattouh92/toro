@@ -1,3 +1,5 @@
+<%= link_to "<<Back", users_path%>
+<br>
 <% if @errors != nil %>
 <div class="validation">
   <ul>
@@ -19,7 +21,7 @@
   </ul>
 </div>
 <% end %>
-<%= form_for(@user, :url => create_captain_path, :html => {:class => "form-signin"}) do |f| %>
+<%= form_for(@user, :url => create_user_path, :html => {:class => "form-signin"}) do |f| %>
 
   <%= f.hidden_field :email, :value => "{Time.now.to_i}#{rand(99)}@example.com" %>  
 
@@ -38,5 +40,11 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
-  <div><%= f.submit "Add captain", class: "btn btn-success btn-large" %></div>
+  <p>Select type of user:</p>
+  <%= radio_button_tag(:type, "true") %>
+  <%= label_tag(:manager, "Manager") %>
+  <%= radio_button_tag(:type, "false") %>
+  <%= label_tag(:cashier, "Cashier") %>
+
+  <div><%= f.submit "Add user", class: "btn btn-success btn-large" %></div>
 <% end %>
