@@ -25,6 +25,13 @@ Toro::Application.routes.draw do
   get "/categories/:id/edit" => "categories#edit", :as => :edit_category
   post "categories/:id/update" => "categories#update", :as => "update_category"
 
+  match 'banks' => 'banks#index', :as => "banks"
+  match 'banks/new' => 'banks#new', :as => "new_bank"
+  post "banks/create" => "banks#create", :as => "create_bank"
+  get "/banks/:id/destroy" => "banks#destroy", :as => :delete_bank
+  get "/banks/:id/edit" => "banks#edit", :as => :edit_bank
+  post "banks/:id/update" => "banks#update", :as => "update_bank"
+
   # prevent access to the pages we are not using from devise
   match 'users/sign_up' => redirect('/404.html')
   match 'users/password/new' => redirect('/404.html')

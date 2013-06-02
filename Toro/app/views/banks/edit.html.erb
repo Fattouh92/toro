@@ -1,0 +1,30 @@
+<%= link_to "<<Back", banks_path%>
+<br>
+<% if @errors != nil %>
+<div class="validation">
+  <ul>
+  <% @errors.each do |error|%>
+    <li><%= error[0] %>
+    <% error.delete_at(0) %>
+    <% error.each do |e|%>
+      <%e.each do |printable|%>
+        <%if printable == e.last%>
+          <%=printable%>
+        <%else%>
+          <%=printable%>,
+        <%end%>
+      <% end %>
+    <%end%>
+    <br>
+    </li>
+  <%end%>
+  </ul>
+</div>
+<% end %>
+<h2>Edit bank</h2>
+<%= form_tag("/banks/#{@bank.id}/update", :method => "post") do %>
+  <%= label_tag(:q, "Name:") %>
+  <%= text_field_tag(:n, @bank.bankname) %>
+  <br>
+  <%= submit_tag "Submit", class: "btn btn-success btn-large"%>
+<% end %>
