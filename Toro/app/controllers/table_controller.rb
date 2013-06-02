@@ -26,4 +26,17 @@ class TableController < ApplicationController
     @orders = Order.where(check_id: @cheque.id).all
     @counter = 0
   end
+
+  def new_cheque
+    @tid = params[:table_id]
+    @categories = Category.all
+  end
+
+  def incr_quantity
+  @item = Item.find(params[:id])
+  # I'd probably move the increment logic into the model
+  @item.quantity += 20
+  @item.save
+  # respond to it however you want
+  end
 end
