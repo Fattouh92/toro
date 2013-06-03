@@ -1,22 +1,28 @@
-<div class="tabbable"> <!-- Only required for left/right tabs -->
-  <ul class="nav nav-tabs">
-    <% @categories.each do |cat| %>
-      <li><a href="#<%= cat.id %>" data-toggle="tab"><%= cat.name %></a></li>
-    <% end %>
-  </ul>
-  <div class="tab-content">
-    <% @categories.each do |cat| %>
-      <div class="tab-pane" id="<%= cat.id %>">
-        <ul>
-          <% @items = Item.where(category_id: cat.id).all %>
-          <% @items.each do |item| %>
-            <!-- <li><%= item.name %></li> -->
-            <%= form_for item, incr_quantity_path(item) do |f| %>
-              <%= f.submit %>
+    <h3>New Cheque</h3>
+
+    <%= form_for (@check),:url => create_check_path(@tid) do |f| %>
+              <div class="control-group">
+                <%= f.label :Cheque_name, :class => "control-label" %>
+                <div class="controls">
+                  <%= f.text_field :name %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= f.label :number_of_customers, :class => "control-label" %>
+                <div class="controls">
+                  <%= f.text_field :number_of_customers %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= f.label :minimum_charge, :class => "control-label" %>
+                <div class="controls">
+                  <%= f.text_field :min_charge %>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls">
+                  <button class="btn btn-info btn-large" type="submit" style="margin-right: 20px"><%= "Create" %></button>
+                  <a class="btn btn-large" href="/<%= @tid %>/order" style="margin-left: 20px"><%= "back" %></a>
+                </div>
+              </div>
             <% end %>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-  </div>
-</div>
