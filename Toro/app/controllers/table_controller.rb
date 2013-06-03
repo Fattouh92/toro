@@ -66,6 +66,7 @@ class TableController < ApplicationController
   def new_cheque
     @tid = params[:table_id]
     @check = Check.new
+    @errors = params[:errors]
   end
 
   def create_check
@@ -73,9 +74,16 @@ class TableController < ApplicationController
     @check.name = params[:check][:name]
     @check.number_of_customers = params[:check][:number_of_customers]
     @check.min_charge = params[:check][:min_charge]
+    @check.captain_id = params[:check][:captain_id]
     @check.table_id = params[:table_id]
-    @check.save
-    redirect_to action: "new_order"
+    @check.cashier_id = current_user.id
+    @check.shift = Dateshift.last.shift
+    @check.date = Dateshift.last.date
+    if @check.save
+      redirect_to action: "new_order"
+    else
+      redirect_to action: "new_cheque", errors: @check.errors.messages
+    end
   end
 
   def new_order
