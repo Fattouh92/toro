@@ -123,4 +123,38 @@ class TableController < ApplicationController
     @cheque_id = params[:id]
     @categories = Category.all
   end
+
+  def close_cheque
+    @ch = Check.find(params[:check_id])
+    @visas = Visa.all
+  end
+
+  def pay_cash
+    ch = Check.find(params[:check_id])
+    table = Table.find(ch.table_id)
+    ch.payment_method = "cash"
+    ch.current = false
+    ch.save
+    @cheque = Check.where(table_id: table.id, current: true)
+    if @cheque = []
+      table.isEmpty = true
+      table.save
+    end
+    redirect_to tables_path
+  end
+
+  def pay_visa
+    ch = Check.find(params[:check_id])
+    table = Table.find(ch.table_id)
+    ch.payment_method = "visa" + params[:bank_name]
+    ch.current = false
+    ch.save
+    @cheque = Check.where(table_id: table.id, current: true)
+    if @cheque = []
+      table.isEmpty = true
+      table.save
+    end
+    redirect_to tables_path
+  end
+
 end
