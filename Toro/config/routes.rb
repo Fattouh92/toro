@@ -51,6 +51,13 @@ Toro::Application.routes.draw do
   match "/new_cheque"=>"table#new_cheque", :as => "new_cheque"
   match "add_table/:number/:placement" => "table#add_table", :as => :add_table
   match "remove_table/:number/:placement" => "table#remove_table", :as => :remove_table
+  match "close_shift" => "table#close_shift", :as => :close_shift
+  match "close_day" => "table#close_day", :as => :close_day
+
+  match "summary" => "summary#index", :as => :summary
+  match "filter" => "summary#filter", :as => :filter
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

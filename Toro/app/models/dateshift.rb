@@ -1,3 +1,3 @@
 class Dateshift < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :shift, :date
 end

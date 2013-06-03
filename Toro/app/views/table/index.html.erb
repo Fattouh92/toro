@@ -1,3 +1,12 @@
+<div class="well" style="font-weight: bold; text-align:center; font-size: 18px; color:#CC0000;">
+  <span><%= @date %></span><span style="padding-left:200px;"><%= @shiftstr %></span>
+  <% if @shift == 1 %>
+    <%= button_to "Close Shift",close_shift_path,class:"btn btn-primary", style:"width: 120px;" %>
+  <% else %>
+    <%= button_to "Close day" , close_day_path,class:"btn btn-primary", style:"width: 120px;" %>
+  <% end %>
+</div>
+
 <div style="padding: 15px; width: 80%;margin:0 auto;">  
   <div style="padding-left:80%;">
     <div class="well" style="font-weight: bold; text-align:center;">
