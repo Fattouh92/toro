@@ -48,9 +48,11 @@ Toro::Application.routes.draw do
 
   match 'tables' => 'table#index', :as => "tables"
   match "/:table_id/order"=>"table#order", :as => "order"
-  match "/new_cheque"=>"table#new_cheque", :as => "new_cheque"
+  match "/:table_id/new_cheque"=>"table#new_cheque", :as => "new_cheque"
   match "add_table/:number/:placement" => "table#add_table", :as => :add_table
   match "remove_table/:number/:placement" => "table#remove_table", :as => :remove_table
+  post "/:table_id/create_check" => "table#create_check", :as => "create_check"
+  match "/:table_id/new_order"=>"table#new_order", :as => "new_order"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

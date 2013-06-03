@@ -1,0 +1,19 @@
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <% @categories.each do |cat| %>
+      <li><a href="#<%= cat.id %>" data-toggle="tab"><%= cat.name %></a></li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <% @categories.each do |cat| %>
+      <div class="tab-pane" id="<%= cat.id %>">
+        <ul>
+          <% @items = Item.where(category_id: cat.id).all %>
+          <% @items.each do |item| %>
+            <li><%= item.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</div>
