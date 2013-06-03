@@ -59,7 +59,7 @@ class TableController < ApplicationController
 
   def order
     @tid = params[:table_id]
-    @cheque = Check.where(table_id: @tid, current: true).all
+    @cheque = Check.where(table_id: @tid, current: true)
     @counter = 0
   end
 
@@ -76,6 +76,7 @@ class TableController < ApplicationController
     @check.min_charge = params[:check][:min_charge]
     @check.captain_id = params[:check][:captain_id]
     @check.table_id = params[:table_id]
+    @check.taxrate = params[:check][:taxrate]
     @check.cashier_id = current_user.id
     @check.shift = Dateshift.last.shift
     @check.date = Dateshift.last.date
