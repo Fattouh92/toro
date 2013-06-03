@@ -59,7 +59,7 @@ class TableController < ApplicationController
 
   def order
     @tid = params[:table_id]
-    @cheque = Check.where(table_id: @tid, current: true).all
+    @cheque = Check.where(table_id: @tid, current: true)
     @counter = 0
   end
 
@@ -95,11 +95,15 @@ class TableController < ApplicationController
     @check.min_charge = params[:check][:min_charge]
     @check.captain_id = params[:check][:captain_id]
     @check.table_id = params[:table_id]
+    @check.taxrate = params[:check][:taxrate]
     @check.cashier_id = current_user.id
     @check.shift = Dateshift.last.shift
     @check.date = Dateshift.last.date
     if @check.save
-      redirect_to action: "new_order", table_id: params[:table_id], id:@check.id
+      @table = Table.find(params[:table_id])
+      @table.isEmpty = false
+      @table.save
+      redirect_to action: "new_order"
     else
       redirect_to action: "new_cheque", errors: @check.errors.messages
     end
