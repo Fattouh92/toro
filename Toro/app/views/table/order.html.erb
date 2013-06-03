@@ -1,5 +1,5 @@
 <% if @cheque != [] %>
-  <h2>Table <%= Table.find(@tid).number %></h2>
+  <h2>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h2>
   <div>
     <% @cheque.each do |ch| %>
     <table class="table">
