@@ -95,11 +95,35 @@ class TableController < ApplicationController
     @categories = Category.all
   end
 
-  # def incr_quantity
-  # @item = Item.find(params[:id])
-  # # I'd probably move the increment logic into the model
-  # @item.quantity += 20
-  # @item.save
-  # # respond to it however you want
-  # end
+  def close_cheque
+    @ch = Check.find(params[:check_id])
+    @visas = Visa.all
+  end
+
+  def pay_cash
+    ch = Check.find(params[:check_id])
+    table = Table.find(ch.table_id)
+    ch.payment_method = "cash"
+    ch.current = false
+    ch.save
+    @cheque = Check.where(table_id: table.id, current: true)
+    if @cheque = []
+      table.isEmpty = true
+    end
+    redirect_to action: "tables"
+  end
+
+  def pay_visa
+    ch = Check.find(params[:check_id])
+    table = Table.find(ch.table_id)
+    ch.payment_method = "visa" + params[:bank_name]
+    ch.current = false
+    ch.save
+    @cheque = Check.where(table_id: table.id, current: true)
+    if @cheque = []
+      table.isEmpty = true
+    end
+    redirect_to action: "tables"
+  end
+
 end
