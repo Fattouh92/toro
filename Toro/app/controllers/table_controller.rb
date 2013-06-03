@@ -16,7 +16,6 @@ class TableController < ApplicationController
     else
       @shiftstr = "Evening Shift"
     end
-
   end
 
   def add_table
@@ -68,18 +67,21 @@ class TableController < ApplicationController
     @order.check_id = params[:id]
     @order.save
     quantities = []
-    params[:quantites].each do |quantity|
+    params[:quantities].each do |quantity|
       if quantity != ""
         quantities << quantity
+      end
+    end
     counter = 0
     params[:item_ids].each do |item_id|
       @item_order = Itemorder.new
       @item_order.item_id = item_id
-      @item.quantity = quantities[counter]
-      @item.order_id = @order.id
-      @item.save
+      @item_order.quantity = quantities[counter]
+      @item_order.order_id = @order.id
+      @item_order.save
       counter = counter+1
     end
+    redirect_to action:"new_order" 
   end
 
   def new_cheque
@@ -103,7 +105,7 @@ class TableController < ApplicationController
       @table = Table.find(params[:table_id])
       @table.isEmpty = false
       @table.save
-      redirect_to action: "new_order"
+      redirect_to action: "new_order", table_id:params[:table_id], id: @check.id
     else
       redirect_to action: "new_cheque", errors: @check.errors.messages
     end
@@ -111,14 +113,7 @@ class TableController < ApplicationController
 
   def new_order
     @tid = params[:table_id]
+    @cheque_id = params[:id]
     @categories = Category.all
   end
-
-  # def incr_quantity
-  # @item = Item.find(params[:id])
-  # # I'd probably move the increment logic into the model
-  # @item.quantity += 20
-  # @item.save
-  # # respond to it however you want
-  # end
 end
