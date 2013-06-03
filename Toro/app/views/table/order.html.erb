@@ -1,87 +1,88 @@
 <% if @cheque != [] %>
-  <h2>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h2>
-  
-  <div>
-    <% @cheque.each do |ch| %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th><h4>Name</h4></th>
-            <th><h4>Cashier</h4></th>
-            <th><h4>Captain</h4></th>
-            <th><h4>Number of Customers</h4></th>
-            <th><h4>Minimum charge state</h4></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th><h5><%= ch.name %></h2></th>
-            <th><h5><%= User.find(ch.cashier_id).firstname %> <%= User.find(ch.cashier_id).lastname %></h5></th>
-            <th><h5><%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h5></th>
-            <th><h5><%= ch.number_of_customers %></h5></th>
-            <% if ch.sum < (ch.min_charge * ch.number_of_customers) %>
-              <th><h5><span class="label label-important">minimum charge</span></h5></th>
-            <% else %>
-              <th><h5><span class="label label-success">minimum charge</span></h5></th>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-      
-      <% @orders = Order.where(check_id: ch.id).all %>
-      <% @orders.each do |order| %>
-        <% @counter = @counter + 1 %>
-        <h5>Order <%= @counter %> <h6><%= order.created_at %></h6></h5>
-        
-        <br>
-        
-        <h2>Items</h2>
-        <% @items = []
-        @tempItems = Itemorder.where(order_id: order.id)
-         @tempItems.each do |temp|
-          item_id_temp = temp.item_id
-          @items << Item.find(item_id_temp)
-        end
-          %>
-        <table class="table table-condensed">
-          <thead>
-            <tr>
-              <th>name</th>
-              <th>price</th>
-              <th>arabic name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @items.each do |item| %>
-              <tr>
-                <th><%= item.name %></th>
-                <% if item.offer.blank? %>
-                  <th><%= item.price %></th>
-                <% else %>
-                  <% @mod = item.price - (item.price * (item.offer + 0.00) * 0.01) %>
-                  <th><%= @mod %></th>
-                <% end %>
-                <th><%= item.arabicname %></th>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
 
+  <h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
+  <br>
+  <div class="tabbable tabs-left"> <!-- Only required for left/right tabs -->
+    <ul class="nav nav-tabs">
+      <% @cheque.each do |ch| %>
+        <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.name %></a></li>
       <% end %>
-      <br>
-      <% if ch.sum >= (ch.min_charge * ch.number_of_customers) %> 
-        <h4>total of cheque before taxes: <%= ch.sum %></h4>
-        <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
-      <% else %>
-        <h4>total of cheque before taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) %></h4>
-        <h4>total of cheque after taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) + (ch.min_charge * (ch.number_of_customers + 0.00) * (ch.taxrate + 0.00) * 0.01) %></h4>
+    </ul>
+    <div class="tab-content">
+      <% @cheque.each do |ch| %>
+        <div class="tab-pane" id="<%= ch.id %>">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th><h2>Cashier <%= User.find(ch.cashier_id).firstname %> <%= User.find(ch.cashier_id).lastname %></h2></th>
+                <th><h2>Captain <%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h2></th>
+                <th><h2><%= ch.number_of_customers %> customers</h2></th>
+                <% if ch.sum < (ch.min_charge * ch.number_of_customers) %>
+                  <th><span class="label label-important">minimum charge</span></th>
+                <% else %>
+                  <th><span class="label label-success">minimum charge</span></th>
+                <% end %>
+              </tr>
+            </thead>
+          </table>        
+          <% @orders = Order.where(check_id: ch.id).all %>
+          <% @orders.each do |order| %>
+            <% @counter = @counter + 1 %>
+            <h2>Order <%= @counter %> <h4><%= order.created_at %></h4></h2>
+        
+            <br>
+        
+            <h2>Items</h2>
+            <% @items = []
+            @tempItems = Itemorder.where(order_id: order.id)
+            @tempItems.each do |temp|
+              item_id_temp = temp.item_id
+              @items << Item.find(item_id_temp)
+            end %>
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>arabic name</th>
+                  <th>price</th>
+                  <th>quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @items.each do |item| %>
+                  <tr>
+                    <th><%= item.name %></th>
+                    <th><%= item.arabicname %></th>
+                    <% if item.offer.blank? %>
+                      <th><%= item.price %></th>
+                    <% else %>
+                      <% @mod = item.price - (item.price * (item.offer + 0.00) * 0.01) %>
+                      <th><%= @mod %></th>
+                    <% end %>
+                    <th><%=Itemorder.where(order_id: order.id, item_id: item.id).first.quantity%></th>
+                    
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% end %>
+          <br>
+          <% if ch.sum >= (ch.min_charge * ch.number_of_customers) %> 
+            <h4>total of cheque before taxes: <%= ch.sum %></h4>
+            <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
+          <% else %>
+            <h4>total of cheque before taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) %></h4>
+            <h4>total of cheque after taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) + (ch.min_charge * (ch.number_of_customers + 0.00) * (ch.taxrate + 0.00) * 0.01) %></h4>
+          <% end %>
+          <div style="text-align:center;">
+            <a class="btn btn-large btn-primary" href="/<%= @tid %>/<%= ch.id %>/new_order">Add Order</a>
+            <a class="btn btn-large btn-primary" href="/<%= ch.id %>/close_cheque">Close Cheque</a>
+          </div>
+        </div>
       <% end %>
-      <div style="text-align:center;">
-        <a class="btn btn-large btn-primary" href="/<%= @tid %>/<%= ch.id %>/new_order">Add Order</a>
-        <a class="btn btn-large btn-primary" href="/<%= ch.id %>/close_cheque">Close Cheque</a>
-      </div>
-    <% end %>
+    </div>
   </div>
+
 
   <br><br><br>
   <div style="text-align:center;">

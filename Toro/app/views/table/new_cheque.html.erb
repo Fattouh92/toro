@@ -46,7 +46,7 @@
                 </div>
               </div>
               <p>Select Captain</p>
-                <%= f.collection_select(:captain_id, User.all, :id,:username, { prompt: true }) %>
+                <%= f.collection_select(:captain_id, User.where(admin: false), :id,:username, { prompt: true }) %>
               <div class="control-group">
                 <div class="controls">
                   <button class="btn btn-info btn-large" type="submit" style="margin-right: 20px"><%= "Create" %></button>
