@@ -4,15 +4,16 @@
       <li><a href="#<%= cat.id %>" data-toggle="tab"><%= cat.name %></a></li>
     <% end %>
   </ul>
+
+    <%= form_tag give_order_path, :method => :post do %>
   <div class="tab-content">
-    <% @categories.each do |cat| %>
-      <div class="tab-pane" id="<%= cat.id %>">
-          <%= form_tag give_order_path, :method => :post do %>
+      <% @categories.each do |cat| %>
+        <div class="tab-pane" id="<%= cat.id %>">
             <% items = Item.where(category_id: cat.id).all %>
             <table class="table table-bordered table-condensed" style="width:600px;background-color:white">
-          <col style="width:10%">
-          <col style="width:45%">
-          <col style="width:45%">
+            <col style="width:10%">
+            <col style="width:45%">
+            <col style="width:45%">
             <% for item in items %>
               <tr>
                 <td style="text-align:center; vertical-align: middle">
@@ -26,12 +27,14 @@
                 </td>
               </tr>
             <% end %>
-        </table>
-            <%= submit_tag "Order", :class => "btn btn-success btn-large", :onclick => "return check();" %>
-          <%end%>
+            </table>
       </div>
     <% end %>
+
   </div>
+  
+            <%= submit_tag "Order", :class => "btn btn-success btn-large", :onclick => "return check();" %>
+          <%end%>
 </div>
 <script type="text/javascript">
 function check(){
