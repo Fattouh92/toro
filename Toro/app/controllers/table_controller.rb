@@ -65,6 +65,7 @@ class TableController < ApplicationController
   def give_order
     @order = Order.new
     @order.check_id = params[:id]
+    @order.total = 0
     @order.save
     quantities = []
     params[:quantities].each do |quantity|
@@ -79,6 +80,11 @@ class TableController < ApplicationController
       @item_order.quantity = quantities[counter]
       @item_order.order_id = @order.id
       @item_order.save
+      @order.total += Item.find(item_id).price
+      @order.save
+      c = Check.find(params[:id])
+      c.sum += Item.find(item_id).price
+      c.save
       counter = counter+1
     end
     redirect_to action:"new_order" 
@@ -99,6 +105,7 @@ class TableController < ApplicationController
     @check.table_id = params[:table_id]
     @check.taxrate = params[:check][:taxrate]
     @check.cashier_id = current_user.id
+    @check.sum = 0
     @check.shift = Dateshift.last.shift
     @check.date = Dateshift.last.date
     if @check.save

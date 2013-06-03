@@ -6,23 +6,23 @@
       <table class="table">
         <thead>
           <tr>
-            <th><h2>Name</h2></th>
-            <th><h2>Cashier</h2></th>
-            <th><h2>Captain</h2></th>
-            <th><h2>Number of Customers</h2></th>
-            <th><h2>Minimum charge state</h2></th>
+            <th><h4>Name</h4></th>
+            <th><h4>Cashier</h4></th>
+            <th><h4>Captain</h4></th>
+            <th><h4>Number of Customers</h4></th>
+            <th><h4>Minimum charge state</h4></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th><h2><%= ch.name %></h2></th>
-            <th><h2><%= User.find(ch.cashier_id).firstname %> <%= User.find(ch.cashier_id).lastname %></h2></th>
-            <th><h2><%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h2></th>
-            <th><h2><%= ch.number_of_customers %></h2></th>
+            <th><h5><%= ch.name %></h2></th>
+            <th><h5><%= User.find(ch.cashier_id).firstname %> <%= User.find(ch.cashier_id).lastname %></h5></th>
+            <th><h5><%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h5></th>
+            <th><h5><%= ch.number_of_customers %></h5></th>
             <% if ch.sum < (ch.min_charge * ch.number_of_customers) %>
-              <th><h2><span class="label label-important">minimum charge</span></h2></th>
+              <th><h5><span class="label label-important">minimum charge</span></h5></th>
             <% else %>
-              <th><h2><span class="label label-success">minimum charge</span></h2></th>
+              <th><h5><span class="label label-success">minimum charge</span></h5></th>
             <% end %>
           </tr>
         </tbody>
@@ -31,20 +31,18 @@
       <% @orders = Order.where(check_id: ch.id).all %>
       <% @orders.each do |order| %>
         <% @counter = @counter + 1 %>
-        <h1>Order <%= @counter %> <h3><%= order.created_at %></h3></h1>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th><h1>Order <%= @counter %></h1></th>
-              <th><h3><%= order.created_at %></h3></th>
-              <th><%= order.total %></th>
-            </tr>
-          </thead>
-        </table>
+        <h5>Order <%= @counter %> <h6><%= order.created_at %></h6></h5>
+        
         <br>
         
         <h2>Items</h2>
-        <% @items = order.items %>
+        <% @items = []
+        @tempItems = Itemorder.where(order_id: order.id)
+         @tempItems.each do |temp|
+          item_id_temp = temp.item_id
+          @items << Item.find(item_id_temp)
+        end
+          %>
         <table class="table table-condensed">
           <thead>
             <tr>
@@ -79,7 +77,7 @@
         <h4>total of cheque after taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) + (ch.min_charge * (ch.number_of_customers + 0.00) * (ch.taxrate + 0.00) * 0.01) %></h4>
       <% end %>
       <div style="text-align:center;">
-        <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_order">Add Order</a>
+        <a class="btn btn-large btn-primary" href="/<%= @tid %>/<%= ch.id %>/new_order">Add Order</a>
         <a class="btn btn-large btn-primary" href="#">Close Cheque</a>
       </div>
     <% end %>
