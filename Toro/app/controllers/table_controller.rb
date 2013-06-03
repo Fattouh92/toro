@@ -44,6 +44,9 @@ class TableController < ApplicationController
     openTables = Table.where(:isEmpty => false).all
     d = Dateshift.first
     if openTables.blank?
+      tempDate = Torodate.new
+      tempDate.date = Dateshift.first.date.to_date
+      tempDate.save
       d.date = d.date + 1.day
       d.save
       if d.shift = 2
@@ -52,7 +55,8 @@ class TableController < ApplicationController
         redirect_to tables_path
       end
     else
-      redirect_to :tables_path, flash: {fail: "There are still open tables."}
+      flash[:error] = "There are still open tables."
+      redirect_to tables_path
     end
   end
 

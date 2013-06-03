@@ -55,7 +55,7 @@ Toro::Application.routes.draw do
   match "close_day" => "table#close_day", :as => :close_day
 
   match "summary" => "summary#index", :as => :summary
-  match "filter" => "summary#filter", :as => :filter
+  post "filter" => "summary#filter", :as => :filter
 
 
   post "/:table_id/create_check" => "table#create_check", :as => "create_check"
