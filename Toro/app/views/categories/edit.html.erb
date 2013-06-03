@@ -26,5 +26,21 @@
   <%= label_tag(:q, "Name:") %>
   <%= text_field_tag(:n, @cat.name) %>
   <br>
+  Select a printer for that category:
+  <br>
+  <%selected = @cat.printer
+  if selected == 1%>
+    <%= radio_button_tag(:printer, 1, 1) %>
+  <%= label_tag(:barista, "Barista printer") %>
+  <%= radio_button_tag(:printer, 2) %>
+  <%= label_tag(:kitchen, "Kitchen printer") %>
+    <%else%>
+    <%= radio_button_tag(:printer, 1) %>
+  <%= label_tag(:barista, "Barista printer") %>
+  <%= radio_button_tag(:printer, 2, 2) %>
+  <%= label_tag(:kitchen, "Kitchen printer") %>
+    <%end %>
+
+  <br>
   <%= submit_tag "Submit", class: "btn btn-success btn-large"%>
 <% end %>

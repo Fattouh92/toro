@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
   def create
     @cat = Category.new
     @cat.name = params[:category][:name]
+    @cat.printer = params[:printer].to_i
     @cat.save
     if @cat.errors.size != 0
       redirect_to action: "new", errors: @cat.errors.messages  
@@ -38,6 +39,7 @@ class CategoriesController < ApplicationController
   def update
     @cat = Category.find(params[:id])
     @cat.name = params[:n]
+    @cat.printer = params[:printer].to_i
     if @cat.save
       flash[:success] = "Category updated successfully!"
       redirect_to categories_path

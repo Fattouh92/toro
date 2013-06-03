@@ -25,6 +25,13 @@
 
   <div><%= f.label :name %><br />
   <%= f.text_field :name %></div>
+  <br>
+  Select a printer for that category:
+  <br>
+  <%= radio_button_tag(:printer, 1) %>
+  <%= label_tag(:barista, "Barista printer") %>
+  <%= radio_button_tag(:printer, 2) %>
+  <%= label_tag(:kitchen, "Kitchen printer") %>
 
   <div><%= f.submit "Add category", class: "btn btn-success btn-large" %></div>
 <% end %>
