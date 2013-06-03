@@ -59,7 +59,8 @@ Toro::Application.routes.draw do
 
 
   post "/:table_id/create_check" => "table#create_check", :as => "create_check"
-  match "/:table_id/new_order"=>"table#new_order", :as => "new_order"
+  match "/:table_id/:id/new_order"=>"table#new_order", :as => "new_order"
+  post "/:table_id/:id/give_order" => "table#give_order", :as => "give_order"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

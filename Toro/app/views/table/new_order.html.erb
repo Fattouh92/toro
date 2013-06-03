@@ -1,4 +1,4 @@
-<div class="tabbable"> <!-- Only required for left/right tabs -->
+<div class="tabbable">
   <ul class="nav nav-tabs">
     <% @categories.each do |cat| %>
       <li><a href="#<%= cat.id %>" data-toggle="tab"><%= cat.name %></a></li>
@@ -7,13 +7,50 @@
   <div class="tab-content">
     <% @categories.each do |cat| %>
       <div class="tab-pane" id="<%= cat.id %>">
-        <ul>
-          <% @items = Item.where(category_id: cat.id).all %>
-          <% @items.each do |item| %>
-            <li><%= item.name %></li>
-          <% end %>
-        </ul>
+          <%= form_tag give_order_path, :method => :post do %>
+            <% items = Item.where(category_id: cat.id).all %>
+            <table class="table table-bordered table-condensed" style="width:600px;background-color:white">
+          <col style="width:10%">
+          <col style="width:45%">
+          <col style="width:45%">
+            <% for item in items %>
+              <tr>
+                <td style="text-align:center; vertical-align: middle">
+                <%= check_box_tag "item_ids[]", item.id %>
+                </td>
+                <td style="text-align:center; vertical-align: middle">
+                <%= item.name %>
+                </td>
+                <td style="text-align:center; vertical-align: middle">
+                  <%= number_field_tag 'quantities[]', nil, {min: 1, id:"key", 'data-id' => item.id} %>
+                </td>
+              </tr>
+            <% end %>
+        </table>
+            <%= submit_tag "Order", :class => "btn btn-success btn-large", :onclick => "return check();" %>
+          <%end%>
       </div>
     <% end %>
   </div>
 </div>
+<script type="text/javascript">
+function check(){
+  var array = [];
+  var inpfields = frm.getElementsByTagName('check_box_tag');
+  var nr_inpfields = inpfields.length;
+  for(var i=0; i<nr_inpfields; i++) {
+    if(inpfields[i].type == 'checkbox' && inpfields[i].checked == true) array.push(inpfields[i].value);
+  }
+  return array;
+}
+</script>
+<script type="text/javascript">
+$('input[type=checkbox]').click(function() {
+  var $this = $(this);
+  if ($this.is(':checked')) {
+    $("select[data-id=" + $this.val() + "]").removeAttr("disabled");
+  } else {
+    $("select[data-id=" + $this.val() + "]").attr("disabled", "disabled");
+  }
+});
+</script>

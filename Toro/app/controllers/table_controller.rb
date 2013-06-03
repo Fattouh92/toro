@@ -63,6 +63,25 @@ class TableController < ApplicationController
     @counter = 0
   end
 
+  def give_order
+    @order = Order.new
+    @order.check_id = params[:id]
+    @order.save
+    quantities = []
+    params[:quantites].each do |quantity|
+      if quantity != ""
+        quantities << quantity
+    counter = 0
+    params[:item_ids].each do |item_id|
+      @item_order = Itemorder.new
+      @item_order.item_id = item_id
+      @item.quantity = quantities[counter]
+      @item.order_id = @order.id
+      @item.save
+      counter = counter+1
+    end
+  end
+
   def new_cheque
     @tid = params[:table_id]
     @check = Check.new
@@ -80,7 +99,7 @@ class TableController < ApplicationController
     @check.shift = Dateshift.last.shift
     @check.date = Dateshift.last.date
     if @check.save
-      redirect_to action: "new_order"
+      redirect_to action: "new_order", table_id: params[:table_id], id:@check.id
     else
       redirect_to action: "new_cheque", errors: @check.errors.messages
     end
