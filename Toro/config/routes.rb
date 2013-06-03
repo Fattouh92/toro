@@ -57,8 +57,11 @@ Toro::Application.routes.draw do
   match "summary" => "summary#index", :as => :summary
   post "filter" => "summary#filter", :as => :filter
 
-
+  match "/:check_id/close_cheque" => "table#close_cheque", :as => "close_cheque"
+  match "/:check_id/pay_cash" => "table#pay_cash", :as => "pay_cash"
+  match "/:check_id/:bank_name/pay_visa" => "table#pay_visa", :as => "pay_visa"
   post "/:table_id/create_check" => "table#create_check", :as => "create_check"
+
   match "/:table_id/:id/new_order"=>"table#new_order", :as => "new_order"
   post "/:table_id/:id/give_order" => "table#give_order", :as => "give_order"
 
