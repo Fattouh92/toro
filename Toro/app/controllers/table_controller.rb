@@ -16,7 +16,6 @@ class TableController < ApplicationController
     else
       @shiftstr = "Evening Shift"
     end
-
   end
 
   def add_table
@@ -63,6 +62,34 @@ class TableController < ApplicationController
     @counter = 0
   end
 
+  def give_order
+    @order = Order.new
+    @order.check_id = params[:id]
+    @order.total = 0
+    @order.save
+    quantities = []
+    params[:quantities].each do |quantity|
+      if quantity != ""
+        quantities << quantity
+      end
+    end
+    counter = 0
+    params[:item_ids].each do |item_id|
+      @item_order = Itemorder.new
+      @item_order.item_id = item_id
+      @item_order.quantity = quantities[counter]
+      @item_order.order_id = @order.id
+      @item_order.save
+      @order.total += Item.find(item_id).price
+      @order.save
+      c = Check.find(params[:id])
+      c.sum += Item.find(item_id).price
+      c.save
+      counter = counter+1
+    end
+    redirect_to action:"new_order" 
+  end
+
   def new_cheque
     @tid = params[:table_id]
     @check = Check.new
@@ -78,13 +105,14 @@ class TableController < ApplicationController
     @check.table_id = params[:table_id]
     @check.taxrate = params[:check][:taxrate]
     @check.cashier_id = current_user.id
+    @check.sum = 0
     @check.shift = Dateshift.last.shift
     @check.date = Dateshift.last.date
     if @check.save
       @table = Table.find(params[:table_id])
       @table.isEmpty = false
       @table.save
-      redirect_to action: "new_order"
+      redirect_to action: "new_order", table_id:params[:table_id], id: @check.id
     else
       redirect_to action: "new_cheque", errors: @check.errors.messages
     end
@@ -92,6 +120,7 @@ class TableController < ApplicationController
 
   def new_order
     @tid = params[:table_id]
+    @cheque_id = params[:id]
     @categories = Category.all
   end
 
@@ -109,8 +138,9 @@ class TableController < ApplicationController
     @cheque = Check.where(table_id: table.id, current: true)
     if @cheque = []
       table.isEmpty = true
+      table.save
     end
-    redirect_to action: "tables"
+    redirect_to tables_path
   end
 
   def pay_visa
@@ -122,8 +152,9 @@ class TableController < ApplicationController
     @cheque = Check.where(table_id: table.id, current: true)
     if @cheque = []
       table.isEmpty = true
+      table.save
     end
-    redirect_to action: "tables"
+    redirect_to tables_path
   end
 
 end
