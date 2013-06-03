@@ -1,10 +1,13 @@
-<% if @cheque != [] && @cheque.current %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th><h2>Table <%= Table.find(@tid).number %></h2></th>
-        <th><h2><%= @cheque.number_of_customers %> customers</h2></th>
-        <% if @cheque.sum < (@cheque.min_charge * @cheque.number_of_customers) %>
+<% if @cheque != [] %>
+  <h2>Table <%= Table.find(@tid).number %></h2>
+  <div>
+    <% @cheque.each do |ch| %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th><h2><%= ch.name %> cheque</h2></th>
+          <th><h2><%= ch.number_of_customers %> customers</h2></th>
+        <% if ch.sum < (ch.min_charge * ch.number_of_customers) %>
           <th><h2><span class="label label-important">minimum charge</span></h2></th>
         <% else %>
           <th><h2><span class="label label-success">minimum charge</span></h2></th>
@@ -12,6 +15,7 @@
       </tr>
     </thead>
   </table>
+  <% @orders = Order.where(check_id: ch.id).all %>
   <% @orders.each do |order| %>
     <% @counter = @counter + 1 %>
     <h1>Order <%= @counter %> <h3><%= order.created_at %></h3></h1>
@@ -59,17 +63,25 @@
     </table>
   <% end %>
   <br>
-  <% if @cheque.sum >= (@cheque.min_charge * @cheque.number_of_customers) %> 
-    <h4>total of cheque: <%= @cheque.sum %></h4>
+  <% if ch.sum >= (ch.min_charge * ch.number_of_customers) %> 
+    <h4>total of cheque: <%= ch.sum %></h4>
   <% else %>
-    <h4>total of cheque: <%= @cheque.min_charge * @cheque.number_of_customers %></h4>
+    <h4>total of cheque: <%= ch.min_charge * ch.number_of_customers %></h4>
   <% end %>
   <div style="text-align:center;">
-    <a class="btn btn-large btn-primary" href="#">Add Order</a>
+    <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_order">Add Order</a>
     <a class="btn btn-large btn-primary" href="#">Close Cheque</a>
   </div>
+  <% end %>
+  </div>
+  <br><br><br>
+<div style="text-align:center;">
+  <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">Add cheque</a>
+  <a class="btn btn-large" href="/tables">back</a>
+</div>
 <% else %>
 	<div style="text-align:center;">
-		<a class="btn btn-large btn-primary" href="/new_cheque?table_id=<%= @tid %>">New Cheque</a>
+		<a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">New Cheque</a>
+    <a class="btn btn-large" href="/tables">back</a>
 	</div>
 <% end %>
