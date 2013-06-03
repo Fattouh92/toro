@@ -1,5 +1,25 @@
     <h3>New Cheque</h3>
-
+<% if @errors != nil %>
+  <div class="validation">
+    <ul>
+      <% @errors.each do |error|%>
+        <li><%= error[0] %>
+        <% error.delete_at(0) %>
+        <% error.each do |e|%>
+          <%e.each do |printable|%>
+            <%if printable == e.last%>
+              <%=printable%>
+            <%else%>
+              <%=printable%>,
+            <%end%>
+          <% end %>
+        <%end%>
+        <br>
+        </li>
+      <%end%>
+    </ul>
+  </div>
+<% end %>
     <%= form_for (@check),:url => create_check_path(@tid) do |f| %>
               <div class="control-group">
                 <%= f.label :Cheque_name, :class => "control-label" %>
@@ -19,6 +39,8 @@
                   <%= f.text_field :min_charge %>
                 </div>
               </div>
+              <p>Select Captain</p>
+                <%= f.collection_select(:captain_id, User.all, :id,:username, { prompt: true }) %>
               <div class="control-group">
                 <div class="controls">
                   <button class="btn btn-info btn-large" type="submit" style="margin-right: 20px"><%= "Create" %></button>

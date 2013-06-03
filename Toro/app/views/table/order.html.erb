@@ -5,15 +5,26 @@
     <table class="table">
       <thead>
         <tr>
-          <th><h2><%= ch.name %> cheque</h2></th>
-          <th><h2><%= ch.number_of_customers %> customers</h2></th>
+          <th><h2>Name</h2></th>
+          <th><h2>Cashier</h2></th>
+          <th><h2>Captain</h2></th>
+          <th><h2>Number of Customers</h2></th>
+          <th><h2>Minimum charge state</h2></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th><h2><%= ch.name %></h2></th>
+          <th><h2><%= User.find(ch.cashier_id).firstname %> <%= User.find(ch.cashier_id).lastname %></h2></th>
+          <th><h2><%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h2></th>
+          <th><h2><%= ch.number_of_customers %></h2></th>
         <% if ch.sum < (ch.min_charge * ch.number_of_customers) %>
           <th><h2><span class="label label-important">minimum charge</span></h2></th>
         <% else %>
           <th><h2><span class="label label-success">minimum charge</span></h2></th>
         <% end %>
       </tr>
-    </thead>
+    </tbody>
   </table>
   <% @orders = Order.where(check_id: ch.id).all %>
   <% @orders.each do |order| %>
@@ -22,18 +33,11 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Casher name</th>
-          <th>captain name</th>
-          <th>total of order</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th><%= order.cashier_name %></th>
-          <th><%= order.captain_name %></th>
+          <th><h1>Order <%= @counter %></h1></th>
+          <th><h3><%= order.created_at %></h3></th>
           <th><%= order.total %></th>
         </tr>
-      </tbody>
+      </thead>
     </table>
     <br>
     <h2>Items</h2>
