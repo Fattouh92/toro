@@ -81,6 +81,9 @@ class TableController < ApplicationController
     @check.shift = Dateshift.last.shift
     @check.date = Dateshift.last.date
     if @check.save
+      @table = Table.find(params[:table_id])
+      @table.isEmpty = false
+      @table.save
       redirect_to action: "new_order"
     else
       redirect_to action: "new_cheque", errors: @check.errors.messages

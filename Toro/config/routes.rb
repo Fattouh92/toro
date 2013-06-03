@@ -47,8 +47,8 @@ Toro::Application.routes.draw do
   match 'staff/choose_mode' => 'staff#choose_mode', :as => "staff_choose_mode"
 
   match 'tables' => 'table#index', :as => "tables"
-  match "/:placement/:number/order"=>"table#order", :as => "order"
-  match "/:placement/:number/new_cheque"=>"table#new_cheque", :as => "new_cheque"
+  match "/:table_id/order"=>"table#order", :as => "order"
+  match "/:table_id/new_cheque"=>"table#new_cheque", :as => "new_cheque"
   match "add_table/:number/:placement" => "table#add_table", :as => :add_table
   match "remove_table/:number/:placement" => "table#remove_table", :as => :remove_table
   match "close_shift" => "table#close_shift", :as => :close_shift
@@ -58,8 +58,8 @@ Toro::Application.routes.draw do
   match "filter" => "summary#filter", :as => :filter
 
 
-  post "/:placement/:number/" => "table#create_check", :as => "create_check"
-  match "/:placement/:number/"=>"table#new_order", :as => "new_order"
+  post "/:table_id/create_check" => "table#create_check", :as => "create_check"
+  match "/:table_id/new_order"=>"table#new_order", :as => "new_order"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
