@@ -39,6 +39,12 @@
                   <%= f.text_field :min_charge %>
                 </div>
               </div>
+               <div class="control-group">
+                <%= f.label :tax_percentage, :class => "control-label" %>
+                <div class="controls">
+                  <%= f.text_field :taxrate %>
+                </div>
+              </div>
               <p>Select Captain</p>
                 <%= f.collection_select(:captain_id, User.all, :id,:username, { prompt: true }) %>
               <div class="control-group">
