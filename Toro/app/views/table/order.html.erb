@@ -2,7 +2,7 @@
 
   <h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
   <br>
-  <div class="tabbable tabs-left"> <!-- Only required for left/right tabs -->
+  <div class="tabbable tabs-left">
     <ul class="nav nav-tabs">
       <% @cheque.each do |ch| %>
         <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.name %></a></li>
@@ -29,8 +29,6 @@
           <% @orders.each do |order| %>
             <% @counter = @counter + 1 %>
             <h2>Order <%= @counter %> <h4><%= order.created_at %></h4></h2>
-        
-            <br>
         
             <h2>Items</h2>
             <% @items = []
@@ -65,12 +63,14 @@
                 <% end %>
               </tbody>
             </table>
+            <h5>Order <%= @counter %> total: <%= order.total %></h5><br>
           <% end %>
           <br>
           <% if ch.sum >= (ch.min_charge * ch.number_of_customers) %> 
             <h4>total of cheque before taxes: <%= ch.sum %></h4>
             <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
           <% else %>
+            <h4>total of cheque without minimu charge: <%= ch.sum %></h4>
             <h4>total of cheque before taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) %></h4>
             <h4>total of cheque after taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) + (ch.min_charge * (ch.number_of_customers + 0.00) * (ch.taxrate + 0.00) * 0.01) %></h4>
           <% end %>
@@ -90,6 +90,7 @@
     <a class="btn btn-large" href="/tables">back</a>
   </div>
 <% else %>
+<br><br><br>
 	<div style="text-align:center;">
 		<a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">New Cheque</a>
     <a class="btn btn-large" href="/tables">back</a>
