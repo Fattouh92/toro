@@ -84,10 +84,12 @@ class TableController < ApplicationController
       @item_order.quantity = quantities[counter]
       @item_order.order_id = @order.id
       @item_order.save
-      @order.total += Item.find(item_id).price
+      z = Item.find(item_id).price
+      k = @item_order.quantity
+      @order.total += (z*k)
       @order.save
       c = Check.find(params[:id])
-      c.sum += Item.find(item_id).price
+      c.sum += (z*k)
       c.save
       counter = counter+1
     end
