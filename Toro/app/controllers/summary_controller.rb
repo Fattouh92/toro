@@ -6,14 +6,21 @@ class SummaryController < ApplicationController
       redirect_to tables_path
       return
     end
-    @check = Check.all
+    if (params[:check])
+      @check  = params[:check]
+    else
+      @check = Check.all
+    end
   end
 
   def filter
     date = params[:date]
     #shift could be none, handle that
     shift = params[:shift]
-    @check = Check.where(date: date).all
+    check = Check.where(shift: shift).all
+    # redirect_to summary_path(:check => check)
+    flash[:error] = "#{check}"
+      redirect_to tables_path
   end
 
 end

@@ -1,8 +1,9 @@
+<%= @check2.to_s %>
 <%= form_tag("/filter", :method => "post") do %>
   <%= collection_select(:summary, :date, Torodate.all, :id,:date, { prompt: true}) %>
   <%= select_tag "shift", options_for_select([['Morning' ,'1'], ['Evening', '2']]), :prompt => "Optional" %>
   <br>
-  <%= submit_tag "Filter", class: "btn btn-success btn-large"%>
+  <%= submit_tag "Filter", class: "btn btn-success"%>
 <% end %>
 <table class="table table-bordered" style="background-color:white;">
 <tr>
@@ -10,7 +11,6 @@
   <th>Date</th>
   <th>Shift</th>
   <th>Time</th>
-  <th>Employee</th>
   <th>Cheque Price</th>
 </tr>
 <% @check.each do |check| %>
@@ -19,7 +19,6 @@
       <td><%= check.date %></td>
       <td><%= check.shift %></td>
       <td><%= check.datetime %></td>
-      <td><%= User.find(check.captain_id).username %></td>
       <td><%= check.sum %></td>
     </tr>
   <% end %> 
