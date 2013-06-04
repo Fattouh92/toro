@@ -44,8 +44,10 @@
                   <th>arabic name</th>
                   <th>price</th>
                   <th>quantity</th>
-                  <th>delete 1 item</th>
-                  <th>move 1 item</th>
+                  <% if current_user.admin? %>
+                    <th>delete 1 item</th>
+                    <th>move 1 item</th>
+                  <% end %>
                 </tr>
               </thead>
               <tbody>
@@ -70,14 +72,13 @@
                     <% if item.offer.blank? %>
                       <th><%= item.price %></th>
                     <% else %>
-                      <% @mod = item.price - (item.price * (item.offer + 0.00) * 0.01) %>
-                      <th><%= @mod %></th>
+                      <th><%= item.offer %></th>
                     <% end %>
                     <th><%=Itemorder.where(order_id: order.id, item_id: item.id).first.quantity%></th>
-                    
-                    
-                    <th><a class="btn btn-mini btn-danger" href="#myModalDelete<%= item.id %>" role="button" class="remove-one-item" data-toggle="modal"><i class="icon-trash"></i></a></th>
-                    <th><a class="btn btn-mini btn-warning" href="/<%=ch.id%>/<%=order.id%>/<%=item.id%>/move_item"><i class="icon-cog"></i></a></th>
+                    <% if current_user.admin? %>
+                      <th><a class="btn btn-mini btn-danger" href="#myModalDelete<%= item.id %>" role="button" class="remove-one-item" data-toggle="modal"><i class="icon-trash"></i></a></th>
+                      <th><a class="btn btn-mini btn-warning" href="/<%=ch.id%>/<%=order.id%>/<%=item.id%>/move_item"><i class="icon-cog"></i></a></th>
+                    <% end %>
                   </tr>
                 <% end %>
               </tbody>
