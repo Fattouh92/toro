@@ -84,7 +84,11 @@ class TableController < ApplicationController
       @item_order.quantity = quantities[counter]
       @item_order.order_id = @order.id
       @item_order.save
-      z = Item.find(item_id).price
+      if Item.find(item_id).offer == nil
+        z = Item.find(item_id).price
+      else
+        z = Item.find(item_id).offer
+      end
       k = @item_order.quantity
       @order.total += (z*k)
       @order.save
