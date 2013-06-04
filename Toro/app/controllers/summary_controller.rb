@@ -6,21 +6,26 @@ class SummaryController < ApplicationController
       redirect_to tables_path
       return
     end
-    if (params[:check])
-      @check  = params[:check]
-    else
-      @check = Check.all
-    end
+    @check = Check.all
   end
 
   def filter
-    date = params[:date]
-    #shift could be none, handle that
+    date = params[:summary][:date]
     shift = params[:shift]
-    check = Check.where(shift: shift).all
-    # redirect_to summary_path(:check => check)
-    flash[:error] = "#{check}"
-      redirect_to tables_path
+    if (Torodate.where(id: date).last.nil?)
+      flash[:error] = "Date must be chosen."
+      redirect_to summary_path
+      return
+    end
+    trueDate = Torodate.where(id: date).last.date
+    
+    if (shift == "")
+      @check = Check.where(date: trueDate).all
+      render "filter"
+    else
+      @check = Check.where(date: trueDate, shift: shift).all
+      render "filter"
+    end
   end
 
 end
