@@ -90,7 +90,7 @@
             <h4>total of cheque before taxes: <%= ch.sum %></h4>
             <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
           <% else %>
-            <h4>total of cheque without minimu charge: <%= ch.sum %></h4>
+            <h4>total of cheque before applying minimum charge: <%= ch.sum %></h4>
             <h4>total of cheque before taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) %></h4>
             <h4>total of cheque after taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) + (ch.min_charge * (ch.number_of_customers + 0.00) * (ch.taxrate + 0.00) * 0.01) %></h4>
           <% end %>
