@@ -1,3 +1,3 @@
 class Itemorder < ActiveRecord::Base
-  # attr_accessible :title, :body
+  attr_accessible :item_id, :order_id, :quantity
 end

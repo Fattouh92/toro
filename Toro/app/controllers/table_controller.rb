@@ -93,7 +93,7 @@ class TableController < ApplicationController
       c.save
       counter = counter+1
     end
-    redirect_to action:"new_order" 
+    redirect_to action:"order" 
   end
 
   def new_cheque
@@ -160,6 +160,66 @@ class TableController < ApplicationController
       table.isEmpty = true
       table.save
     end
+    redirect_to tables_path
+  end
+
+  def decrement_quantity
+    if current_user.admin == true
+      d = DeletedItem.new
+      d.item_id = params[:item_id]
+      d.order_id = params[:order_id]
+      d.check_id = params[:check_id]
+      d.save
+      o = Order.find(params[:order_id])
+      o.total = o.total - (Item.find(params[:item_id]).price)
+      o.save
+      h = Check.find(params[:check_id])
+      h.sum = h.sum - (Item.find(params[:item_id]).price)
+      h.save
+      c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
+      c.quantity = c.quantity - 1
+      c.save
+      if(c.quantity == 0)
+        c.delete
+      end
+      t = Table.find(Check.find(params[:check_id]).table_id)
+      redirect_to action: "order", table_id:t
+    end
+  end
+
+  def move_item
+    if current_user.admin == true
+      @item = Item.find(params[:item_id])
+      @order = Order.find(params[:order_id])
+      o = Order.find(params[:order_id])
+      o.total = o.total - (@item.price)
+      o.save
+      h = Check.find(params[:check_id])
+      @tid = h.table_id
+      h.sum = h.sum - (@item.price)
+      h.save
+      c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
+      c.quantity = c.quantity - 1
+      c.save
+      if(c.quantity == 0)
+        c.delete
+      end
+    end
+  end
+
+  def transfer_item
+    o = Order.new
+    o.check_id = params[:order][:check_id]
+    o.total = Item.find(params[:item_id]).price
+    o.save
+    io = Itemorder.new
+    io.item_id = params[:item_id]
+    io.quantity = 1
+    io.order_id = o.id
+    io.save
+    c = Check.find(params[:order][:check_id])
+    c.sum += Item.find(params[:item_id]).price
+    c.save
     redirect_to tables_path
   end
 

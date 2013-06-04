@@ -44,10 +44,26 @@
                   <th>arabic name</th>
                   <th>price</th>
                   <th>quantity</th>
+                  <th>delete 1 item</th>
+                  <th>move 1 item</th>
                 </tr>
               </thead>
               <tbody>
                 <% @items.each do |item| %>
+                  <div id="myModalDelete<%= item.id %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3 id="myModalLabel">Item decrement</h3>
+                    </div>
+                    <div class="modal-body">
+                      <p>Are you sure you want to decrease item quantity by 1?</p>
+                      <div class="prize-view"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn" data-dismiss="modal" aria-hidden="true">No, go back</button>
+                      <a class="btn btn-danger" href="/<%=ch.id%>/<%=order.id%>/<%=item.id%>/decrement_quantity">delete</a>
+                    </div>
+                  </div>
                   <tr>
                     <th><%= item.name %></th>
                     <th><%= item.arabicname %></th>
@@ -59,6 +75,9 @@
                     <% end %>
                     <th><%=Itemorder.where(order_id: order.id, item_id: item.id).first.quantity%></th>
                     
+                    
+                    <th><a class="btn btn-mini btn-danger" href="#myModalDelete<%= item.id %>" role="button" class="remove-one-item" data-toggle="modal"><i class="icon-trash"></i></a></th>
+                    <th><a class="btn btn-mini btn-warning" href="/<%=ch.id%>/<%=order.id%>/<%=item.id%>/move_item"><i class="icon-cog"></i></a></th>
                   </tr>
                 <% end %>
               </tbody>

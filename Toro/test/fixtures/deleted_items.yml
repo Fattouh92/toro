@@ -3,9 +3,9 @@
 one:
   item_id: 1
   order_id: 1
-  quantity: 1
+  check_id: 1
 
 two:
   item_id: 1
   order_id: 1
-  quantity: 1
+  check_id: 1
