@@ -1,7 +1,48 @@
-<%= @check2.to_s %>
 <%= form_tag("/filter", :method => "post") do %>
-  <%= collection_select(:summary, :date, Torodate.all, :id,:date, { prompt: true}) %>
+  <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
   <%= select_tag "shift", options_for_select([['Morning' ,'1'], ['Evening', '2']]), :prompt => "Optional" %>
   <br>
   <%= submit_tag "Filter", class: "btn btn-success"%>
 <% end %>
+
+<table class="table table-bordered" style="background-color:white;">
+<tr>
+  <th>#</th>
+  <th>Date</th>
+  <th>Shift</th>
+  <th>Time</th>
+  <th>Before Taxes</th>
+  <th>Taxes</th>
+  <th>After Taxes</th>
+</tr>
+<% total1 = 0 %>
+<% total2 = 0 %>
+<% total3 = 0 %>
+<% @check.each do |check| %>
+  <% before = check.sum %>
+  <% after = check.sum + (check.sum * check.taxrate + 0.00) * 0.01 %>
+  <% tax = before + after %>
+  <% total1 += before %>
+  <% total2 += tax %>
+  <% total3 += after %>
+  <% date1 = check.date.strftime("%d-%m-%Y") %>
+    <tr>
+      <td><%= check.id %></td>
+      <td><%= date1 %></td>
+      <td><%= check.shift %></td>
+      <td><%= check.created_at %></td>
+      <td><%= before %></td>
+      <td><%= tax %></td>
+      <td><%= after %></td>
+    </tr>
+  <% end %> 
+    <tr>
+      <td style="font-weight:bold;"> Total:</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td style="font-weight:bold;"><%= total1 %></td>
+      <td style="font-weight:bold;"><%= total2 %></td>
+      <td style="font-weight:bold;"><%= total3 %></td>
+    </tr>
+</table>

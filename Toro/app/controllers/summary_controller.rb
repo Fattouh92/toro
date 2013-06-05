@@ -6,7 +6,8 @@ class SummaryController < ApplicationController
       redirect_to tables_path
       return
     end
-    @check = Check.all
+    trueDate = Torodate.last.date
+    @check = Check.where(date: trueDate).all
   end
 
   def filter
