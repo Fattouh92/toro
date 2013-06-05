@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
       redirect_to action: "new", errors: @item.errors.messages  
     else
       flash[:success] = "Item added successfully!"
-      redirect_to items_path
+      redirect_to new_item_path
     end
   end
 

@@ -14,7 +14,6 @@
           <table class="table table-condensed">
             <thead>
               <tr>
-                <th><h2>Cashier <%= User.find(ch.cashier_id).firstname %> <%= User.find(ch.cashier_id).lastname %></h2></th>
                 <th><h2>Captain <%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h2></th>
                 <th><h2><%= ch.number_of_customers %> customers</h2></th>
                 <% if ch.sum < (ch.min_charge * ch.number_of_customers) %>

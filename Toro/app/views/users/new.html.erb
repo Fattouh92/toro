@@ -41,10 +41,12 @@
   <%= f.password_field :password_confirmation %></div>
 
   <p>Select type of user:</p>
-  <%= radio_button_tag(:type, "true") %>
+  <%= radio_button_tag(:type, 1) %>
   <%= label_tag(:manager, "Manager") %>
-  <%= radio_button_tag(:type, "false") %>
-  <%= label_tag(:cashier, "Cashier/Captain") %>
+  <%= radio_button_tag(:type, 2) %>
+  <%= label_tag(:captain, "Captain") %>
+  <%= radio_button_tag(:type, 3) %>
+  <%= label_tag(:cashier, "Cashier") %>
 
   <div><%= f.submit "Add user", class: "btn btn-success btn-large" %></div>
 <% end %>

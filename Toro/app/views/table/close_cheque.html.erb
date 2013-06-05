@@ -6,11 +6,6 @@
   <h4>total of cheque before taxes: <%= @ch.min_charge * (@ch.number_of_customers + 0.00) %></h4>
   <h4>total of cheque after taxes: <%= @ch.min_charge * (@ch.number_of_customers + 0.00) + (@ch.min_charge * (@ch.number_of_customers + 0.00) * (@ch.taxrate + 0.00) * 0.01) %></h4>
 <% end %>
-<%= @p %>
-<br><br>
-<input type=button onClick="findPrinter('zebra')" value="Detect Printer" class="btn btn-primary"><br /><br>
-<input type=button onClick="print()" value="Print" class="btn btn-primary"/><br />
-<input type=button onClick="printHTML()" value="Print 5ara" class="btn btn-primary"/><br />
 <a href="<%=print_path(@ch.id)%>" class="btn btn-primary">Print cheque</a>
 <h4>Type of payment</h4>
 <table>
@@ -23,10 +18,9 @@
 		</tr>
 	</thead>
 </table>
-<applet name="jzebra" code="jzebra.PrintApplet.class" archive="/jzebra.jar" width="50px" height="50px">
-   </applet><br />
 <script type="text/javascript">
-// <%= @ch.id%>, <%= @ch.table.placement %>, <%= @ch.table.number %>,<%= @prices  %>, <%= @totalPrices %>, <%=@toBePaid%>, <%=@taxes%>, <%= @items %>, <%= @quantities %>
+// <applet name="jzebra" code="jzebra.PrintApplet.class" archive="/jzebra.jar" width="50px" height="50px">
+//    </applet><br />
 function printHTML() {
             var applet = document.jzebra;
              if (applet != null) {

@@ -17,11 +17,22 @@ class UsersController < ApplicationController
     if @user.errors.size != 0
       redirect_to action: "new", errors: @user.errors.messages  
     else
-      @user.admin = params[:type]
-      @user.save
-      flash[:success] = "User added successfully!"
-      redirect_to users_path
+      if params[:type] == "1"
+        @user.admin = true
+        @user.captain = false
+        @user.save
+      else
+        if params[:type] == "2"
+          @user.captain = true
+          @user.save
+        else
+          @user.captain = false
+          @user.save
+        end
+      end
     end
+    flash[:success] = "User added successfully!"
+    redirect_to new_user_path
   end
 
   def index

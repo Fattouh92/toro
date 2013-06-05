@@ -118,10 +118,18 @@ class TableController < ApplicationController
     @check.name = params[:check][:name]
     @check.number_of_customers = params[:check][:number_of_customers]
     @check.min_charge = params[:check][:min_charge]
-    @check.captain_id = params[:check][:captain_id]
+    if current_user.captain == true
+      @check.captain_id = current_user.id
+    else
+      @check.captain_id = params[:check][:captain_id]
+    end
     @check.table_id = params[:table_id]
     @check.taxrate = params[:check][:taxrate]
-    @check.cashier_id = current_user.id
+    if current_user.captain == true
+      @check.cashier_id = nil
+    else
+      @check.cashier_id = current_user.id
+    end
     @check.sum = 0
     @check.shift = Dateshift.last.shift
     @check.date = Dateshift.last.date
