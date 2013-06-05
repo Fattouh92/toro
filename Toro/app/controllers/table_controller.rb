@@ -68,16 +68,21 @@ class TableController < ApplicationController
   end
 
   def give_order
-    @order = Order.new
-    @order.check_id = params[:id]
-    @order.total = 0
-    @order.save
     quantities = []
     params[:quantities].each do |quantity|
       if quantity != ""
         quantities << quantity
       end
     end
+    if quantities.size != params[:item_ids].size
+      flash[:error] = "Please be sure to mark the checkbox and enter the quantity"
+      redirect_to new_order_path
+      return
+    end
+    @order = Order.new
+    @order.check_id = params[:id]
+    @order.total = 0
+    @order.save
     counter = 0
     params[:item_ids].each do |item_id|
       @item_order = Itemorder.new
