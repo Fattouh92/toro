@@ -31,16 +31,28 @@
   <%selected = @cat.printer
   if selected == 1%>
     <%= radio_button_tag(:printer, 1, 1) %>
-  <%= label_tag(:barista, "Barista printer") %>
-  <%= radio_button_tag(:printer, 2) %>
-  <%= label_tag(:kitchen, "Kitchen printer") %>
+    <%= label_tag(:barista, "Barista printer") %>
+    <%= radio_button_tag(:printer, 2) %>
+    <%= label_tag(:kitchen, "Kitchen printer") %>
+    <%= radio_button_tag(:printer, 3) %>
+    <%= label_tag(:shisha, "Shisha printer") %>
+  <%else%>
+    <%if selected == 2%>
+      <%= radio_button_tag(:printer, 1) %>
+      <%= label_tag(:barista, "Barista printer") %>
+      <%= radio_button_tag(:printer, 2,2) %>
+      <%= label_tag(:kitchen, "Kitchen printer") %>
+      <%= radio_button_tag(:printer, 3) %>
+      <%= label_tag(:shisha, "Shisha printer") %>
     <%else%>
-    <%= radio_button_tag(:printer, 1) %>
-  <%= label_tag(:barista, "Barista printer") %>
-  <%= radio_button_tag(:printer, 2, 2) %>
-  <%= label_tag(:kitchen, "Kitchen printer") %>
+      <%= radio_button_tag(:printer, 1) %>
+      <%= label_tag(:barista, "Barista printer") %>
+      <%= radio_button_tag(:printer, 2) %>
+      <%= label_tag(:kitchen, "Kitchen printer") %>
+      <%= radio_button_tag(:printer, 3,3) %>
+      <%= label_tag(:shisha, "Shisha printer") %>
     <%end %>
-
+  <%end %>
   <br>
   <%= submit_tag "Submit", class: "btn btn-success btn-large"%>
 <% end %>

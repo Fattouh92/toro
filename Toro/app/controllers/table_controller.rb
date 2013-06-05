@@ -1,3 +1,4 @@
+# UTF-8
 class TableController < ApplicationController
   before_filter :authenticate_user!
 
@@ -132,6 +133,41 @@ class TableController < ApplicationController
     @tid = params[:table_id]
     @cheque_id = params[:id]
     @categories = Category.all
+  end
+
+  def print
+    @ch = Check.find(params[:check_id])
+    @p = @ch.table.placement
+    @n = @ch.table.number
+    @orders = Order.where(check_id: @ch.id)
+    @items = []
+    @quantities = []
+    @prices = []
+    @totalPrices = []
+    @orders.each do |order|
+      @tempItems = Itemorder.where(order_id: order.id)
+      @tempItems.each do |temp|
+        item_id_temp = temp.item_id
+        @items << Item.find(item_id_temp).arabicname
+        @quantities << Itemorder.where(order_id: order.id, item_id: item_id_temp).first.quantity
+        if Item.find(item_id_temp).offer == nil
+          @prices << Item.find(item_id_temp).price
+        else
+          @prices << Item.find(item_id_temp).offer
+        end
+        @totalPrices << @quantities.last * @prices.last
+      end
+    end
+    sumCheque = @ch.sum
+    sumMinimum = @ch.min_charge * @ch.number_of_customers
+    if sumCheque > sumMinimum
+      @toBePaid = sumCheque
+      @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
+    else
+      @toBePaid = sumMinimum
+      @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
+    end
+    render :layout => false
   end
 
   def close_cheque

@@ -4,5 +4,5 @@ class Category < ActiveRecord::Base
   validates_presence_of :name, :printer
   has_many :items
   validates :name, :format => { :with => /^[a-zA-Z ]*$/ }
-  validates :printer, :format => { :with => /^[1|2]$/ }
+  validates :printer, :format => { :with => /^[1|2|3]$/ }
 end
