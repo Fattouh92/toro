@@ -68,8 +68,9 @@
           <% end %>
           <% if current_user.admin == true %>
             <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "B") ,class:"btn btn-primary", style:"width: 120px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "B") ,class:"btn btn-danger", style:"width: 120px;" %></div>
-          <% end %>
-         </div> 
+          
+         </div>
+         <% end %>
         </div>
        </end>
     </div>
@@ -103,8 +104,9 @@
           <% end %>
           <% if current_user.admin == true %>
             <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "C") ,class:"btn btn-primary", style:"width: 120px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "C") ,class:"btn btn-danger", style:"width: 120px;" %></div>
-          <% end %>
-         </div> 
+          
+         </div>
+         <% end %> 
         </div>
        </end>
     </div>
@@ -138,8 +140,9 @@
           <% end %>
           <% if current_user.admin == true %>
             <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "D") ,class:"btn btn-primary", style:"width: 120px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "D") ,class:"btn btn-danger", style:"width: 120px;" %></div>
-          <% end %>
-         </div> 
+          
+         </div>
+         <% end %> 
         </div>
        </end>
     </div>
