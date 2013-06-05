@@ -15,7 +15,11 @@
     <td><strong><%if cat.printer == 1%>
         Barista printer
       <%else%>
-        Kitchen printer
+        <%if cat.printer == 2%>
+          Kitchen printer
+        <%else%>
+        Shisha printer
+        <%end%>
       <%end%></strong></td>
     <td><a href="<%=edit_category_path(cat.id)%>" class="btn btn-primary">Edit</a></td>
     <td><a href="<%=delete_category_path(cat.id)%>" class="btn btn-danger">Delete</a></td>
