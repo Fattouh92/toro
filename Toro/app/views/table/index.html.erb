@@ -2,9 +2,9 @@
   <span><%= @date %></span><span style="padding-left:200px;"><%= @shiftstr %></span>
     <% if current_user.admin == true %>
       <% if @shift == 1 %>
-        <%= button_to "Close Shift",close_shift_path,class:"btn btn-primary", style:"width: 120px;" %>
+        <%= button_to "Close Shift",close_shift_path,class:"btn btn-primary", style:"width: 130px;" %>
       <% else %>
-        <%= button_to "Close day" , close_day_path,class:"btn btn-primary", style:"width: 120px;" %>
+        <%= button_to "Close day" , close_day_path,class:"btn btn-primary", style:"width: 130px;" %>
       <% end %>
     <% end %>
 </div>
@@ -33,7 +33,7 @@
             <% deleteTable = @tablesA.last.number %>
           <% end %>
           <% if current_user.admin == true %>
-            <div class="span2"><div class="span1"><%= button_to "Add Table" , add_table_path(newTable, "A") ,class:"btn btn-primary", style:"width: 120px;" %></div><div class="span1"><%= button_to "Remove Table" , remove_table_path(deleteTable, "A") ,class:"btn btn-danger" , style:"width: 120px;" %></div></div> 
+            <div class="span2"><div class="span1"><%= button_to "Add Table" , add_table_path(newTable, "A") ,class:"btn btn-primary", style:"width: 130px;" %></div><div class="span1"><%= button_to "Remove Table" , remove_table_path(deleteTable, "A") ,class:"btn btn-danger" , style:"width: 130px;" %></div></div> 
           <% end %> 
       </div>
     </end>
@@ -67,7 +67,7 @@
             <% deleteTable = @tablesB.last.number %>
           <% end %>
           <% if current_user.admin == true %>
-            <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "B") ,class:"btn btn-primary", style:"width: 120px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "B") ,class:"btn btn-danger", style:"width: 120px;" %></div>
+            <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "B") ,class:"btn btn-primary", style:"width: 130px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "B") ,class:"btn btn-danger", style:"width: 130px;" %></div>
           
          </div>
          <% end %>
@@ -103,7 +103,7 @@
             <% deleteTable = @tablesC.last.number %>
           <% end %>
           <% if current_user.admin == true %>
-            <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "C") ,class:"btn btn-primary", style:"width: 120px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "C") ,class:"btn btn-danger", style:"width: 120px;" %></div>
+            <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "C") ,class:"btn btn-primary", style:"width: 130px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "C") ,class:"btn btn-danger", style:"width: 130px;" %></div>
           
          </div>
          <% end %> 
@@ -139,7 +139,7 @@
             <% deleteTable = @tablesD.last.number %>
           <% end %>
           <% if current_user.admin == true %>
-            <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "D") ,class:"btn btn-primary", style:"width: 120px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "D") ,class:"btn btn-danger", style:"width: 120px;" %></div>
+            <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "D") ,class:"btn btn-primary", style:"width: 130px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "D") ,class:"btn btn-danger", style:"width: 130px;" %></div>
           
          </div>
          <% end %> 
