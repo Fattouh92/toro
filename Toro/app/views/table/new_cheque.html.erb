@@ -45,7 +45,7 @@
                   <%= f.text_field :taxrate %>
                 </div>
               </div>
-              <%if current_user.captain == false%>
+              <%if current_user.captain != true%>
               <p>Select Captain</p>
                 <%= f.collection_select(:captain_id, User.where(admin: false), :id,:username, { prompt: true }) %>
                 <%end%>

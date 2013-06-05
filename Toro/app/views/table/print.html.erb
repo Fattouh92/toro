@@ -3,7 +3,7 @@
   <img src="../assets/toro.jpg" style="margin-left:80px;">
   <br><br>
   <h1 style="margin-left:60px;">Welcome to Toro</h1>
-  <table style="width:400px; font-size:18px;"><tr><td>رقم الشيك: <%=@ch.id%></td><td>طاولة: <%=@p%><%=@n%></td></tr><tr><td>الوقت: <%=Time.now.to_formatted_s(:long)%></td><td>المستخدم: <%=current_user.username%></td></tr>
+  <table style="width:400px; font-size:18px;"><tr><td>رقم الشيك: <%=@ch.id%></td><td>طاولة: <%=@p%><%=@n%></td></tr><tr><td>الوقت: <%=Time.now%></td><td>المستخدم: <%=current_user.username%></td></tr>
   </table>
   <br><br><br>
   <table style="width:400px; font-size:20px;">
