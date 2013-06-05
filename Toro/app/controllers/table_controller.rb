@@ -172,13 +172,14 @@ class TableController < ApplicationController
         @totalPrices << @quantities.last * @prices.last
       end
     end
-    sumCheque = @ch.sum
-    sumMinimum = @ch.min_charge * @ch.number_of_customers
-    if sumCheque > sumMinimum
-      @toBePaid = sumCheque
+    @sumCheque = @ch.sum
+    @sumMinimum = @ch.min_charge * @ch.number_of_customers
+    if @sumCheque >= @sumMinimum
+      @toBePaid = @sumCheque
       @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
     else
-      @toBePaid = sumMinimum
+      @diff = @sumMinimum - @sumCheque
+      @toBePaid = @sumMinimum
       @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
     end
     render :layout => false
@@ -187,6 +188,7 @@ class TableController < ApplicationController
   def close_cheque
     @ch = Check.find(params[:check_id])
     @visas = Visa.all
+    @tid = @ch.table_id
   end
 
   def pay_cash
