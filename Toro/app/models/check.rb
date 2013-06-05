@@ -3,4 +3,9 @@ class Check < ActiveRecord::Base
   has_many :orders 
   belongs_to :table
   validates_presence_of :date, :shift, :number_of_customers, :name, :captain_id, :taxrate, :min_charge, :table_id
+  def cheques
+    if Table.find(self.table_id) != nil
+    ' ' + Table.find(self.table_id).placement + Table.find(self.table_id).number.to_s + ' - ' + self.name
+	 end
+  end
 end
