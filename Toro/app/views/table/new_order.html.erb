@@ -46,8 +46,6 @@ function check(){
   }
   return array;
 }
-</script>
-<script type="text/javascript">
 $('input[type=checkbox]').click(function() {
   var $this = $(this);
   if ($this.is(':checked')) {
@@ -55,5 +53,7 @@ $('input[type=checkbox]').click(function() {
   } else {
     $("select[data-id=" + $this.val() + "]").attr("disabled", "disabled");
   }
+
+
 });
 </script>
