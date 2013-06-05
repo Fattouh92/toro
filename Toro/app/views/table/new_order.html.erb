@@ -23,7 +23,7 @@
                 <%= item.name %>
                 </td>
                 <td style="text-align:center; vertical-align: middle">
-                  <%= number_field_tag 'quantities[]', nil, {min: 1, id:"key", disabled: true, 'data-id' => item.id} %>
+                  <%= number_field_tag 'quantities[]', nil, {min: 1, id:"key", 'data-id' => item.id} %>
                 </td>
               </tr>
             <% end %>
@@ -34,6 +34,7 @@
   </div>
   
             <%= submit_tag "Order", :class => "btn btn-success btn-large", :onclick => "return check();" %>
+            <a class="btn btn-large" href="/<%= @tid %>/order" style="margin-left: 20px"><%= "back" %></a>
           <%end%>
 </div>
 <script type="text/javascript">

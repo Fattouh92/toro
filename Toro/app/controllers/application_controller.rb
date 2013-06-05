@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+  def after_sign_in_path_for(user)
+    tables_path
+  end
 end

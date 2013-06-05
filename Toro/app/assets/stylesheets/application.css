@@ -16,6 +16,15 @@
   padding-right: 50px;
   padding-top: 10px;
 }
+.omar{
+   position:absolute;
+   top:50%;
+   left:50%;
+   margin-top:-220px;
+   margin-left:-250px;
+   width: 500px;
+	height: 500px;
+}
 
 .print{
   margin-top: -75px;

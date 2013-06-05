@@ -1,6 +1,7 @@
 # UTF-8
 class TableController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :authenticate_manager!, :only => [:add_table, :remove_table, :close_shift, :close_day, :decrement_quantity, :move_item, :transfer_item]
 
   def index
     @tables = Table.all
@@ -68,16 +69,21 @@ class TableController < ApplicationController
   end
 
   def give_order
-    @order = Order.new
-    @order.check_id = params[:id]
-    @order.total = 0
-    @order.save
     quantities = []
     params[:quantities].each do |quantity|
       if quantity != ""
         quantities << quantity
       end
     end
+    if quantities.size != params[:item_ids].size
+      flash[:error] = "Please be sure to mark the checkbox and enter the quantity"
+      redirect_to new_order_path
+      return
+    end
+    @order = Order.new
+    @order.check_id = params[:id]
+    @order.total = 0
+    @order.save
     counter = 0
     params[:item_ids].each do |item_id|
       @item_order = Itemorder.new
@@ -158,13 +164,14 @@ class TableController < ApplicationController
         @totalPrices << @quantities.last * @prices.last
       end
     end
-    sumCheque = @ch.sum
-    sumMinimum = @ch.min_charge * @ch.number_of_customers
-    if sumCheque > sumMinimum
-      @toBePaid = sumCheque
+    @sumCheque = @ch.sum
+    @sumMinimum = @ch.min_charge * @ch.number_of_customers
+    if @sumCheque >= @sumMinimum
+      @toBePaid = @sumCheque
       @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
     else
-      @toBePaid = sumMinimum
+      @diff = @sumMinimum - @sumCheque
+      @toBePaid = @sumMinimum
       @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
     end
     render :layout => false
@@ -173,6 +180,7 @@ class TableController < ApplicationController
   def close_cheque
     @ch = Check.find(params[:check_id])
     @visas = Visa.all
+    @tid = @ch.table_id
   end
 
   def pay_cash

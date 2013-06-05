@@ -5,7 +5,7 @@
   <h1 style="margin-left:60px;">Welcome to Toro</h1>
   <table style="width:400px; font-size:18px;"><tr><td>رقم الشيك: <%=@ch.id%></td><td>طاولة: <%=@p%><%=@n%></td></tr><tr><td>الوقت: <%=Time.now%></td><td>المستخدم: <%=current_user.username%></td></tr>
   </table>
-  <br><br><br>
+  <br><br>
   <table style="width:400px; font-size:18px;">
     <tr style="height:30;">
       <td style="border: solid 3px black;">المبلغ</td><td style="border: solid 3px black;">الصنف</td><td style="border: solid 3px black;">الكمية</td><td style="border: solid 3px black;">السعر</td>
@@ -17,6 +17,11 @@
     </tr>
     <%counter = counter+1%>
     <%end%>
+    <% if @sumCheque < @sumMinimum %>
+   <tr style="height:30;">
+      <td style="border: solid 3px black;"><%=BigDecimal(@diff).round(2)%></td><td style="border: solid 3px black;">الحد الأدنى</td><td style="border: solid 3px black;"></td><td style="border: solid 3px black;"></td>
+    </tr>
+    <% end %>
     <tr style="height:30;">
     <td style="border: solid 3px black;"><%=BigDecimal(@toBePaid).round(2)%></td><td style="border: solid 3px black;">الإجمالي</td><td style="border: solid 3px black;"></td><td style="border: solid 3px black;"></td>
     </tr>
