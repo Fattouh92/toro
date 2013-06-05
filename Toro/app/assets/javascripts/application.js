@@ -13,6 +13,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery
+//= require_tree .
 
 /* ===================================================
  * bootstrap-transition.js v2.3.2

@@ -1,28 +1,33 @@
 <%= stylesheet_link_tag 'application' %>
 <div class="print">
-  <h3>Welcome to Toro</h3>
-  <table style="width:300px;"><tr><td>رقم الشيك: <%=@ch.id%></td><td>طاولة: <%=@p%><%=@n%></td></tr><tr><td>الوقت: <%=Time.now%></td><td>المستخدم: <%=current_user.username%></td></tr>
+  <img src="../assets/toro.jpg" style="margin-left:80px;">
+  <br><br>
+  <h1 style="margin-left:60px;">Welcome to Toro</h1>
+  <table style="width:400px; font-size:18px;"><tr><td>رقم الشيك: <%=@ch.id%></td><td>طاولة: <%=@p%><%=@n%></td></tr><tr><td>الوقت: <%=Time.now%></td><td>المستخدم: <%=current_user.username%></td></tr>
   </table>
-  <table style="width:600px;" class="table table-bordered table-condensed">
-    <tr>
-      <td>المبلغ</td><td>الصنف</td><td>الكمية</td><td>السعر</td>
+  <br><br><br>
+  <table style="width:400px; font-size:18px;">
+    <tr style="height:30;">
+      <td style="border: solid 3px black;">المبلغ</td><td style="border: solid 3px black;">الصنف</td><td style="border: solid 3px black;">الكمية</td><td style="border: solid 3px black;">السعر</td>
     </tr>
     <%counter = 0
     @items.each do |item|%>
-    <tr>
-      <td><%=BigDecimal(@totalPrices[counter]).round(2)%></td><td><%=item%></td><td><%=@quantities[counter]%></td><td><%=BigDecimal(@prices[counter]).round(2)%></td>
+    <tr style="height:30;">
+      <td style="border: solid 3px black;"><%=BigDecimal(@totalPrices[counter]).round(2)%></td><td style="border: solid 3px black;"><%=item%></td><td style="border: solid 3px black;"><%=@quantities[counter]%></td><td style="border: solid 3px black;"><%=BigDecimal(@prices[counter]).round(2)%></td>
     </tr>
     <%counter = counter+1%>
     <%end%>
-    <tr>
-    <td><%=BigDecimal(@toBePaid).round(2)%></td><td>الإجمالي</td><td></td><td></td>
+    <tr style="height:30;">
+    <td style="border: solid 3px black;"><%=BigDecimal(@toBePaid).round(2)%></td><td style="border: solid 3px black;">الإجمالي</td><td style="border: solid 3px black;"></td><td style="border: solid 3px black;"></td>
     </tr>
-    <tr>
-    <td><%=@taxes.to_f.round(2)%></td><td>خدمة</td><td></td><td></td>
+    <tr style="height:30;">
+    <td style="border: solid 3px black;"><%=@taxes.to_f.round(2)%></td><td style="border: solid 3px black;">خدمة</td><td style="border: solid 3px black;"></td><td style="border: solid 3px black;"></td>
     </tr>
-    <tr>
-    <td><%=(@taxes.to_f+ @toBePaid).round(2)%></td><td>إجمالي الطلب</td><td></td><td></td>
+    <tr style="height:30;">
+    <td style="border: solid 3px black;"><%=(@taxes.to_f+ @toBePaid).round(2)%></td><td style="border: solid 3px black;">إجمالي الطلب</td><td style="border: solid 3px black;"></td><td style="border: solid 3px black;"></td>
     </tr>
   </table>
-  <h3>Thank you very much</h3>
+  <br><br>
+  <h1 style="margin-left:15px;">We are happy to serve you</h1>
+  <br><br><br>
 </div>
