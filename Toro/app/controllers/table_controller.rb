@@ -179,6 +179,7 @@ class TableController < ApplicationController
   def close_cheque
     @ch = Check.find(params[:check_id])
     @visas = Visa.all
+    @tid = @ch.table_id
   end
 
   def pay_cash
