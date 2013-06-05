@@ -15,7 +15,8 @@ class UsersController < ApplicationController
     end
     @user = User.create(params[:user])
     if @user.errors.size != 0
-      redirect_to action: "new", errors: @user.errors.messages  
+      redirect_to action: "new", errors: @user.errors.messages
+      return  
     else
       if params[:type] == "1"
         @user.admin = true
