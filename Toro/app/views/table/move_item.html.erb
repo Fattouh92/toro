@@ -1,7 +1,7 @@
 <%= form_for (@order),:url => transfer_item_path(@item.id, @order.id, @check.id) do |f| %>
 
 	<p>Choose cheque to move item <%=@item.name%> to</p>
-    <%= f.collection_select(:check_id, Check.where(current: true), :id, :name, { prompt: true }) %>
+    <%= f.collection_select(:check_id, Check.where(current: true), :id, :cheques, { prompt: true }) %>
   <div class="control-group">
     <div class="controls">
         <button class="btn btn-info btn-large" type="submit" style="margin-right: 20px"><%= "Move" %></button>
