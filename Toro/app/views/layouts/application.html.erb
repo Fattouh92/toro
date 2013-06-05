@@ -9,8 +9,8 @@
 <body>
   <% current_uri = request.env['PATH_INFO'] %>
   <% if !(current_uri.include? '/print') %>
-  <div class="navbar navbar-inverse">
-  <div class="navbar-inner">
+  <div class="navbar navbar-fixed-top" style="padding-bottom:20px; ">  
+  <div class="navbar-inner" style="padding-left:30px; padding-right:30px;">
     <a class="brand" href="<%=root_path%>">Toro</a>
     <%if user_signed_in?%>
     <a class="brand" style="font-size:16px;" class="pull-left">Welcome, <%=current_user.username%></a>
