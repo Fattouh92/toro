@@ -17,3 +17,44 @@
   padding-top: 10px;
 }
 
+.print{
+  margin-top: -75px;
+  padding-left: 5px;
+
+}
+
+.redCircle {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+
+    width: 25px;
+    height: 25px;
+    padding: 10px;
+    
+    background: red;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    
+    font: 18px Arial, sans-serif
+}
+.greenCircle {
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+
+    width: 25px;
+    height: 25px;
+    padding: 10px;
+    
+    background: green;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    
+    font: 18px Arial, sans-serif
+}
+

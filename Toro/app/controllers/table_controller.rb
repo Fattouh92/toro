@@ -167,6 +167,7 @@ class TableController < ApplicationController
       @toBePaid = sumMinimum
       @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
     end
+    render :layout => false
   end
 
   def close_cheque
@@ -227,38 +228,38 @@ class TableController < ApplicationController
   end
 
   def move_item
-    if current_user.admin == true
-      @item = Item.find(params[:item_id])
-      @order = Order.find(params[:order_id])
-      o = Order.find(params[:order_id])
-      o.total = o.total - (@item.price)
-      o.save
-      h = Check.find(params[:check_id])
-      @tid = h.table_id
-      h.sum = h.sum - (@item.price)
-      h.save
-      c = item_orderer.where(order_id: params[:order_id], item_id: params[:item_id]).last
-      c.quantity = c.quantity - 1
-      c.save
-      if(c.quantity == 0)
-        c.delete
-      end
-    end
+    @item = Item.find(params[:item_id])
+    @order = Order.find(params[:order_id])
+    @check = Check.find(params[:check_id])
+    @tid = @check.table_id
   end
 
   def transfer_item
-    o = Order.new
-    o.check_id = params[:order][:check_id]
-    o.total = Item.find(params[:item_id]).price
+    @item = Item.find(params[:item_id])
+    o = Order.find(params[:order_id])
+    o.total = o.total - (@item.price)
     o.save
+    h = Check.find(params[:check_id])
+    h.sum = h.sum - (@item.price)
+    h.save
+    c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
+    c.quantity = c.quantity - 1
+    c.save
+    if(c.quantity == 0)
+     c.delete
+    end
+    oa = Order.new
+    oa.check_id = params[:order][:check_id]
+    oa.total = @item.price
+    oa.save
     io = Itemorder.new
     io.item_id = params[:item_id]
     io.quantity = 1
-    io.order_id = o.id
+    io.order_id = oa.id
     io.save
-    c = Check.find(params[:order][:check_id])
-    c.sum += Item.find(params[:item_id]).price
-    c.save
+    ch = Check.find(params[:order][:check_id])
+    ch.sum += @item.price
+    ch.save
     redirect_to tables_path
   end
 
