@@ -1,4 +1,4 @@
-<%= form_for (@order),:url => transfer_item_path(@item.id) do |f| %>
+<%= form_for (@order),:url => transfer_item_path(@item.id, @order.id, @check.id) do |f| %>
 
 	<p>Choose cheque to move item <%=@item.name%> to</p>
     <%= f.collection_select(:check_id, Check.where(current: true), :id, :name, { prompt: true }) %>
