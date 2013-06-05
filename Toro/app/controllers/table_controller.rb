@@ -167,6 +167,7 @@ class TableController < ApplicationController
       @toBePaid = sumMinimum
       @taxes = (@toBePaid*(@ch.taxrate+ 0.00) * 0.01)
     end
+    render :layout => false
   end
 
   def close_cheque
