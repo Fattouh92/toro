@@ -1,4 +1,6 @@
 class SummaryController < ApplicationController
+  before_filter :authenticate_user!
+  before_filter :authenticate_manager!
   
   def index
     if Torodate.all == []
