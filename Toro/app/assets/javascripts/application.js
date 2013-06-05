@@ -33,6 +33,10 @@
  * limitations under the License.
  * ========================================================== */
 
+function findPrinter() {
+         // Searches for locally installed printer with "zebra" in the name
+         document.jzebra.findPrinter("zebra");
+}
 
 !function ($) {
 
