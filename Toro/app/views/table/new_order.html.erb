@@ -1,3 +1,9 @@
+<%= form_tag give_order_path, :method => :post do %>
+<% if @c == nil %>
+<%= label_tag(:q, "Cheque name:") %>
+  <%= text_field_tag(:name) %>
+<% end %>
+
 <div class="tabbable">
   <ul class="nav nav-tabs">
     <% @categories.each do |cat| %>
@@ -5,7 +11,7 @@
     <% end %>
   </ul>
 
-    <%= form_tag give_order_path, :method => :post do %>
+    
   <div class="tab-content">
       <% @categories.each do |cat| %>
         <div class="tab-pane" id="<%= cat.id %>">

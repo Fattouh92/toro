@@ -69,6 +69,11 @@ class TableController < ApplicationController
   end
 
   def give_order
+    c = Check.find(params[:id])
+    if c.name == nil
+      c.name = params[:name]
+      c.save
+    end
     quantities = []
     params[:quantities].each do |quantity|
       if quantity != ""
@@ -107,11 +112,30 @@ class TableController < ApplicationController
     redirect_to action:"order" 
   end
 
-  def new_cheque
-    @tid = params[:table_id]
-    @check = Check.new
-    @errors = params[:errors]
+  def new_cheque2
+    c = Check.new
+    c.table_id = params[:table_id]
+    c.sum = 0
+    c.shift = Dateshift.last.shift
+    c.date = Dateshift.last.date
+    if current_user.captain == true
+      c.captain_id = current_user.id
+      c.cashier_id = nil
+    else
+      c.cashier_id = current_user.id
+    end
+    c.save
+    t = Table.find(params[:table_id])
+    t.isEmpty = false
+    t.save
+    redirect_to action: "new_order", table_id:params[:table_id], id: c.id
   end
+
+  # def new_cheque
+  #   @tid = params[:table_id]
+  #   @check = Check.new
+  #   @errors = params[:errors]
+  # end
 
   def create_check
     @check = Check.new
@@ -146,6 +170,7 @@ class TableController < ApplicationController
   def new_order
     @tid = params[:table_id]
     @cheque_id = params[:id]
+    @c = Check.find(@cheque_id).name
     @categories = Category.all
   end
 
