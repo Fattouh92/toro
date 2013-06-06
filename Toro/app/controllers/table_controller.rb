@@ -66,10 +66,32 @@ class TableController < ApplicationController
     @tid = params[:table_id]
     @cheque = Check.where(table_id: @tid, current: true)
     @counter = 0
+    if @cheque == []
+      redirect_to action: "new_order", table_id: @tid
+    end
   end
 
   def give_order
-    c = Check.find(params[:id])
+    ca = Check.where(table_id: params[:table_id], current: true)
+    if ca == []
+      c = Check.new
+      c.table_id = params[:table_id]
+      c.sum = 0
+      c.shift = Dateshift.last.shift
+      c.date = Dateshift.last.date
+      if current_user.captain == true
+        c.captain_id = current_user.id
+        c.cashier_id = nil
+      else
+        c.cashier_id = current_user.id
+      end
+      c.save
+      t = Table.find(params[:table_id])
+      t.isEmpty = false
+      t.save
+    else
+      c = ca.last
+    end
     if c.name == nil
       c.name = params[:name]
       c.save
@@ -86,7 +108,7 @@ class TableController < ApplicationController
       return
     end
     @order = Order.new
-    @order.check_id = params[:id]
+    @order.check_id = c.id
     @order.total = 0
     @order.save
     counter = 0
@@ -104,7 +126,6 @@ class TableController < ApplicationController
       k = @item_order.quantity
       @order.total += (z*k)
       @order.save
-      c = Check.find(params[:id])
       c.sum += (z*k)
       c.save
       counter = counter+1
@@ -146,12 +167,9 @@ class TableController < ApplicationController
     end
     @check.taxrate = params[:check][:taxrate]
     if @check.save
-      @table = Table.find(params[:table_id])
-      @table.isEmpty = false
-      @table.save
-      redirect_to action: "new_order", table_id:params[:table_id], id: @check.id
+      redirect_to action: "close_cheque", check_id: @check.id
     else
-      redirect_to action: "new_cheque", errors: @check.errors.messages
+      redirect_to action: "add_data", errors: @check.errors.messages
     end
   end
 
@@ -164,8 +182,19 @@ class TableController < ApplicationController
 
   def new_order
     @tid = params[:table_id]
-    @cheque_id = params[:id]
-    @c = Check.find(@cheque_id).name
+    @cheque = Check.where(table_id: @tid, current: true)
+    if (@cheque == [])
+      @c = nil
+    else
+      @cc = @cheque.last
+      @c = @cc.name
+    end
+    @categories = Category.all
+  end
+
+  def new_order2
+    @tid = params[:table_id]
+    @cheque = Check.where(table_id: @tid, current: true)
     @categories = Category.all
   end
 

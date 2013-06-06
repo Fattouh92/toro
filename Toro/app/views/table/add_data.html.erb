@@ -20,7 +20,7 @@
     </ul>
   </div>
 <% end %>
-    <%= form_for (@check),:url => create_check_path(@tid,@check.id) do |f| %>
+    <%= form_for (@check),:url => create_check_path(@check.id) do |f| %>
               <div class="control-group">
                 <%= f.label :number_of_customers, :class => "control-label" %>
                 <div class="controls">
@@ -45,7 +45,7 @@
                 <%end%>
               <div class="control-group">
                 <div class="controls">
-                  <button class="btn btn-info btn-large" type="submit" style="margin-right: 20px"><%= "Create" %></button>
+                  <button class="btn btn-info btn-large" type="submit" style="margin-right: 20px"><%= "Add" %></button>
                   <a class="btn btn-large" href="/<%= @tid %>/order" style="margin-left: 20px"><%= "back" %></a>
                 </div>
               </div>

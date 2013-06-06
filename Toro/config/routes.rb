@@ -64,11 +64,11 @@ Toro::Application.routes.draw do
   match "/:check_id/print" => "table#print", :as => "print"
   match "/:check_id/pay_cash" => "table#pay_cash", :as => "pay_cash"
   match "/:check_id/:bank_name/pay_visa" => "table#pay_visa", :as => "pay_visa"
-  post "/:table_id/:check_id/create_check" => "table#create_check", :as => "create_check"
+  put "/:check_id/create_check" => "table#create_check", :as => "create_check"
   put "/:item_id/:order_id/:check_id/transfer_item" => "table#transfer_item", :as => "transfer_item"
 
-  match "/:table_id/:id/new_order"=>"table#new_order", :as => "new_order"
-  post "/:table_id/:id/give_order" => "table#give_order", :as => "give_order"
+  match "/:table_id/new_order"=>"table#new_order", :as => "new_order"
+  post "/:table_id/give_order" => "table#give_order", :as => "give_order"
 
   match "/:check_id/:order_id/:item_id/decrement_quantity" => "table#decrement_quantity", :as => "decrement_quantity"
   match "/:check_id/:order_id/:item_id/move_item" => "table#move_item", :as => "move_item"
