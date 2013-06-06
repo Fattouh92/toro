@@ -1,8 +1,20 @@
 <% if @cheque != [] %>
 
+  <div style="text-align:center;">
+    <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">Add cheque</a>
+    <a class="btn btn-large" href="/tables">back</a>
+  </div>
+<% else %>
+<br><br><br>
+  <div style="text-align:center;">
+    <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">New Cheque</a>
+    <a class="btn btn-large" href="/tables">back</a>
+  </div>
+<% end %>
+
   <h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
   <br>
-  <div class="tabbable tabs-left">
+  <div class="tabbable tabs-top">
     <ul class="nav nav-tabs">
       <% @cheque.each do |ch| %>
         <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.name %></a></li>
@@ -10,7 +22,7 @@
     </ul>
     <div class="tab-content">
       <% @cheque.each do |ch| %>
-        <div class="tab-pane" id="<%= ch.id %>">
+        <div class="tab-pane well" id="<%= ch.id %>">
           <table class="table table-condensed">
             <thead>
               <tr>
@@ -36,7 +48,7 @@
               item_id_temp = temp.item_id
               @items << Item.find(item_id_temp)
             end %>
-            <table class="table table-condensed">
+            <table class="table table-condensed  table-bordered">
               <thead>
                 <tr>
                   <th>name</th>
@@ -101,17 +113,3 @@
       <% end %>
     </div>
   </div>
-
-
-  <br><br><br>
-  <div style="text-align:center;">
-    <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">Add cheque</a>
-    <a class="btn btn-large" href="/tables">back</a>
-  </div>
-<% else %>
-<br><br><br>
-	<div style="text-align:center;">
-		<a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">New Cheque</a>
-    <a class="btn btn-large" href="/tables">back</a>
-	</div>
-<% end %>
