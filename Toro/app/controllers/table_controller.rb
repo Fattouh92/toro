@@ -138,25 +138,13 @@ class TableController < ApplicationController
   # end
 
   def create_check
-    @check = Check.new
-    @check.name = params[:check][:name]
+    @check = Check.find(params[:check_id])
     @check.number_of_customers = params[:check][:number_of_customers]
     @check.min_charge = params[:check][:min_charge]
-    if current_user.captain == true
-      @check.captain_id = current_user.id
-    else
+    if current_user.captain != true
       @check.captain_id = params[:check][:captain_id]
     end
-    @check.table_id = params[:table_id]
     @check.taxrate = params[:check][:taxrate]
-    if current_user.captain == true
-      @check.cashier_id = nil
-    else
-      @check.cashier_id = current_user.id
-    end
-    @check.sum = 0
-    @check.shift = Dateshift.last.shift
-    @check.date = Dateshift.last.date
     if @check.save
       @table = Table.find(params[:table_id])
       @table.isEmpty = false
@@ -165,6 +153,13 @@ class TableController < ApplicationController
     else
       redirect_to action: "new_cheque", errors: @check.errors.messages
     end
+  end
+
+  def add_data
+    @check = Check.find(params[:check_id])
+    @tid = @check.table_id
+    @table = Table.find(@tid)
+    @errors = params[:errors]
   end
 
   def new_order

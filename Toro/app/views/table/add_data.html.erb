@@ -1,4 +1,4 @@
-    <h3>New Cheque</h3>
+<h3>Data of Cheque <%= @check.name %> for table <%= @table.placement %><%= @table.number %></h3>
 <% if @errors != nil %>
   <div class="validation">
     <ul>
@@ -20,13 +20,7 @@
     </ul>
   </div>
 <% end %>
-    <%= form_for (@check),:url => create_check_path(@tid) do |f| %>
-              <div class="control-group">
-                <%= f.label :Cheque_name, :class => "control-label" %>
-                <div class="controls">
-                  <%= f.text_field :name %>
-                </div>
-              </div>
+    <%= form_for (@check),:url => create_check_path(@tid,@check.id) do |f| %>
               <div class="control-group">
                 <%= f.label :number_of_customers, :class => "control-label" %>
                 <div class="controls">

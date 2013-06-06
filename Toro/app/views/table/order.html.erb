@@ -85,7 +85,7 @@
             <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
           <div style="text-align:center;">
             <a class="btn btn-large btn-primary" href="/<%= @tid %>/<%= ch.id %>/new_order">Add Order</a>
-            <a class="btn btn-large btn-primary" href="/<%= ch.id %>/close_cheque">Close Cheque</a>
+            <a class="btn btn-large btn-primary" href="/<%= ch.id %>/add_data">Close Cheque</a>
           </div>
         </div>
       <% end %>
