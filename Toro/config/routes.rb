@@ -48,6 +48,7 @@ Toro::Application.routes.draw do
   match 'tables' => 'table#index', :as => "tables"
   match "/:table_id/order"=>"table#order", :as => "order"
   match "/:table_id/new_cheque"=>"table#new_cheque", :as => "new_cheque"
+  post "/tables/:table_id/move"=>"table#move", :as => "move_table"
   match "add_table/:number/:placement" => "table#add_table", :as => :add_table
   match "remove_table/:number/:placement" => "table#remove_table", :as => :remove_table
   match "close_shift" => "table#close_shift", :as => :close_shift

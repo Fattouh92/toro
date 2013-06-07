@@ -1,4 +1,10 @@
 <% if @cheque != [] %>
+<p>Move table:</p>
+<%= form_tag("/tables/#{@tid}/move", :method => "post") do %>  
+  <%= collection_select(:new_table,:table_id, Table.all, :id, :full_name, { prompt: true }) %>
+  <br>
+  <%= submit_tag "Move", class: "btn btn-success btn-large"%>
+<% end %>
 
   <div style="text-align:center;">
     <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">Add cheque</a>

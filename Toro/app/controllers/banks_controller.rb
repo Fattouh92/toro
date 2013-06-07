@@ -1,6 +1,6 @@
 class BanksController < ApplicationController
    before_filter :authenticate_user!
-  before_filter :authenticate_manager!
+  before_filter :authenticate_admin!
 
   def new
     @errors = params[:errors]
