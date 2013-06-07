@@ -5,7 +5,11 @@
   <div class="tabbable tabs-left">
     <ul class="nav nav-tabs">
       <% @cheque.each do |ch| %>
-        <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.name %></a></li>
+        <% if ch.name == "" %>
+          <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.id %></a></li>
+        <% else %>
+          <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.name %></a></li>
+        <% end %>
       <% end %>
     </ul>
     <div class="tab-content">
@@ -84,7 +88,7 @@
             <h4>total of cheque before taxes: <%= ch.sum %></h4>
             <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
           <div style="text-align:center;">
-            <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_order">Add Order</a>
+            <a class="btn btn-large btn-primary" href="/2/<%= @tid %>/new_order">Add Order</a>
             <a class="btn btn-large btn-primary" href="/<%= ch.id %>/add_data">Close Cheque</a>
           </div>
         </div>
@@ -95,13 +99,13 @@
 
   <br><br><br>
   <div style="text-align:center;">
-    <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_order">Add cheque</a>
+    <a class="btn btn-large btn-primary" href="/1/<%= @tid %>/new_order">Add cheque</a>
     <a class="btn btn-large" href="/tables">back</a>
   </div>
 <% else %>
 <br><br><br>
 	<div style="text-align:center;">
-		<a class="btn btn-large btn-primary" href="/<%= @tid %>/new_order">New Cheque</a>
+		<a class="btn btn-large btn-primary" href="/1/<%= @tid %>/new_order">New Cheque</a>
     <a class="btn btn-large" href="/tables">back</a>
 	</div>
 <% end %>

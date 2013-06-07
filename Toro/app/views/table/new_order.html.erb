@@ -1,9 +1,9 @@
 <%= form_tag give_order_path, :method => :post do %>
-<% if @c == nil %>
-<%= label_tag(:q, "Cheque name:") %>
-  <%= text_field_tag(:name) %>
+<% if @ch == "1" || @c == nil || @c == "" %>
+  <%= label_tag(:q, "Cheque name:") %>
+    <%= text_field_tag(:name) %>
 <% end %>
-
+<%= hidden_field_tag "type", @ch %>
 <div class="tabbable">
   <ul class="nav nav-tabs">
     <% @categories.each do |cat| %>

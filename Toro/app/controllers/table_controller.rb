@@ -67,13 +67,13 @@ class TableController < ApplicationController
     @cheque = Check.where(table_id: @tid, current: true)
     @counter = 0
     if @cheque == []
-      redirect_to action: "new_order", table_id: @tid
+      redirect_to action: "new_order", choice: 1, table_id: @tid
     end
   end
 
   def give_order
     ca = Check.where(table_id: params[:table_id], current: true)
-    if ca == []
+    if params[:type] == "1"
       c = Check.new
       c.table_id = params[:table_id]
       c.sum = 0
@@ -133,31 +133,6 @@ class TableController < ApplicationController
     redirect_to action:"order" 
   end
 
-  def new_cheque2
-    c = Check.new
-    c.table_id = params[:table_id]
-    c.sum = 0
-    c.shift = Dateshift.last.shift
-    c.date = Dateshift.last.date
-    if current_user.captain == true
-      c.captain_id = current_user.id
-      c.cashier_id = nil
-    else
-      c.cashier_id = current_user.id
-    end
-    c.save
-    t = Table.find(params[:table_id])
-    t.isEmpty = false
-    t.save
-    redirect_to action: "new_order", table_id:params[:table_id], id: c.id
-  end
-
-  # def new_cheque
-  #   @tid = params[:table_id]
-  #   @check = Check.new
-  #   @errors = params[:errors]
-  # end
-
   def create_check
     @check = Check.find(params[:check_id])
     @check.number_of_customers = params[:check][:number_of_customers]
@@ -182,19 +157,13 @@ class TableController < ApplicationController
 
   def new_order
     @tid = params[:table_id]
+    @ch = params[:choice]
     @cheque = Check.where(table_id: @tid, current: true)
     if (@cheque == [])
       @c = nil
     else
-      @cc = @cheque.last
-      @c = @cc.name
+      @c = @cheque.last.name
     end
-    @categories = Category.all
-  end
-
-  def new_order2
-    @tid = params[:table_id]
-    @cheque = Check.where(table_id: @tid, current: true)
     @categories = Category.all
   end
 
@@ -247,7 +216,7 @@ class TableController < ApplicationController
     ch.current = false
     ch.save
     @cheque = Check.where(table_id: table.id, current: true)
-    if @cheque = []
+    if @cheque == []
       table.isEmpty = true
       table.save
     end
@@ -261,7 +230,7 @@ class TableController < ApplicationController
     ch.current = false
     ch.save
     @cheque = Check.where(table_id: table.id, current: true)
-    if @cheque = []
+    if @cheque == []
       table.isEmpty = true
       table.save
     end
