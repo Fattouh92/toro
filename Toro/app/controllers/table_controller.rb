@@ -1,7 +1,7 @@
 # UTF-8
 class TableController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :authenticate_manager!, :only => [:add_table, :remove_table, :close_shift, :close_day, :decrement_quantity, :move_item, :transfer_item]
+  before_filter :authenticate_admin!, :only => [:add_table, :remove_table, :close_shift, :close_day, :decrement_quantity, :move_item, :transfer_item]
 
   def index
     @tables = Table.all
@@ -297,4 +297,18 @@ class TableController < ApplicationController
     redirect_to tables_path
   end
 
+  def move
+    new_table = Table.find(params[:new_table][:table_id])
+    cheques = Table.find(params[:table_id]).checks
+    cheques.each do |c|
+      c.table_id = new_table.id
+      c.save
+    end
+    old_table = Table.find(params[:table_id])
+    old_table.isEmpty = true
+    old_table.save
+    new_table.isEmpty = false
+    new_table.save
+    redirect_to tables_path
+  end
 end

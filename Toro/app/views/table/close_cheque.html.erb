@@ -11,9 +11,9 @@
 <table>
 	<thead>
 		<tr>
-			<th><a class="btn btn-large btn-primary" href="<%=pay_cash_path(@ch.id)%>">Cash</a></th>
+			<th><a class="btn btn-primary" href="<%=pay_cash_path(@ch.id)%>">Cash</a></th>
 			<% @visas.each do |v| %>
-				<th><a class="btn btn-large btn-primary" href="/<%= @ch.id %>/<%= v.bankname %>/pay_visa">Visa <%= v.bankname %></a></th>
+				<th><a class="btn btn-primary" href="/<%= @ch.id %>/<%= v.bankname %>/pay_visa">Visa <%= v.bankname %></a></th>
 			<% end %>
 		</tr>
 	</thead>

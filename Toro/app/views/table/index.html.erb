@@ -19,7 +19,7 @@
               <% if table.isEmpty == true %>
                 <a href="/<%= table.id %>/order" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
               <% else %>
-                <a href="/<%= table.id %>/order" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
+                <a href="<%= order_path(table.id)%>" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
               <% end %>
               <br>
               <br>
@@ -52,7 +52,7 @@
               <% if table.isEmpty == true %>
                 <a href="/<%= table.id %>/order" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
               <% else %>
-                <a href="/<%= table.id %>/order/<%= table.id %>/order" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
+                <a href="<%=order_path(table.id)%>" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
               <% end %>
               <br>
               <br>
@@ -88,7 +88,7 @@
               <% if table.isEmpty == true %>
                 <a href="/<%= table.id %>/order" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
               <% else %>
-                <a href="/<%= table.id %>/order/<%= table.id %>/order/<%= table.id %>/order/<%= table.id %>/order/<%= table.id %>/order" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
+                <a href="<%=order_path(table.id)%>" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
               <% end %>
               <br>
               <br>
@@ -122,9 +122,9 @@
           <% @tablesD.each do |table| %>
             <div class="span3" style="padding-left: 10px; width: 150px;">
               <% if table.isEmpty == true %>
-                <a href="/<%= table.id %>/order/<%= table.id %>/order/<%= table.id %>/order/<%= table.id %>/order" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
+                <a href="<%=order_path(table.id)%>" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
               <% else %>
-                <a href="/<%= table.id %>/order/<%= table.id %>/order/<%= table.id %>/order" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
+                <a href="<%=order_path(table.id)%>" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
               <% end %>
               <br>
               <br>
@@ -156,9 +156,9 @@
           <% @tablesE.each do |table| %>
             <div class="span2">
               <% if table.isEmpty == true %>
-                <a href="/<%= table.id %>/order/<%= table.id %>/order" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
+                <a href="<%=order_path(table.id)%>" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
               <% else %>
-                <a href="/<%= table.id %>/order" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
+                <a href="<%=order_path(table.id)%>" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
               <% end %>
               <br>
               <br>

@@ -1,8 +1,14 @@
 <% if @cheque != [] %>
-
-  <h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
+<p>Move table:</p>
+<%= form_tag("/tables/#{@tid}/move", :method => "post") do %>  
+  <%= collection_select(:new_table,:table_id, Table.all, :id, :full_name, { prompt: true }) %>
   <br>
-  <div class="tabbable tabs-left">
+  <%= submit_tag "Move", class: "btn btn-success btn-large"%>
+<% end %>
+
+<h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
+  <br>
+  <div class="tabbable tabs-top">
     <ul class="nav nav-tabs">
       <% @cheque.each do |ch| %>
         <% if ch.name == "" %>
@@ -14,7 +20,7 @@
     </ul>
     <div class="tab-content">
       <% @cheque.each do |ch| %>
-        <div class="tab-pane" id="<%= ch.id %>">
+        <div class="tab-pane well" id="<%= ch.id %>">
           <table class="table table-condensed">
             <thead>
               <tr>
@@ -36,7 +42,7 @@
               item_id_temp = temp.item_id
               @items << Item.find(item_id_temp)
             end %>
-            <table class="table table-condensed">
+            <table class="table table-condensed  table-bordered">
               <thead>
                 <tr>
                   <th>name</th>

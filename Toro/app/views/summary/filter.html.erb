@@ -25,9 +25,10 @@
   <% total1 += before %>
   <% total2 += tax %>
   <% total3 += after %>
+  <% date1 = check.date.strftime("%d-%m-%Y") %>
     <tr>
       <td><%= check.id %></td>
-      <td><%= check.date %></td>
+      <td><%= date1 %></td>
       <td><%= check.shift %></td>
       <td><%= check.created_at %></td>
       <td><%= before %></td>

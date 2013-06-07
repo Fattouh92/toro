@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :authenticate_manager!
+  before_filter :authenticate_admin!
 
   def new
     @errors = params[:errors]
@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
       redirect_to action: "new", errors: @cat.errors.messages  
     else
       flash[:success] = "Category added successfully!"
-      redirect_to categories_path
+      redirect_to new_category_path
     end
   end
 

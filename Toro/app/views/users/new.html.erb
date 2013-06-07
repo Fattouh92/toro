@@ -42,11 +42,15 @@
 
   <p>Select type of user:</p>
   <%= radio_button_tag(:type, 1) %>
-  <%= label_tag(:manager, "Manager") %>
+  <%= label_tag(:admin, "Admin") %>
   <%= radio_button_tag(:type, 2) %>
-  <%= label_tag(:captain, "Captain") %>
+  <%= label_tag(:accountant, "Accountant") %>
   <%= radio_button_tag(:type, 3) %>
+  <%= label_tag(:manager, "Manager") %>
+  <%= radio_button_tag(:type, 4) %>
   <%= label_tag(:cashier, "Cashier") %>
+  <%= radio_button_tag(:type, 5) %>
+  <%= label_tag(:captain, "Captain") %>
 
   <div><%= f.submit "Add user", class: "btn btn-success btn-large" %></div>
 <% end %>
