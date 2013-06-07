@@ -20,15 +20,24 @@ class UsersController < ApplicationController
     else
       if params[:type] == "1"
         @user.admin = true
-        @user.captain = false
         @user.save
       else
         if params[:type] == "2"
-          @user.captain = true
+          @user.accountant = true
           @user.save
         else
-          @user.captain = false
-          @user.save
+          if params[:type] == "3"
+            @user.manager = true
+            @user.save
+          else
+            if params[:type] == "4"
+              @user.cashier = true
+              @user.save
+            else
+              @user.captain = true
+              @user.save
+            end
+          end
         end
       end
     end

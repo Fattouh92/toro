@@ -19,7 +19,7 @@
               <% if table.isEmpty == true %>
                 <a href="/<%= table.id %>/order" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
               <% else %>
-                <a href="/<%= order_path(table.id)%>" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
+                <a href="<%= order_path(table.id)%>" style="text-decoration:none;"><div class="redCircle"> <%= table.number %></div></a>
               <% end %>
               <br>
               <br>
