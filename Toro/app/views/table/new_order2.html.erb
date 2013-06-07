@@ -1,9 +1,7 @@
 <%= form_tag give_order_path, :method => :post do %>
-<% if @ch == "1" || @c == nil || @c == "" %>
-  <%= label_tag(:q, "Cheque name:") %>
-    <%= text_field_tag(:name) %>
-<% end %>
-<%= hidden_field_tag "type", @ch %>
+<%= label_tag(:q, "Cheque name:") %>
+  <%= text_field_tag(:name) %>
+
 <div class="tabbable">
   <ul class="nav nav-tabs">
     <% @categories.each do |cat| %>
@@ -40,11 +38,7 @@
   </div>
   
             <%= submit_tag "Order", :class => "btn btn-success btn-large", :onclick => "return check();" %>
-            <% if @cheque != [] %>
-              <a class="btn btn-large" href="/<%= @tid %>/order" style="margin-left: 20px"><%= "back" %></a>
-              <% else %>
-              <a class="btn btn-large" href="/tables" style="margin-left: 20px"><%= "back" %></a>
-              <% end %>
+              <a class="btn btn-large" href="tables" style="margin-left: 20px"><%= "back" %></a>
           <%end%>
 </div>
 <script type="text/javascript">
