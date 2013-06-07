@@ -17,4 +17,7 @@ class Table < ActiveRecord::Base
     table.delete
   end
   
+  def full_name
+    self.placement+self.number.to_s
+  end
 end

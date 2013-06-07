@@ -36,7 +36,6 @@ Toro::Application.routes.draw do
   match 'users/sign_up' => redirect('/404.html')
   match 'users/password/new' => redirect('/404.html')
   match 'users/password/edit' => redirect('/404.html')
-  match 'users/edit' => redirect('/404.html')
 
   devise_for :users do 
     get '/users/sign_out' => 'devise/sessions#destroy' 
@@ -48,7 +47,9 @@ Toro::Application.routes.draw do
 
   match 'tables' => 'table#index', :as => "tables"
   match "/:table_id/order"=>"table#order", :as => "order"
-  match "/:table_id/new_cheque"=>"table#new_cheque", :as => "new_cheque"
+
+  post "/tables/:table_id/move"=>"table#move", :as => "move_table"
+
   match "add_table/:number/:placement" => "table#add_table", :as => :add_table
   match "remove_table/:number/:placement" => "table#remove_table", :as => :remove_table
   match "close_shift" => "table#close_shift", :as => :close_shift
@@ -59,14 +60,15 @@ Toro::Application.routes.draw do
   match "/filtered" => "summary#filtered", :as => :filtered
 
   match "/:check_id/close_cheque" => "table#close_cheque", :as => "close_cheque"
+  match "/:check_id/add_data" => "table#add_data", :as => "add_data"
   match "/:check_id/print" => "table#print", :as => "print"
   match "/:check_id/pay_cash" => "table#pay_cash", :as => "pay_cash"
   match "/:check_id/:bank_name/pay_visa" => "table#pay_visa", :as => "pay_visa"
-  post "/:table_id/create_check" => "table#create_check", :as => "create_check"
+  put "/:check_id/create_check" => "table#create_check", :as => "create_check"
   put "/:item_id/:order_id/:check_id/transfer_item" => "table#transfer_item", :as => "transfer_item"
 
-  match "/:table_id/:id/new_order"=>"table#new_order", :as => "new_order"
-  post "/:table_id/:id/give_order" => "table#give_order", :as => "give_order"
+  match "/:choice/:table_id/new_order"=>"table#new_order", :as => "new_order"
+  post "/:table_id/give_order" => "table#give_order", :as => "give_order"
 
   match "/:check_id/:order_id/:item_id/decrement_quantity" => "table#decrement_quantity", :as => "decrement_quantity"
   match "/:check_id/:order_id/:item_id/move_item" => "table#move_item", :as => "move_item"
