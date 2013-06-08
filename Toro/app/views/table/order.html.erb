@@ -736,7 +736,11 @@ window.onload = function () {
             <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
           <div style="text-align:center;">
             <a class="btn btn-large btn-primary" href="/2/<%= @tid %>/new_order">Add Order</a>
-            <a class="btn btn-large btn-primary" href="/<%= ch.id %>/add_data">Close Cheque</a>
+            <% if ch.dataAdded == false %>
+              <a class="btn btn-large btn-primary" href="/<%= ch.id %>/add_data">Close Cheque</a>
+            <% else %>
+              <a class="btn btn-large btn-primary" href="/<%= ch.id %>/close_cheque">Close Cheque</a>
+            <% end %>
           </div>
         </div>
       <% end %>
