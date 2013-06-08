@@ -2,9 +2,9 @@
   <span><%= @date %></span><span style="padding-left:200px;"><%= @shiftstr %></span>
     <% if current_user.admin == true %>
       <% if @shift == 1 %>
-        <%= button_to "Close Shift",close_shift_path,class:"btn btn-primary", style:"width: 130px;" %>
+        <%= button_to "Close Shift",close_shift_path,class:"btn btn-danger", style:"width: 130px;" %>
       <% else %>
-        <%= button_to "Close day" , close_day_path,class:"btn btn-primary", style:"width: 130px;" %>
+        <%= button_to "Close day" , close_day_path,class:"btn btn-danger", style:"width: 130px;" %>
       <% end %>
     <% end %>
 </div>

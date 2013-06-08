@@ -647,24 +647,16 @@ window.onload = function () {
   <%= submit_tag "Move", class: "btn btn-success btn-large"%>
 <% end %>
 
-  <div style="text-align:center;">
-    <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">Add cheque</a>
-    <a class="btn btn-large" href="/tables">back</a>
-  </div>
-<% else %>
-<br><br><br>
-  <div style="text-align:center;">
-    <a class="btn btn-large btn-primary" href="/<%= @tid %>/new_cheque">New Cheque</a>
-    <a class="btn btn-large" href="/tables">back</a>
-  </div>
-<% end %>
-
-  <h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
+<h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
   <br>
   <div class="tabbable tabs-top">
     <ul class="nav nav-tabs">
       <% @cheque.each do |ch| %>
-        <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.name %></a></li>
+        <% if ch.name == "" %>
+          <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.id %></a></li>
+        <% else %>
+          <li><a href="#<%= ch.id %>" data-toggle="tab">Cheque <%= ch.name %></a></li>
+        <% end %>
       <% end %>
     </ul>
     <div class="tab-content">
@@ -673,12 +665,8 @@ window.onload = function () {
           <table class="table table-condensed">
             <thead>
               <tr>
-                <th><h2>Captain <%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h2></th>
-                <th><h2><%= ch.number_of_customers %> customers</h2></th>
-                <% if ch.sum < (ch.min_charge * ch.number_of_customers) %>
-                  <th><span class="label label-important">minimum charge</span></th>
-                <% else %>
-                  <th><span class="label label-success">minimum charge</span></th>
+                <% if ch.captain_id != nil %>
+                  <th><h2>Captain <%= User.find(ch.captain_id).firstname %> <%= User.find(ch.captain_id).lastname %></h2></th>
                 <% end %>
               </tr>
             </thead>
@@ -744,21 +732,30 @@ window.onload = function () {
             <h5>Order <%= @counter %> total: <%= order.total %></h5><br>
           <% end %>
           <br>
-          <% if ch.sum >= (ch.min_charge * ch.number_of_customers) %> 
             <h4>total of cheque before taxes: <%= ch.sum %></h4>
             <h4>total of cheque after taxes: <%= ch.sum + (ch.sum * (ch.taxrate + 0.00) * 0.01) %></h4>
-          <% else %>
-            <h4>total of cheque before applying minimum charge: <%= ch.sum %></h4>
-            <h4>total of cheque before taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) %></h4>
-            <h4>total of cheque after taxes: <%= ch.min_charge * (ch.number_of_customers + 0.00) + (ch.min_charge * (ch.number_of_customers + 0.00) * (ch.taxrate + 0.00) * 0.01) %></h4>
-          <% end %>
           <div style="text-align:center;">
-            <a class="btn btn-large btn-primary" href="/<%= @tid %>/<%= ch.id %>/new_order">Add Order</a>
-            <a class="btn btn-large btn-primary" href="/<%= ch.id %>/close_cheque">Close Cheque</a>
+            <a class="btn btn-large btn-primary" href="/2/<%= @tid %>/new_order">Add Order</a>
+            <a class="btn btn-large btn-primary" href="/<%= ch.id %>/add_data">Close Cheque</a>
           </div>
         </div>
       <% end %>
     </div>
   </div>
+  <br><br><br>
+  <div style="text-align:center;">
+    <a class="btn btn-large btn-primary" href="/1/<%= @tid %>/new_order">Add cheque</a>
+    <a class="btn btn-large" href="/tables">back</a>
+  </div>
+<% else %>
+<br><br><br>
+	<div style="text-align:center;">
+		<a class="btn btn-large btn-primary" href="/1/<%= @tid %>/new_order">New Cheque</a>
+    <a class="btn btn-large" href="/tables">back</a>
+	</div>
+<% end %>
+
    <applet name="jzebra" code="jzebra.PrintApplet.class" archive="/jzebra.jar" width="50px" height="50px">
    </applet><br />
+
+
