@@ -46,11 +46,11 @@ class TableController < ApplicationController
     openTables = Table.where(:isEmpty => false).all
     d = Dateshift.first
     if openTables.blank?
+      d.date = d.date + 1.day
+      d.save
       tempDate = Torodate.new
       tempDate.date = Dateshift.first.date.to_date
       tempDate.save
-      d.date = d.date + 1.day
-      d.save
       if d.shift = 2
         close_shift
       else
@@ -64,8 +64,33 @@ class TableController < ApplicationController
 
   def order
     @tid = params[:table_id]
+    @items = params[:items]
+    @quantities = params[:quantities]
     @cheque = Check.where(table_id: @tid, current: true)
     @counter = 0
+    counterq = 0
+    @shisha = []
+    @barista = []
+    @kitchen = []
+    @shishaq = []
+    @baristaq = []
+    @kitchenq = []
+    @items.each do |item_id|
+      temp_item = Item.find(item_id)
+      if temp_item.category.printer == 1
+          @barista << temp_item.name
+          @baristaq << @quantities[counterq]
+      else 
+        if temp_item.category.printer == 2
+          @kitchen << temp_item.name
+          @kitchenq << @quantities[counterq]
+        else
+          @shisha << temp_item.name
+          @shishaq << @quantities[counterq]
+        end
+      end
+      counterq = counterq + 1
+    end
   end
 
   def give_order
@@ -91,10 +116,11 @@ class TableController < ApplicationController
       @item_order.quantity = quantities[counter]
       @item_order.order_id = @order.id
       @item_order.save
-      if Item.find(item_id).offer == nil
-        z = Item.find(item_id).price
+      temp_item = Item.find(item_id)
+      if temp_item.offer == nil
+        z = temp_item.price
       else
-        z = Item.find(item_id).offer
+        z = temp_item.offer
       end
       k = @item_order.quantity
       @order.total += (z*k)
@@ -104,7 +130,7 @@ class TableController < ApplicationController
       c.save
       counter = counter+1
     end
-    redirect_to action:"order" 
+    redirect_to action:"order", items: params[:item_ids], quantities: params[:quantities]
   end
 
   def new_cheque
