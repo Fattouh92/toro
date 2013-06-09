@@ -67,6 +67,8 @@ class TableController < ApplicationController
     @items = params[:items]
     @quantities = params[:quantities]
     @cheque = Check.where(table_id: @tid, current: true)
+    @place = Table.find(@tid).placement
+    @num = Table.find(@tid).number
     @counter = 0  
     if @cheque == []
       redirect_to action: "new_order", choice: 1, table_id: @tid
@@ -82,15 +84,15 @@ class TableController < ApplicationController
     @items.each do |item_id|
       temp_item = Item.find(item_id)
       if temp_item.category.printer == 1
-          @barista << temp_item.name
-          @baristaq << @quantities[counterq]
+          @barista << temp_item.name.to_s
+          @baristaq << @quantities[counterq].to_s
       else 
         if temp_item.category.printer == 2
-          @kitchen << temp_item.name
-          @kitchenq << @quantities[counterq]
+          @kitchen << temp_item.name.to_s
+          @kitchenq << @quantities[counterq].to_s
         else
-          @shisha << temp_item.name
-          @shishaq << @quantities[counterq]
+          @shisha << temp_item.name.to_s
+          @shishaq << @quantities[counterq].to_s
         end
       end
       counterq = counterq + 1
@@ -249,6 +251,13 @@ class TableController < ApplicationController
       table.save
     end
     redirect_to tables_path
+  end
+
+  def pay_credit
+  end
+
+  def pay_officer
+       
   end
 
   def pay_visa

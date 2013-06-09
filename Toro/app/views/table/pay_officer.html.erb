@@ -1,0 +1,26 @@
+<div class="well">
+Choose directly from already defined officers:
+<%= form_tag(pay_officer_exists_path, :method => "post") do %>  
+  <%= collection_select(:officer, :id, Officer.all, :id, :full_name, { prompt: true }) %>
+  <br>
+  <%= submit_tag "Close", class: "btn btn-success btn-large"%>
+<%end%>
+</div>
+<br><br>
+<div class="well">
+Or define a new officer:
+<%= form_tag(new_officer_path, :method => "post") do %>  
+  <%= label_tag(:q, "Officer full name:") %>
+  <%= text_field_tag(:on) %>
+  <br>
+  Choose from already existing Companies or define a new one:
+  <br>
+  Companies:
+  <br>
+  <%= collection_select(:company, :company_id, Company.all, :id, :name, { prompt: true }) %>
+  <%= label_tag(:q, "Define new company:") %>
+  <%= text_field_tag(:cn) %>
+  <br>
+  <%= submit_tag "Create and close", class: "btn btn-success btn-large"%>
+<%end%>
+</div>

@@ -16,7 +16,11 @@
   <tr>
     <td><strong><%= item.name%></strong></td>
     <td><strong><%= item.arabicname%></strong></td>
-    <td><%= item.category.name%></td>
+    <% if item.category != nil %>
+      <td><%= item.category.name%></td>
+    <%else%>
+    <td> - </td>
+    <%end%>
     <td><%= item.price %></td>
     <td>
       <%if item.offer == nil %>

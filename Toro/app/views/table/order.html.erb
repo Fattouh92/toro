@@ -70,7 +70,7 @@ function printHTML() {
          monitorFinding2();
       }
 
-      function print(array1, array2, place, num) {
+      function print123(array1, array2, place, num) {
          var applet = document.jzebra;
          if (applet != null) {
             document.jzebra.setEncoding("UTF-8")
@@ -636,7 +636,9 @@ function printHTML() {
       }
 
 window.onload = function () {
-  
+  alert("hi");
+  findPrinter("kitchen");
+  print123(<%=@kitchenq%>, <%=@kitchen%>, <%=@place%>, <%=@num%>)
   }
 </script>
 <% end %>
@@ -646,7 +648,6 @@ window.onload = function () {
   <br>
   <%= submit_tag "Move", class: "btn btn-success btn-large"%>
 <% end %>
-
 <h1>Table <%= Table.find(@tid).placement %> <%= Table.find(@tid).number %></h1>
   <br>
   <div class="tabbable tabs-top">
@@ -683,7 +684,7 @@ window.onload = function () {
               item_id_temp = temp.item_id
               @items << Item.find(item_id_temp)
             end %>
-            <table class="table table-condensed  table-bordered">
+            <table class="table table-condensed table-bordered">
               <thead>
                 <tr>
                   <th>name</th>
