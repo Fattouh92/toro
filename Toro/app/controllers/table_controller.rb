@@ -114,7 +114,7 @@ class TableController < ApplicationController
       else
         c.cashier_id = current_user.id
       end
-      c.save
+      c.save validate:false
       t = Table.find(params[:table_id])
       t.isEmpty = false
       t.save
@@ -123,7 +123,7 @@ class TableController < ApplicationController
     end
     if c.name == nil
       c.name = params[:name]
-      c.save
+      c.save validate:false
     end
     quantities = []
     params[:quantities].each do |quantity|
@@ -157,7 +157,7 @@ class TableController < ApplicationController
       @order.total += (z*k)
       @order.save
       c.sum += (z*k)
-      c.save
+      c.save validate:false
       counter = counter+1
     end
     redirect_to action:"order", items: params[:item_ids], quantities: params[:quantities]
@@ -172,6 +172,8 @@ class TableController < ApplicationController
     end
     @check.taxrate = params[:check][:taxrate]
     if @check.save
+      @check.dataAdded = true
+      @check.save
       redirect_to action: "close_cheque", check_id: @check.id
     else
       redirect_to action: "add_data", errors: @check.errors.messages
