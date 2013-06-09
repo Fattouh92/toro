@@ -5,16 +5,26 @@ class OfficersController < ApplicationController
       company_name = params[:cn]
       c = Company.new
       c.name = company_name
-      c.save
-      o = Officer.new
-      o.name = officer_name
-      o.company_id = c.id
-      o.save
+      if c.save
+        o = Officer.new
+        o.name = officer_name
+        o.company_id = c.id
+        if !(o.save)
+          redirect_to controller: "table", action: "pay_officer", errors: o.errors.messages, type: 2
+          return
+        end
+      else
+        redirect_to controller: "table", action: "pay_officer", errors: c.errors.messages, type: 1
+        return        
+      end
     else
       o = Officer.new
       o.name = officer_name
       o.company_id = params[:company][:company_id];
-      o.save
+      if !(o.save)
+        redirect_to controller: "table", action: "pay_officer", errors: o.errors.messages, type: 2
+        return
+      end
     end
     ch = Check.find(params[:check_id])
     table = Table.find(ch.table_id)

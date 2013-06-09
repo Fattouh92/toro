@@ -64,6 +64,7 @@ Toro::Application.routes.draw do
   match "/:check_id/print" => "table#print", :as => "print"
   match "/:check_id/pay_cash" => "table#pay_cash", :as => "pay_cash"
   match "/:check_id/pay_credit" => "table#pay_credit", :as => "pay_credit"
+  match "/:check_id/pay_staff" => "table#pay_staff", :as => "pay_staff"
   match "/:check_id/pay_officer" => "table#pay_officer", :as => "pay_officer"
   post "/:check_id/new_officer" => "officers#new_officer", :as => "new_officer"
   post "/:check_id/pay_officer_exists" => "officers#pay_officer_exists", :as => "pay_officer_exists"

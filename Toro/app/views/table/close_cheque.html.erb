@@ -16,6 +16,8 @@
 				<th><a class="btn btn-primary btn-large" href="/<%= @ch.id %>/<%= v.bankname %>/pay_visa">Visa <%= v.bankname %></a></th>
 			<% end %>
       <th><a class="btn btn-primary btn-large" href="<%=pay_officer_path(@ch.id)%>">Officer</a></th>
+      <th><a class="btn btn-primary btn-large" href="<%=pay_staff_path(@ch.id)%>">Staff</a></th>
+      <th><a class="btn btn-primary btn-large" href="<%=pay_credit_path(@ch.id)%>">Credit</a></th>
 		</tr>
 	</thead>
 </table>

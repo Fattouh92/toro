@@ -1,22 +1,42 @@
 <div class="well">
-Choose directly from already defined officers:
+<h3>Choose directly from already defined officers:</h3>
 <%= form_tag(pay_officer_exists_path, :method => "post") do %>  
   <%= collection_select(:officer, :id, Officer.all, :id, :full_name, { prompt: true }) %>
   <br>
   <%= submit_tag "Close", class: "btn btn-success btn-large"%>
 <%end%>
 </div>
-<br><br>
+<h1>Or</h1>
 <div class="well">
-Or define a new officer:
+  <% if @errors != nil %>
+<div class="validation">
+  <ul>
+  <% @errors.each do |error|%>
+    <li><%=@type%>&nbsp;<%= error[0] %>
+    <% error.delete_at(0) %>
+    <% error.each do |e|%>
+      <%e.each do |printable|%>
+        <%if printable == e.last%>
+          <%=printable%>
+        <%else%>
+          <%=printable%>,
+        <%end%>
+      <% end %>
+    <%end%>
+    <br>
+    </li>
+  <%end%>
+  </ul>
+</div>
+<% end %>
+<h3>Define a new officer:</h3>
 <%= form_tag(new_officer_path, :method => "post") do %>  
   <%= label_tag(:q, "Officer full name:") %>
   <%= text_field_tag(:on) %>
   <br>
   Choose from already existing Companies or define a new one:
-  <br>
-  Companies:
-  <br>
+  <br><br>
+  Companies:&nbsp;
   <%= collection_select(:company, :company_id, Company.all, :id, :name, { prompt: true }) %>
   <%= label_tag(:q, "Define new company:") %>
   <%= text_field_tag(:cn) %>

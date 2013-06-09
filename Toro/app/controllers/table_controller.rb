@@ -255,11 +255,42 @@ class TableController < ApplicationController
     redirect_to tables_path
   end
 
+  def pay_staff
+    ch = Check.find(params[:check_id])
+    table = Table.find(ch.table_id)
+    ch.payment_method = "staff"
+    ch.current = false
+    ch.save
+    @cheque = Check.where(table_id: table.id, current: true)
+    if @cheque == []
+      table.isEmpty = true
+      table.save
+    end
+    redirect_to tables_path
+  end
+
   def pay_credit
+    ch = Check.find(params[:check_id])
+    table = Table.find(ch.table_id)
+    ch.payment_method = "credit"
+    ch.current = false
+    ch.save
+    @cheque = Check.where(table_id: table.id, current: true)
+    if @cheque == []
+      table.isEmpty = true
+      table.save
+    end
+    redirect_to tables_path
   end
 
   def pay_officer
-       
+    type = params[:type]
+    if type == 1
+      @type = Company
+    else
+      @type = Officer
+    end
+    @errors = params[:errors]  
   end
 
   def pay_visa
