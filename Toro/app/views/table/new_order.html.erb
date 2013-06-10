@@ -1,7 +1,7 @@
 <%= form_tag give_order_path, :method => :post do %>
 <% if @ch == "1" || @c == nil || @c == "" %>
   <%= label_tag(:q, "Cheque name:") %>
-    <%= text_field_tag(:name) %>
+    <%= text_field_tag(:name, nil, placeholder: "Optional") %>
 <% end %>
 <%= hidden_field_tag "type", @ch %>
 <div class="tabbable">
@@ -26,7 +26,7 @@
                 <%= check_box_tag "item_ids[]", item.id %>
                 </td>
                 <td style="text-align:center; vertical-align: middle">
-                <%= item.name %>
+                <%= item.arabicname %>
                 </td>
                 <td style="text-align:center; vertical-align: middle">
                   <%= number_field_tag 'quantities[]', nil, {min: 1, id:"key", 'data-id' => item.id} %>

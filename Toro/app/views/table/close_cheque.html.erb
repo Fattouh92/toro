@@ -6,7 +6,7 @@
   <h4>total of cheque before taxes: <%= @ch.min_charge * (@ch.number_of_customers + 0.00) %></h4>
   <h4>total of cheque after taxes: <%= @ch.min_charge * (@ch.number_of_customers + 0.00) + (@ch.min_charge * (@ch.number_of_customers + 0.00) * (@ch.taxrate + 0.00) * 0.01) %></h4>
 <% end %>
-<a href="<%=print_path(@ch.id)%>" class="btn btn-primary">Print cheque</a>
+<%= link_to "Print Cheque", print_path(@ch.id), :target => "_blank", class: "btn btn-primary btn-large"%>
 <h4>Type of payment</h4>
 <table>
 	<thead>
@@ -21,4 +21,5 @@
 		</tr>
 	</thead>
 </table>
+<br>
 <a class="btn btn-large" href="/<%= @ch.id %>/add_data" style="margin-left: 20px"><%= "back" %></a>
