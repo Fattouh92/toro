@@ -1,16 +1,3 @@
-<h5>Filer by Date:</h5>
-<%= form_tag("/filter", :method => "post") do %>
-  <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
-  <%= collection_select(:summary, :date2, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
-  <%= select_tag "shift", options_for_select([['Morning' ,'1'], ['Evening', '2']]), :prompt => "Optional" %></span>
-  <br>
-  <%= submit_tag "Filter", class: "btn btn-success"%>
-<% end %>
-
-<%= link_to "printable version", summary_print_path(@date, @date2, @shift) %>
-
-
-
 <table class="table table-bordered" style="background-color:white;">
 <tr>
   <th>#</th>
