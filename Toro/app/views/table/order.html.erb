@@ -636,10 +636,19 @@ function printHTML() {
       }
 
 window.onload = function () {
-  // alert("hi");
-  // findPrinter("kitchen");
-  // print123(<%=@kitchenq%>, <%=@kitchen%>, <%=@place%>, <%=@num%>)
+  if (<%= @kitchenq.to_json.html_safe %>.length != 0 ){
+    findPrinter("kitchen");
+    print123(<%=@kitchenq.to_json.html_safe%>, <%=@kitchen.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
   }
+  if (<%= @baristaq.to_json.html_safe %>.length != 0 ){
+    findPrinter("bar");
+    print123(<%=@baristaq.to_json.html_safe%>, <%=@barista.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
+  }
+  if (<%= @shishaq.to_json.html_safe %>.length != 0 ){
+    findPrinter("shisha");
+    print123(<%=@shishaq.to_json.html_safe%>, <%=@shisha.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
+  }
+}
 </script>
 <% end %>
 <p>Move table:</p>
@@ -760,7 +769,7 @@ window.onload = function () {
 	</div>
 <% end %>
 
-   <!-- <applet name="jzebra" code="jzebra.PrintApplet.class" archive="/jzebra.jar" width="50px" height="50px">
-   </applet><br /> -->
+   <applet name="jzebra" code="jzebra.PrintApplet.class" archive="/jzebra.jar" width="50px" height="50px">
+   </applet><br />
 
 
