@@ -84,15 +84,15 @@ class TableController < ApplicationController
     @items.each do |item_id|
       temp_item = Item.find(item_id)
       if temp_item.category.printer == 1
-          @barista << temp_item.name.to_s
-          @baristaq << @quantities[counterq].to_s
+          @barista << temp_item.name.to_s.html_safe
+          @baristaq << @quantities[counterq].to_s.html_safe
       else 
         if temp_item.category.printer == 2
-          @kitchen << temp_item.name.to_s
-          @kitchenq << @quantities[counterq].to_s
+          @kitchen << temp_item.name.to_s.html_safe
+          @kitchenq << @quantities[counterq].to_s.html_safe
         else
-          @shisha << temp_item.name.to_s
-          @shishaq << @quantities[counterq].to_s
+          @shisha << temp_item.name.to_s.html_safe
+          @shishaq << @quantities[counterq].to_s.html_safe
         end
       end
       counterq = counterq + 1
