@@ -160,9 +160,9 @@ class TableController < ApplicationController
       c.save validate:false
       counter = counter+1
 
-      if temp_item.category.printer == 1 then ca.bar_profit += z end
-      if temp_item.category.printer == 2 then ca.kitchen_profit += z end
-      if temp_item.category.printer == 3 then ca.shisha_profit += z end
+      if temp_item.category.printer == 1 then c.bar_profit += z end
+      if temp_item.category.printer == 2 then c.kitchen_profit += z end
+      if temp_item.category.printer == 3 then c.shisha_profit += z end
     end
 
     redirect_to action:"order", items: params[:item_ids], quantities: params[:quantities]
