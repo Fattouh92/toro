@@ -69,7 +69,7 @@ class TableController < ApplicationController
     @cheque = Check.where(table_id: @tid, current: true)
     @place = Table.find(@tid).placement
     @num = Table.find(@tid).number
-    @counter = 0  
+    @counter = 0
     if @cheque == []
       redirect_to action: "new_order", choice: 1, table_id: @tid
     end
@@ -81,26 +81,31 @@ class TableController < ApplicationController
     @baristaq = []
     @kitchenq = []
     if @items != nil
-    @items.each do |item_id|
-      temp_item = Item.find(item_id)
-      if temp_item.category.printer == 1
+      @items.each do |item_id|
+        temp_item = Item.find(item_id)
+        if temp_item.category.printer == 1
           @barista << temp_item.name.to_s.html_safe
           @baristaq << @quantities[counterq].to_s.html_safe
-      else 
-        if temp_item.category.printer == 2
-          @kitchen << temp_item.name.to_s.html_safe
-          @kitchenq << @quantities[counterq].to_s.html_safe
         else
-          @shisha << temp_item.name.to_s.html_safe
-          @shishaq << @quantities[counterq].to_s.html_safe
+          if temp_item.category.printer == 2
+            @kitchen << temp_item.name.to_s.html_safe
+            @kitchenq << @quantities[counterq].to_s.html_safe
+          else
+            @shisha << temp_item.name.to_s.html_safe
+            @shishaq << @quantities[counterq].to_s.html_safe
+          end
         end
+        counterq = counterq + 1
       end
-      counterq = counterq + 1
-    end
     end
   end
 
   def give_order
+    if params[:item_ids] == nil
+      flash[:error] = "Please choose items."
+      redirect_to new_order_path(params[:type], params[:table_id])
+      return
+    end
     ca = Check.where(table_id: params[:table_id], current: true)
     if params[:type] == "1"
       c = Check.new
@@ -160,9 +165,10 @@ class TableController < ApplicationController
       c.save validate:false
       counter = counter+1
 
-      if temp_item.category.printer == 1 then c.bar_profit += z end
-      if temp_item.category.printer == 2 then c.kitchen_profit += z end
-      if temp_item.category.printer == 3 then c.shisha_profit += z end
+      if temp_item.category.printer == 1 then c.bar_profit += (z*k) end
+      if temp_item.category.printer == 2 then c.kitchen_profit += (z*k) end
+      if temp_item.category.printer == 3 then c.shisha_profit += (z*k) end
+      c.save validate:false
     end
 
     redirect_to action:"order", items: params[:item_ids], quantities: params[:quantities]
@@ -295,7 +301,7 @@ class TableController < ApplicationController
     else
       @type = Officer
     end
-    @errors = params[:errors]  
+    @errors = params[:errors]
   end
 
   def pay_visa
@@ -355,7 +361,7 @@ class TableController < ApplicationController
     c.quantity = c.quantity - 1
     c.save
     if(c.quantity == 0)
-     c.delete
+      c.delete
     end
     oa = Order.new
     oa.check_id = params[:order][:check_id]
