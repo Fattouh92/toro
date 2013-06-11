@@ -1,7 +1,7 @@
 # UTF-8
 class TableController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :authenticate_admin!, :only => [:add_table, :remove_table, :close_shift, :close_day, :decrement_quantity, :move_item, :transfer_item]
+  before_filter :authenticate_admin!, :only => [:add_table, :remove_table, :decrement_quantity, :move_item, :transfer_item]
 
   def index
     @tables = Table.all

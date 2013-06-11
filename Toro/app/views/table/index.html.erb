@@ -1,6 +1,6 @@
 <div class="well" style="font-weight: bold; text-align:center; font-size: 18px; color:#CC0000;">
   <span><%= @date %></span><span style="padding-left:200px;"><%= @shiftstr %></span>
-    <% if current_user.admin == true %>
+    <% if current_user.admin == true || current_user.cashier == true %>
       <% if @shift == 1 %>
         <%= button_to "Close Shift",close_shift_path,class:"btn btn-danger", style:"width: 130px;" %>
       <% else %>
