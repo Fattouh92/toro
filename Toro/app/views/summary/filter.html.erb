@@ -8,8 +8,10 @@
   <% end %>
 
   <% if !@date.empty? && !@date2.empty?%>
-      <%= link_to "printable version", summary_print_path(@date, @date2) %>
+      <%= link_to "printable version", summary_print_path(@date, @date2), :target => "_blank", class: "btn btn-primary"%>
   <% end %>
+
+  <br><br>
 
 
 
@@ -50,8 +52,12 @@
       <td><%= check.id %></td>
       <td><%= date1 %></td>
       <td><%= check.shift %></td>
-      <td><%= check.created_at %></td>   
-      <td><%= check.payment_method %></td>
+      <td><%= check.created_at %></td>
+      <% if check.payment_method == nil %>
+        <td style="font-weight:bold; color:red;">open</td>
+      <% else %>
+        <td><%= check.payment_method %></td>
+      <% end %>
       <td><%= check.kitchen_profit %></td>
       <td><%= check.bar_profit %></td>
       <td><%= check.shisha_profit %></td>
