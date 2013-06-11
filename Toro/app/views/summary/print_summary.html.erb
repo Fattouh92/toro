@@ -1,11 +1,6 @@
-<h5>Filer by Date:</h5>
-<%= form_tag("/filter", :method => "post") do %>
-  <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
-  <%= collection_select(:summary, :date2, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
-  <%= select_tag "shift", options_for_select([['Morning' ,'1'], ['Evening', '2']]), :prompt => "Optional" %></span>
-<br>
-  <%= submit_tag "Filter", class: "btn btn-success"%>
-<% end %>
+<%= stylesheet_link_tag 'application' %>
+<div style="padding:15px;"> 
+  <p style="font-size: 15px;">Toro summary from <div style="font-weight:bold; font-size: 18px;"><%= @date %></div> to <div style="font-weight:bold;font-size: 18px;"><%= @date2 %></div></p>
 <table class="table table-bordered" style="background-color:white;">
 <tr>
   <th>#</th>
@@ -45,7 +40,7 @@
       <td><%= check.shift %></td>
       <td><%= check.created_at %></td>
       <% if check.payment_method == nil %>
-        <td style="font-weight:bold; color:red;">open</td>
+        <td style="font-weight:bold;">open</td>
       <% else %>
         <td><%= check.payment_method %></td>
       <% end %>

@@ -61,42 +61,26 @@ class SummaryController < ApplicationController
     end
   end
 
-  def print
+  def print_summary
     date = params[:date1]
     date2 = params[:date2]
-    shift = params[:shift]
 
     @date = Torodate.where(id: date).last.date
     @date2 = Torodate.where(id: date2).last.date
-    @shift = shift
-
     if (!Torodate.where(id: date).last.nil? && Torodate.where(id: date2).last.nil?)
       trueDate = Torodate.where(id: date).last.date
-      if (shift == "")
-        @check = Check.where(date: trueDate).all
-      else
-        @check = Check.where(date: trueDate, shift: shift).all
-      end
+      @check = Check.where(date: trueDate).all
     end
 
     if (Torodate.where(id: date).last.nil? && !Torodate.where(id: date2).last.nil?)
       trueDate = Torodate.where(id: date2).last.date
-      if (shift == "")
-        @check = Check.where(date: trueDate).all
-      else
-        @check = Check.where(date: trueDate, shift: shift).all
-      end
+      @check = Check.where(date: trueDate).all
     end
 
     if (!Torodate.where(id: date).last.nil? && !Torodate.where(id: date2).last.nil?)
       trueDate = Torodate.where(id: date).last.date
       trueDate2 = Torodate.where(id: date2).last.date
-      if (shift == "")
-        @check = Check.where('date <= ?', trueDate).where('date >= ?', trueDate2).all
-      else
-        @check = Check.where('date <= ?', trueDate).where('date >= ?', trueDate2)
-          .where(shift: shift).all
-      end
+      @check = Check.where('date <= ?', trueDate).where('date >= ?', trueDate2).all
     end
     render :layout => false
   end

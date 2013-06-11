@@ -58,7 +58,8 @@ Toro::Application.routes.draw do
   match "summary" => "summary#index", :as => :summary
   match "/filter" => "summary#filter", :as => :filter
   match "/filtered" => "summary#filtered", :as => :filtered
-  match "/:date1/:date2/:shift/print" => "summary#print", :as => :summary_print
+  match "/:date1/:date2/print_summary" => "summary#print_summary", :as => :summary_print
+
 
 
   match "/:check_id/close_cheque" => "table#close_cheque", :as => "close_cheque"
