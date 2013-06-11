@@ -171,7 +171,7 @@ class TableController < ApplicationController
       c.save validate:false
     end
 
-    redirect_to action:"order", items: params[:item_ids], quantities: params[:quantities]
+    redirect_to action:"order"
   end
 
   def create_check
