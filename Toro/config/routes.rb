@@ -81,6 +81,8 @@ Toro::Application.routes.draw do
   match "/:check_id/:order_id/:item_id/decrement_quantity" => "table#decrement_quantity", :as => "decrement_quantity"
   match "/:check_id/:order_id/:item_id/move_item" => "table#move_item", :as => "move_item"
 
+  match "/deleted_items" => "table#deleted_items", :as => :"deleted_items"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

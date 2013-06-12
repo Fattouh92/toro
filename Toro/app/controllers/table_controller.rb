@@ -324,12 +324,21 @@ class TableController < ApplicationController
       d.item_id = params[:item_id]
       d.order_id = params[:order_id]
       d.check_id = params[:check_id]
+      d.deleter_id = current_user.id
       d.save
       o = Order.find(params[:order_id])
       o.total = o.total - (Item.find(params[:item_id]).price)
       o.save
       h = Check.find(params[:check_id])
       h.sum = h.sum - (Item.find(params[:item_id]).price)
+      itm = Item.find(params[:item_id])
+      if itm.category.printer == 1
+        h.bar_profit -= Item.find(params[:item_id]).price
+      elsif itm.category.printer == 2
+        h.kitchen_profit -= Item.find(params[:item_id]).price
+      else
+        h.shisha_profit -= Item.find(params[:item_id]).price
+      end
       h.save
       c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
       c.quantity = c.quantity - 1
@@ -340,6 +349,10 @@ class TableController < ApplicationController
       t = Table.find(Check.find(params[:check_id]).table_id)
       redirect_to action: "order", table_id:t
     end
+  end
+
+  def deleted_items
+    @all = DeletedItem.all
   end
 
   def move_item

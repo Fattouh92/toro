@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Table</th>
+      <th>Cheque</th>
+      <th>Item</th>
+      <th>Deleter</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all.each do |item| %>
+      <tr>
+        <% c = Check.find(item.check_id) %>
+        <th><%= Table.find(c.table_id).placement %> <%= Table.find(c.table_id).number %></th>
+        <% if c.name == nil || c.name == "" %>
+          <th><%= c.id %></th>
+        <% else %>
+          <th><%= c.name %></th>
+        <% end %>
+        <th><%= Item.find(item.item_id).name %></th>
+        <th><%= User.find(item.deleter_id).fullname %></th>
+        <th><%= item.created_at %></th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
