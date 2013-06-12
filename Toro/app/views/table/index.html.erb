@@ -36,8 +36,7 @@
             <div class="span2"><div class="span1"><%= button_to "Add Table" , add_table_path(newTable, "A") ,class:"btn btn-primary", style:"width: 130px;" %></div><div class="span1"><%= button_to "Remove Table" , remove_table_path(deleteTable, "A") ,class:"btn btn-danger" , style:"width: 130px;" %></div></div> 
           <% end %> 
       </div>
-    </end>
-  </div>
+    </div>
   </div>
 
   <div>
@@ -72,7 +71,6 @@
          </div>
          <% end %>
         </div>
-       </end>
     </div>
   </div>
 
@@ -108,7 +106,6 @@
          </div>
          <% end %> 
         </div>
-       </end>
     </div>
   </div>
 
@@ -144,17 +141,18 @@
          </div>
          <% end %> 
         </div>
-       </end>
     </div>
   </div>
 
+    <div>
     <div class="well" style="font-weight: bold; text-align:center;">
       <div class="row">
           <div class="span12">
-            <h1 style="font-size:16px; padding-bottom:30px;">Special</h1></div>
-          <br>
+            <h1 style="font-size:16px">Special</h1>
+          </div>
+          <div style="padding-left: 16%">
           <% @tablesE.each do |table| %>
-            <div class="span2">
+            <div class="span3" style="padding-left: 10px; width: 150px;">
               <% if table.isEmpty == true %>
                 <a href="<%=order_path(table.id)%>" style="text-decoration:none;"><div class="greenCircle"> <%= table.number %></div></a>
               <% else %>
@@ -164,7 +162,20 @@
               <br>
             </div>
           <% end %>
-      </div>
-    </end>
+          </div>
+          <% if @tablesE.blank?%>
+            <% newTable = 1 %>
+            <% deleteTable = 0 %>
+          <% else %>
+            <% newTable = @tablesE.last.number + 1 %>
+            <% deleteTable = @tablesE.last.number %>
+          <% end %>
+          <% if current_user.admin == true %>
+            <div class="span6" style="padding-left:32%; "><div class="span2"><%= button_to "Add Table" , add_table_path(newTable, "E") ,class:"btn btn-primary", style:"width: 130px;" %></div><div class="span2"><%= button_to "Remove Table" , remove_table_path(deleteTable, "E") ,class:"btn btn-danger", style:"width: 130px;" %></div>
+          
+         </div>
+         <% end %> 
+        </div>
+    </div>
   </div>
 </div>
