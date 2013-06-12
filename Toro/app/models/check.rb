@@ -4,8 +4,8 @@ class Check < ActiveRecord::Base
   belongs_to :table
   validates_presence_of :date, :shift, :table_id, :number_of_customers, :captain_id
   def cheques
-  	if self.name == nil
-  		' ' + Table.find(self.table_id).placement + Table.find(self.table_id).number.to_s
+  	if self.name == nil || self.name == ""
+  		' ' + Table.find(self.table_id).placement + Table.find(self.table_id).number.to_s + ' - ' + self.id.to_s
   	else
     ' ' + Table.find(self.table_id).placement + Table.find(self.table_id).number.to_s + ' - ' + self.name
   	end

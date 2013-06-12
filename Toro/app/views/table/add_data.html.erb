@@ -24,7 +24,7 @@
               <div class="control-group">
                 <%= f.label :number_of_customers, :class => "control-label" %>
                 <div class="controls">
-                  <%= f.text_field :number_of_customers %>
+                  <%= f.text_field :number_of_customers, value: 1 %>
                 </div>
               </div>
               <div class="control-group">
@@ -41,7 +41,7 @@
               </div>
               <%if current_user.captain != true%>
               <p>Select Captain</p>
-                <%= f.collection_select(:captain_id, User.where(admin: false), :id,:username, { prompt: true }) %>
+                <%= f.collection_select(:captain_id, User.where(captain: true), :id,:fullname, { prompt: true }) %>
                 <%end%>
               <div class="control-group">
                 <div class="controls">
