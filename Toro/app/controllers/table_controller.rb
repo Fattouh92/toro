@@ -410,7 +410,7 @@ class TableController < ApplicationController
     cheques = Table.find(params[:table_id]).checks
     cheques.each do |c|
       c.table_id = new_table.id
-      c.save
+      c.save validate:false
     end
     old_table = Table.find(params[:table_id])
     old_table.isEmpty = true

@@ -73,6 +73,7 @@ Toro::Application.routes.draw do
   post "/:check_id/pay_officer_exists" => "officers#pay_officer_exists", :as => "pay_officer_exists"
   match "/:check_id/:bank_name/pay_visa" => "table#pay_visa", :as => "pay_visa"
   put "/:check_id/create_check" => "table#create_check", :as => "create_check"
+  put "/:check_id/show_check" => "table#show_check", :as => "show_check"
   put "/:item_id/:order_id/:check_id/transfer_item" => "table#transfer_item", :as => "transfer_item"
 
   match "/:choice/:table_id/new_order"=>"table#new_order", :as => "new_order"
