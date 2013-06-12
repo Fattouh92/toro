@@ -41,7 +41,7 @@
               </div>
               <%if current_user.captain != true%>
               <p>Select Captain</p>
-                <%= f.collection_select(:captain_id, User.where(admin: false), :id,:username, { prompt: true }) %>
+                <%= f.collection_select(:captain_id, User.where(captain: true), :id,:fullname, { prompt: true }) %>
                 <%end%>
               <div class="control-group">
                 <div class="controls">
