@@ -1,12 +1,14 @@
+<a class="btn btn-primary pull-right" href="/deleted_items">View deleted items</a>
 <h5>Filer by Date:</h5>
 <%= form_tag("/filter", :method => "post",:remote => :true) do %>
-  <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
-  <%= collection_select(:summary, :date2, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
+  <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: "From"}) %>
+  <%= collection_select(:summary, :date2, Torodate.order('id DESC').all, :id,:date, { prompt: "To"}) %>
   <%= select_tag "shift", options_for_select([['Morning' ,'1'], ['Evening', '2']]), :prompt => "Optional" %></span>
 <br>
   <%= submit_tag "Filter", class: "btn btn-success"%>
 <% end %>
-<span><a class="btn btn-primary" href="/deleted_items">View deleted items</a><% if !@date.empty? && !@date2.empty?%>
+<span>
+  <% if !@date.empty? && !@date2.empty?%>
       <%= link_to "printable version", summary_print_path(@date, @date2), :target => "_blank", class: "btn btn-primary"%>
       <br><br>
         <% end %></span>
@@ -51,12 +53,12 @@
       <% else %>
         <td><%= check.payment_method %></td>
       <% end %>
-      <td><%= check.kitchen_profit %></td>
-      <td><%= check.bar_profit %></td>
-      <td><%= check.shisha_profit %></td>
-      <td><%= before %></td>
-      <td><%= tax %></td>
-      <td><%= after %></td>
+      <td><%= check.kitchen_profit.round(2) %></td>
+      <td><%= check.bar_profit.round(2) %></td>
+      <td><%= check.shisha_profit.round(2) %></td>
+      <td><%= before.round(2) %></td>
+      <td><%= tax.round(2) %></td>
+      <td><%= after.round(2) %></td>
     </tr>
   <% end %>
   <tr>

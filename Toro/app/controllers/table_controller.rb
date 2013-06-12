@@ -171,7 +171,7 @@ class TableController < ApplicationController
       c.save validate:false
     end
 
-    redirect_to action:"order", items: params[:item_ids], quantities: params[:quantities]
+    redirect_to action:"order", quantities: quantities, items: params[:item_ids]
   end
 
   def create_check
@@ -339,7 +339,7 @@ class TableController < ApplicationController
       else
         h.shisha_profit -= Item.find(params[:item_id]).price
       end
-      h.save
+      h.save validate:false
       c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
       c.quantity = c.quantity - 1
       c.save
@@ -369,7 +369,7 @@ class TableController < ApplicationController
     o.save
     h = Check.find(params[:check_id])
     h.sum = h.sum - (@item.price)
-    h.save
+    h.save validate:false
     c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
     c.quantity = c.quantity - 1
     c.save
@@ -387,7 +387,7 @@ class TableController < ApplicationController
     io.save
     ch = Check.find(params[:order][:check_id])
     ch.sum += @item.price
-    ch.save
+    ch.save validate:false
     redirect_to tables_path
   end
 

@@ -42,12 +42,12 @@
       <% else %>
         <td><%= check.payment_method %></td>
       <% end %>
-      <td><%= check.kitchen_profit %></td>
-      <td><%= check.bar_profit %></td>
-      <td><%= check.shisha_profit %></td>
-      <td><%= before %></td>
-      <td><%= tax %></td>
-      <td><%= after %></td>
+      <td><%= check.kitchen_profit.round(2) %></td>
+      <td><%= check.bar_profit.round(2) %></td>
+      <td><%= check.shisha_profit.round(2) %></td>
+      <td><%= before.round(2) %></td>
+      <td><%= tax.round(2) %></td>
+      <td><%= after.round(2) %></td>
     </tr>
   <% end %> 
     <tr>
