@@ -1,55 +1,46 @@
-  <h5>Filer by Date:</h5>
-  <%= form_tag("/filter", :method => "post",:remote => :true) do %>
-    <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
-    <%= collection_select(:summary, :date2, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
-    <%= select_tag "shift", options_for_select([['Morning' ,'1'], ['Evening', '2']]), :prompt => "Optional" %></span>
-    <br>
-    <%= submit_tag "Filter", class: "btn btn-success"%>
-  <% end %>
-
-  <% if !@date.empty? && !@date2.empty?%>
+<h5>Filer by Date:</h5>
+<%= form_tag("/filter", :method => "post",:remote => :true) do %>
+  <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
+  <%= collection_select(:summary, :date2, Torodate.order('id DESC').all, :id,:date, { prompt: true}) %>
+  <%= select_tag "shift", options_for_select([['Morning' ,'1'], ['Evening', '2']]), :prompt => "Optional" %></span>
+<br>
+  <%= submit_tag "Filter", class: "btn btn-success"%>
+<% end %>
+<span><a class="btn btn-primary" href="/deleted_items">View deleted items</a><% if !@date.empty? && !@date2.empty?%>
       <%= link_to "printable version", summary_print_path(@date, @date2), :target => "_blank", class: "btn btn-primary"%>
-  <% end %>
-
-  <br>
-  <a class="btn btn-primary" href="/deleted_items">View deleted items</a>
-  <br>
-
-
-
+      <br><br>
+        <% end %></span>
 <table class="table table-bordered" style="background-color:white;">
-<tr>
-  <th>#</th>
-  <th>Date</th>
-  <th>Shift</th>
-  <th>Time</th>
-  <th>Payement Method</th>
-  <th>Kitchen</th>
-  <th>Bar</th>
-  <th>Shisha</th>
-  <th>Before Taxes</th>
-  <th>Taxes</th>
-  <th>After Taxes</th>
-</tr>
-<% total1 = 0 %>
-<% total2 = 0 %>
-<% total3 = 0 %>
-<% totalkitchen = 0 %>
-<% totalbar = 0 %>
-<% totalshisha = 0 %>
-<% @check.each do |check| %>
-  <% before = check.sum.round(2) %>
-  <% after = (check.sum + (check.sum * check.taxrate + 0.00) * 0.01 ).round(2)%>
-  <% tax = (after - before).round(2) %>
-  <% total1 += before %>
-  <% total2 += tax %>
-  <% total3 += after %>
-  <% totalkitchen += check.kitchen_profit %>
-  <% totalbar += check.bar_profit %>
-  <% totalshisha += check.shisha_profit %>
-  <% total2 += tax %>
-  <% total3 += after %>
-  <% date1 = check.date.strftime("%d-%m-%Y") %>
+  <tr>
+    <th>#</th>
+    <th>Date</th>
+    <th>Shift</th>
+    <th>Time</th>
+    <th>Payement Method</th>
+    <th>Kitchen</th>
+    <th>Bar</th>
+    <th>Shisha</th>
+    <th>Before Taxes</th>
+    <th>Taxes</th>
+    <th>After Taxes</th>
+  </tr>
+  <% total1 = 0 %>
+  <% total2 = 0 %>
+  <% total3 = 0 %>
+  <% totalkitchen = 0 %>
+  <% totalbar = 0 %>
+  <% totalshisha = 0 %>
+  <% @check.each do |check| %>
+    <% before = check.sum.round(2) %>
+    <% after = (check.sum + (check.sum * check.taxrate + 0.00) * 0.01 ).round(2)%>
+    <% tax = (after - before).round(2) %>
+    <% total1 += before %>
+    <% total2 += tax %>
+    <% total3 += after %>
+    <% totalkitchen += check.kitchen_profit %>
+    <% totalbar += check.bar_profit %>
+    <% totalshisha += check.shisha_profit %>
+    <% date1 = check.date.strftime("%d-%m-%Y") %>
     <tr>
       <td><%= check.id %></td>
       <td><%= date1 %></td>
@@ -67,18 +58,19 @@
       <td><%= tax %></td>
       <td><%= after %></td>
     </tr>
-  <% end %> 
-    <tr>
-      <td style="font-weight:bold;"> Total:</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td style="font-weight:bold;"><%= totalkitchen.round(2) %></td>
-      <td style="font-weight:bold;"><%= totalbar.round(2) %></td>
-      <td style="font-weight:bold;"><%= totalshisha.round(2) %></td>
-      <td style="font-weight:bold;"><%= total1.round(2) %></td>
-      <td style="font-weight:bold;"><%= total2.round(2) %></td>
-      <td style="font-weight:bold;"><%= total3.round(2) %></td>
-    </tr>
+  <% end %>
+  <tr>
+    <td style="font-weight:bold;">
+      Total:</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td style="font-weight:bold;"><%= totalkitchen.round(2) %></td>
+    <td style="font-weight:bold;"><%= totalbar.round(2) %></td>
+    <td style="font-weight:bold;"><%= totalshisha.round(2) %></td>
+    <td style="font-weight:bold;"><%= total1.round(2) %></td>
+    <td style="font-weight:bold;"><%= total2.round(2) %></td>
+    <td style="font-weight:bold;"><%= total3.round(2) %></td>
+  </tr>
 </table>

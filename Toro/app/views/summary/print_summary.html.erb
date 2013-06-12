@@ -31,8 +31,6 @@
   <% totalkitchen += check.kitchen_profit %>
   <% totalbar += check.bar_profit %>
   <% totalshisha += check.shisha_profit %>
-  <% total2 += tax %>
-  <% total3 += after %>
   <% date1 = check.date.strftime("%d-%m-%Y") %>
     <tr>
       <td><%= check.id %></td>
@@ -40,7 +38,7 @@
       <td><%= check.shift %></td>
       <td><%= check.created_at %></td>
       <% if check.payment_method == nil %>
-        <td style="font-weight:bold;">open</td>
+        <td style="font-weight:bold; color:red;">open</td>
       <% else %>
         <td><%= check.payment_method %></td>
       <% end %>
