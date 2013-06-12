@@ -369,6 +369,13 @@ class TableController < ApplicationController
     o.save
     h = Check.find(params[:check_id])
     h.sum = h.sum - (@item.price)
+    if @item.category.printer == 1
+        h.bar_profit -= Item.find(params[:item_id]).price
+      elsif @item.category.printer == 2
+        h.kitchen_profit -= Item.find(params[:item_id]).price
+      else
+        h.shisha_profit -= Item.find(params[:item_id]).price
+      end
     h.save validate:false
     c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
     c.quantity = c.quantity - 1
@@ -387,6 +394,13 @@ class TableController < ApplicationController
     io.save
     ch = Check.find(params[:order][:check_id])
     ch.sum += @item.price
+    if @item.category.printer == 1
+        ch.bar_profit += Item.find(params[:item_id]).price
+      elsif @item.category.printer == 2
+        ch.kitchen_profit += Item.find(params[:item_id]).price
+      else
+        ch.shisha_profit += Item.find(params[:item_id]).price
+      end
     ch.save validate:false
     redirect_to tables_path
   end
