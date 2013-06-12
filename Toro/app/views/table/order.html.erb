@@ -70,10 +70,11 @@ function printHTML() {
          monitorFinding2();
       }
 
-      function print123(array1, array2, place, num) {
+      function print123(printer, array1, array2, place, num) {
          var applet = document.jzebra;
          if (applet != null) {
-            document.jzebra.setEncoding("UTF-8")
+            document.jzebra.setEncoding("UTF-8");
+            findPrinter(printer);
             // Send characters/raw commands to applet using "append"
             // Hint:  Carriage Return = \r, New Line = \n, Escape Double Quotes= \"
             applet.append("Table: "+ place+num+"\n");
@@ -81,7 +82,7 @@ function printHTML() {
               applet.append(array1[i]+" "+array2[i]+"\n");
             }        
             // Send characters/raw commands to printer
-            applet.append("\n\n\n\n\n");
+            applet.append("\n\n\n\n\n\n\n\n\n\n");
             applet.print();
     }
     
@@ -638,16 +639,13 @@ function printHTML() {
 
 window.onload = function () {
   if (<%= @kitchenq.to_json.html_safe %>.length != 0 ){
-    findPrinter("kitchen");
-    print123(<%=@kitchenq.to_json.html_safe%>, <%=@kitchen.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
+    print123("kitchen", <%=@kitchenq.to_json.html_safe%>, <%=@kitchen.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
   }
   if (<%= @baristaq.to_json.html_safe %>.length != 0 ){
-    findPrinter("bar");
-    print123(<%=@baristaq.to_json.html_safe%>, <%=@barista.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
+    print123("bar", <%=@baristaq.to_json.html_safe%>, <%=@barista.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
   }
   if (<%= @shishaq.to_json.html_safe %>.length != 0 ){
-    findPrinter("shisha");
-    print123(<%=@shishaq.to_json.html_safe%>, <%=@shisha.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
+    print123("shisha", <%=@shishaq.to_json.html_safe%>, <%=@shisha.to_json.html_safe%>, <%=@place.to_s.to_json.html_safe%>, <%=@num%>)
   }
 }
 </script>
