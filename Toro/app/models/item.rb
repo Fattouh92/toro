@@ -8,4 +8,13 @@ class Item < ActiveRecord::Base
   validates_format_of :price, with: /^[1-9]\d*(\.\d+)?$/
   validates_format_of :offer, with: /^(([1-9]\d*(\.\d+)?)|)$/
   validates_format_of :name, with: /^[a-zA-Z ]*$/
+
+  def current_price
+  	if self.offer.blank?
+  		return self.price
+  	else
+  		return self.offer
+  	end
+  end
+
 end
