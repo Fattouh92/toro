@@ -26,8 +26,14 @@ class TableController < ApplicationController
   end
 
   def remove_table
-    Table.delete_table(params[:number], params[:placement])
-    redirect_to tables_path
+    t = Table.where(number: params[:number], placement: params[:placement]).first
+    if t.isEmpty == false
+      flash[:error] = "There are still open cheques for this table."
+      redirect_to tables_path
+    else
+      Table.delete_table(params[:number], params[:placement])
+      redirect_to tables_path
+    end
   end
 
   def close_shift
