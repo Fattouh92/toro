@@ -26,8 +26,14 @@ class TableController < ApplicationController
   end
 
   def remove_table
-    Table.delete_table(params[:number], params[:placement])
-    redirect_to tables_path
+    t = Table.where(number: params[:number], placement: params[:placement]).first
+    if t.isEmpty == false
+      flash[:error] = "There are still open cheques for this table."
+      redirect_to tables_path
+    else
+      Table.delete_table(params[:number], params[:placement])
+      redirect_to tables_path
+    end
   end
 
   def close_shift
@@ -153,11 +159,7 @@ class TableController < ApplicationController
       @item_order.order_id = @order.id
       @item_order.save
       temp_item = Item.find(item_id)
-      if temp_item.offer == nil
-        z = temp_item.price
-      else
-        z = temp_item.offer
-      end
+      z = temp_item.current_price
       k = @item_order.quantity
       @order.total += (z*k)
       @order.save
@@ -336,17 +338,17 @@ class TableController < ApplicationController
       d.deleter_id = current_user.id
       d.save
       o = Order.find(params[:order_id])
-      o.total = o.total - (Item.find(params[:item_id]).price)
+      o.total = o.total - (Item.find(params[:item_id]).current_price)
       o.save
       h = Check.find(params[:check_id])
-      h.sum = h.sum - (Item.find(params[:item_id]).price)
+      h.sum = h.sum - (Item.find(params[:item_id]).current_price)
       itm = Item.find(params[:item_id])
       if itm.category.printer == 1
-        h.bar_profit -= Item.find(params[:item_id]).price
+        h.bar_profit -= Item.find(params[:item_id]).current_price
       elsif itm.category.printer == 2
-        h.kitchen_profit -= Item.find(params[:item_id]).price
+        h.kitchen_profit -= Item.find(params[:item_id]).current_price
       else
-        h.shisha_profit -= Item.find(params[:item_id]).price
+        h.shisha_profit -= Item.find(params[:item_id]).current_price
       end
       h.save validate:false
       c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
@@ -374,16 +376,16 @@ class TableController < ApplicationController
   def transfer_item
     @item = Item.find(params[:item_id])
     o = Order.find(params[:order_id])
-    o.total = o.total - (@item.price)
+    o.total = o.total - (@item.current_price)
     o.save
     h = Check.find(params[:check_id])
-    h.sum = h.sum - (@item.price)
+    h.sum = h.sum - (@item.current_price)
     if @item.category.printer == 1
-        h.bar_profit -= Item.find(params[:item_id]).price
+        h.bar_profit -= Item.find(params[:item_id]).current_price
       elsif @item.category.printer == 2
-        h.kitchen_profit -= Item.find(params[:item_id]).price
+        h.kitchen_profit -= Item.find(params[:item_id]).current_price
       else
-        h.shisha_profit -= Item.find(params[:item_id]).price
+        h.shisha_profit -= Item.find(params[:item_id]).current_price
       end
     h.save validate:false
     c = Itemorder.where(order_id: params[:order_id], item_id: params[:item_id]).last
@@ -394,7 +396,7 @@ class TableController < ApplicationController
     end
     oa = Order.new
     oa.check_id = params[:order][:check_id]
-    oa.total = @item.price
+    oa.total = @item.current_price
     oa.save
     io = Itemorder.new
     io.item_id = params[:item_id]
@@ -402,13 +404,13 @@ class TableController < ApplicationController
     io.order_id = oa.id
     io.save
     ch = Check.find(params[:order][:check_id])
-    ch.sum += @item.price
+    ch.sum += @item.current_price
     if @item.category.printer == 1
-        ch.bar_profit += Item.find(params[:item_id]).price
+        ch.bar_profit += Item.find(params[:item_id]).current_price
       elsif @item.category.printer == 2
-        ch.kitchen_profit += Item.find(params[:item_id]).price
+        ch.kitchen_profit += Item.find(params[:item_id]).current_price
       else
-        ch.shisha_profit += Item.find(params[:item_id]).price
+        ch.shisha_profit += Item.find(params[:item_id]).current_price
       end
     ch.save validate:false
     redirect_to tables_path

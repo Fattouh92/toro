@@ -322,11 +322,7 @@ window.onload = function () {
                   <tr>
                     <th><%= item.name %></th>
                     <th><%= item.arabicname %></th>
-                    <% if item.offer.blank? %>
-                      <th><%= item.price %></th>
-                    <% else %>
-                      <th><%= item.offer %></th>
-                    <% end %>
+                    <th><%= item.current_price %></th>>
                     <th><%=Itemorder.where(order_id: order.id, item_id: item.id).first.quantity%></th>
                     <% if current_user.admin? %>
                       <th><a class="btn btn-mini btn-danger" href="#myModalDelete<%= item.id %>" role="button" class="remove-one-item" data-toggle="modal"><i class="icon-trash"></i></a></th>
