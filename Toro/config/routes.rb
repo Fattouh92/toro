@@ -75,6 +75,7 @@ Toro::Application.routes.draw do
   put "/:check_id/create_check" => "table#create_check", :as => "create_check"
   put "/:check_id/show_check" => "table#show_check", :as => "show_check"
   put "/:item_id/:order_id/:check_id/transfer_item" => "table#transfer_item", :as => "transfer_item"
+  post "/:check_id/combine" => "table#combine", :as => "combine_checks"
 
   match "/:choice/:table_id/new_order"=>"table#new_order", :as => "new_order"
   post "/:table_id/give_order" => "table#give_order", :as => "give_order"

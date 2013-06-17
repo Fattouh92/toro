@@ -263,6 +263,12 @@ window.onload = function () {
     <div class="tab-content">
       <% @cheque.each do |ch| %>
         <div class="tab-pane well" id="<%= ch.id %>">
+          <h3>Combine tables:</h3>
+          <%= form_tag("/#{ch.id}/combine", :method => "post") do %>  
+  <%= collection_select(:check, :check_id, Check.where(current: true), :id, :cheques, { prompt: true }) %>
+  <br>
+  <%= submit_tag "Combine", class: "btn btn-success btn-large"%>
+<% end %>
           <table class="table table-condensed">
             <thead>
               <tr>

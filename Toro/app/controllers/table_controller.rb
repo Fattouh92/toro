@@ -165,9 +165,19 @@ class TableController < ApplicationController
       c.save validate:false
       counter = counter+1
 
-      if temp_item.category.printer == 1 then c.bar_profit += (z*k) end
-      if temp_item.category.printer == 2 then c.kitchen_profit += (z*k) end
-      if temp_item.category.printer == 3 then c.shisha_profit += (z*k) end
+      if temp_item.category.printer == 1 then
+        c.bar_profit += (z*k)
+        @order.bar_profit += (z*k)
+      end
+      if temp_item.category.printer == 2 then 
+        c.kitchen_profit += (z*k)
+        @order.kitchen_profit += (z*k)
+      end
+      if temp_item.category.printer == 3 then
+        c.shisha_profit += (z*k)
+        @order.shisha_profit += (z*k) 
+      end
+      @order.save
       c.save validate:false
     end
     redirect_to action:"order", quantities: quantities, items: params[:item_ids]
@@ -418,4 +428,27 @@ class TableController < ApplicationController
     new_table.save
     redirect_to tables_path
   end
+
+  def combine
+    new_check = Check.find(params[:check][:check_id])
+    old_check = Check.find(params[:check_id])
+    orders = old_check.orders
+    orders.each do |o|
+      o.check_id = new_check.id
+      o.save
+      new_check.sum += o.total
+      new_check.kitchen_profit += o.kitchen_profit
+      new_check.bar_profit += o.bar_profit
+      new_check.shisha_profit += o.shisha_profit
+      new_check.save validate:false
+    end
+    table = old_check.table
+    old_check.destroy
+    if table.checks == []
+      table.isEmpty = true
+      table.save
+    end
+    redirect_to tables_path
+  end
+
 end
