@@ -451,4 +451,13 @@ class TableController < ApplicationController
     redirect_to tables_path
   end
 
+  def find_check
+    if Check.find_by_id(params[:n]) == nil
+      flash[:error] = "Check #{params[:n]} not found"
+      redirect_to summary_path
+      return
+    end
+    redirect_to close_cheque_path(params[:n])
+  end
+
 end

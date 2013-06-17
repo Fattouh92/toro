@@ -1,4 +1,14 @@
+<div class="span5">
+  <%= form_tag("/find_check", :method => "post") do %>
+  <%= label_tag(:q, "Cheque number:") %>
+  <%= text_field_tag(:n) %>
+  <br>
+  <%= submit_tag "Find", class: "btn btn-success"%>
+<% end %>
+</div>
+<br><br><br>
 <a class="btn btn-primary pull-right" href="/deleted_items">View deleted items</a>
+<br><br><br>
 <h5>Filer by Date:</h5>
 <%= form_tag("/filter", :method => "post") do %>
   <%= collection_select(:summary, :date, Torodate.order('id DESC').all, :id,:date, { prompt: "From"}) %>
